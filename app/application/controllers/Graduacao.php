@@ -1,5 +1,5 @@
 <?php
-class Grupo extends CI_Controller
+class Graduacao extends CI_Controller
 {
 
     function __construct()
@@ -7,7 +7,7 @@ class Grupo extends CI_Controller
         parent::__construct();
                 //$this->load->library('Abstract_model');
                 $this->load->helper('inflector');
-		$this->load->model('grupo_model');
+		$this->load->model('graduacao_model');
 		$this->load->helper('url');
 		//$this->_init();
     }

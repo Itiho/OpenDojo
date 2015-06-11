@@ -7,7 +7,9 @@
  * @copyright Copyright (c) 2012, Jamie Rumbelow <http://jamierumbelow.net>
  */
 
-abstract class AbstractModel extends CI_Model
+//$this->load->library('Abstract_model');
+
+class MY_Model extends CI_Model
 {
 
     /* --------------------------------------------------------------

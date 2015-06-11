@@ -10,9 +10,10 @@
 * -------------------------------------------------------
 */
 
-$this->load->library('Abstract_model');
+//$this->load->library('Abstract_model');
+//include base_url().'application/libraries/Abstract_model.php';
 
-class Grupo_Model extends AbstractModel
+class Grupo_Model extends MY_Model
 { 
 
 
