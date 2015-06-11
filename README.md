@@ -11,6 +11,7 @@ Modelagem feita com Mysql Workbench
 ##Padronização de nomes e diretórios
 Alguns são necessários pelo próprio codeigniter outros foram escolhidos por mim
 
+
 * Model
   * Nome de arquivo
     * Inicial maiuscula
@@ -41,4 +42,5 @@ Alguns são necessários pelo próprio codeigniter outros foram escolhidos por m
   * Nome da classe
     * Inicial maiuscula
     * Exemplo: 'class Grupo extends CI_Controller'
+
 
