@@ -12,6 +12,6 @@ Modelagem feita com Mysql Workbench
 Alguns são necessários pelo próprio codeigniter outros foram escolhidos por mim
 
 * Nome de tabelas do banco de dados: 
-..* Tudo minúsculo
-..* No plural
+  * Tudo minúsculo
+  * No plural
 
