@@ -92,7 +92,6 @@ $filedate = date("d.m.Y");
 $c = "";
 
 $c = "
-<!-- begin of generated class -->
 <?php
 /*
 *
@@ -103,7 +102,7 @@ $c = "
 * -------------------------------------------------------
 */
 
-class $class extends AbstractModel
+class $class extends MY_Model
 { 
 
 
@@ -135,7 +134,8 @@ $cdb = "$" . "database";
 $cdb2 = "database";
 $c.="
 
-
+//Insira aqui no mome da tabela
+var $_table = '';
 
 ";
 
@@ -189,10 +189,10 @@ function $mname
 
 $c.= "
 
-} // class : end
+} 
 
 ?>
-<!-- end of generated class -->
+
 ";
 fwrite($file, $c);
 

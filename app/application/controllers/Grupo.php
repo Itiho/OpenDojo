@@ -5,25 +5,22 @@ class Grupo extends CI_Controller
     function __construct()
     {
         parent::__construct();
-                //$this->load->library('Abstract_model');
-                $this->load->helper('inflector');
 		$this->load->model('grupo_model');
-		$this->load->helper('url');
-		//$this->_init();
     }
 
 
     function index()
     {
         
-        $this->load->view('header');
+        $this->load->view('Header_view');
+        $this->load->view('Navbar_view');
         
         $data['titulo'] = "OpenDojo";
   		$data['cabecalho'] = "Grupos";
 
 		$data['grupos'] = $this->grupo_model->get_all();
 
-        $this->load->view('grupo_view', $data);
-        $this->load->view('footer');
+        $this->load->view('GrupoList_view', $data);
+        $this->load->view('Footer_view');
     }
 }

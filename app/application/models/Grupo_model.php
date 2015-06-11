@@ -1,5 +1,3 @@
-
-<!-- begin of generated class -->
 <?php
 /*
 *
@@ -22,6 +20,9 @@ var $idGrupo;   // KEY ATTR. WITH AUTOINCREMENT
 
 var $nome;   // (normal Attribute)
 var $descricao;   // (normal Attribute)
+
+//Insira aqui no mome da tabela
+var $_table = 'Grupo';
 
 
 

@@ -103,7 +103,7 @@ class MY_Model extends CI_Model
     {
         parent::__construct();
 
-        //$this->load->helper('inflector');
+        $this->load->helper('inflector');
 
         $this->_fetch_table();
 
@@ -202,6 +202,35 @@ class MY_Model extends CI_Model
         return $result;
     }
 
+       public function get_join($data)
+    {
+        $this->trigger('before_get');
+
+        if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
+        {
+            $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
+        }
+
+
+        $this->db->from($this->_table);
+        
+
+        $this->db->join($data['tabela'],$data['condicao']);
+        $result = $this->db->get()->{$this->_return_type(1)}();
+        
+        $this->_temporary_return_type = $this->return_type;  
+
+
+        foreach ($result as $key => &$row)
+        {
+            $row = $this->trigger('after_get', $row, ($key == count($result) - 1));
+        }
+
+        $this->_with = array();
+        return $result;
+    }
+    
+    
     /**
      * Insert a new row into the table. $data should be an associative array
      * of data to be inserted. Returns newly created ID.
@@ -856,7 +885,9 @@ class MY_Model extends CI_Model
     {
         if ($this->_table == NULL)
         {
-            $this->_table = plural(preg_replace('/(_m|_model)?$/', '', strtolower(get_class($this))));
+            //$this->_table = plural(preg_replace('/(_m|_model)?$/', '', strtolower(get_class($this))));
+            
+            
         }
     }
 

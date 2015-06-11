@@ -11,16 +11,18 @@
 */
 
 
-class Graduacao_Model extends AbstractModel
+class Graduacao_Model extends MY_Model
 { 
 
 
 
 var $idGraduacao;   // KEY ATTR. WITH AUTOINCREMENT
 
-var $graduacao;   // (normal Attribute)
-var $ArteMarcial_idArteMarcial;   // (normal Attribute)
+var $nomeGraduacao;   // (normal Attribute)
+var $arteMarcial;   // (normal Attribute)
 
+//Insira aqui no mome da tabela
+var $_table = 'Graduacao';
 
 
 
@@ -34,14 +36,14 @@ function get_idGraduacao()
     return $this->idGraduacao;
 }
 
-function get_graduacao()
+function get_nomeGraduacao()
 {
-    return $this->graduacao;
+    return $this->nomeGraduacao;
 }
 
-function get_ArteMarcial_idArteMarcial()
+function get_arteMarcial()
 {
-    return $this->ArteMarcial_idArteMarcial;
+    return $this->arteMarcial;
 }
 
 // **********************
@@ -54,18 +56,18 @@ function set_idGraduacao($val)
     $this->idGraduacao =  $val;
 }
 
-function set_graduacao($val)
+function set_nomeGraduacao($val)
 {
-    $this->graduacao =  $val;
+    $this->nomeGraduacao =  $val;
 }
 
-function set_ArteMarcial_idArteMarcial($val)
+function set_arteMarcial($val)
 {
-    $this->ArteMarcial_idArteMarcial =  $val;
+    $this->arteMarcial =  $val;
 }
 
 
-} // class : end
+} 
 
 ?>
-<!-- end of generated class -->
+

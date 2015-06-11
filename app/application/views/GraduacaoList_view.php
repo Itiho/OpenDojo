@@ -2,8 +2,10 @@
 <div class="container-fluid">
   <div class="row">		
 
-	<p><?=anchor('grupo/criar', 'Criar Grupo') ?></p>
+	<p><?=anchor('graduacao/criar', 'Criar Grupo') ?></p>
 
+
+        
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -11,26 +13,29 @@
                 ID
             </th>
             <th>
-                Nome do grupo
+                Graduação
             </th>
             <th>
-                Ações
+                Arte Marcial
             </th>
         </tr>
     </thead>
     <tbody>
-        <?php if ($grupos != false): ?>
-        <?php foreach ($grupos as $grupo): ?>
+        <?php if ($graduacoes != false): ?>
+        <?php foreach ($graduacoes as $graduacao): ?>
             <tr>
             <td>
-                <?=$grupo->idGrupo ?>
+                <?=$graduacao->idGraduacao ?>
             </td>
             <td>
-                <?=$grupo->nome ?>
+                <?=$graduacao->nomeGraduacao ?>
             </td>
             <td>
-                <?=anchor('grupo/editar/' . $grupo->idGrupo, 'Editar') ?> |
-                <?=anchor('grupo/deletar/' . $grupo->idGrupo, 'Deletar') ?>
+                <?=$graduacao->nomeArteMarcial ?>
+            </td>
+            <td>
+                <?=anchor('graduacao/editar/' . $graduacao->idGraduacao, 'Editar') ?> |
+                <?=anchor('graduacao/deletar/' . $graduacao->idGraduacao, 'Deletar') ?>
             </td>
         </tr>
         <?php endforeach; ?>

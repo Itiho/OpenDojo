@@ -5,25 +5,33 @@ class Graduacao extends CI_Controller
     function __construct()
     {
         parent::__construct();
-                //$this->load->library('Abstract_model');
-                $this->load->helper('inflector');
 		$this->load->model('graduacao_model');
-		$this->load->helper('url');
-		//$this->_init();
     }
 
 
     function index()
     {
         
-        $this->load->view('header');
+        $this->load->view('Header_view');
+        $this->load->view('Navbar_view');
         
         $data['titulo'] = "OpenDojo";
-  		$data['cabecalho'] = "Grupos";
+        $data['cabecalho'] = "Graduações";
 
-		$data['grupos'] = $this->grupo_model->get_all();
+        $consulta = array('tabela' => 'ArteMarcial', 'condicao' => 'Graduacao.arteMarcial = ArteMarcial.idArteMarcial');
+        //$consulta[] = ();
+        //$consulta['condicao'] = 'Graduacao.arteMarcial = ArteMarcial.idArteMarcial';
+//        get_join($data)
+//        $this->db->select('*');
+//        $this->db->from('blogs');
+//        $this->db->join('comments', 'comments.id = blogs.id');
+//
+//        $query = $this->db->get();
+        
+        
+	$data['graduacoes'] = $this->graduacao_model->get_join($consulta);
 
-        $this->load->view('grupo_view', $data);
-        $this->load->view('footer');
+        $this->load->view('GraduacaoList_view', $data);
+        $this->load->view('Footer_view');
     }
 }
