@@ -11,7 +11,7 @@ Modelagem feita com Mysql Workbench
 ##Padronização de nomes 
 Alguns são necessários pelo próprio codeigniter outros foram escolhidos por mim
 
-*Nome de tabelas do banco de dados: 
-..*Tudo minúsculo
-..*No plural
+* Nome de tabelas do banco de dados: 
+..* Tudo minúsculo
+..* No plural
 
