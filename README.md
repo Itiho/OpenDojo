@@ -4,6 +4,10 @@ Sistema para gerenciamento de academias de arte marcial - Dojo
 Modelagem feita com Mysql Workbench
 
 ##Frameworks utilizados
+*[CodeIgniter](http://www.codeigniter.com/) - Framework PHP
+*[Bootstrap](http://getbootstrap.com/) - Framework CSS e JavaScript
+*[Font Awesome](http://fortawesome.github.io/) - Framework CSS com ícones
+*[JQuery](https://jquery.com/) - Framework JavaScript
 
 
 
