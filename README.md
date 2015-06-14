@@ -21,7 +21,7 @@ Alguns são necessários pelo próprio codeigniter outros foram escolhidos por m
     * Inicial maiuscula
     * Sufixo '_model.php'
     * Diretório: application/models/
-    * Exemplo: Grupo_model.php
+    * Exemplo: Artemarcial_model.php
   * Nome da classe
     * Inicial maiuscula
     * Sufixo '_Model'
