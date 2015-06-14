@@ -1,7 +1,6 @@
 <?php
 
-public class Objects {
-
+if (!function_exists('objectToArray')){
     function objectToArray($d) {
         if (is_object($d)) {
             // Gets the properties of the given object
@@ -11,9 +10,7 @@ public class Objects {
 
         if (is_array($d)) {
             /*
-             * Return array converted to object
-             * Using __FUNCTION__ (Magic constant)
-             * for recursive call
+             * Função que verifica se é um objeto multidimenção
              */
             return array_map(__FUNCTION__, $d);
         } else {
@@ -21,7 +18,9 @@ public class Objects {
             return $d;
         }
     }
+}
 
+if (!function_exists('arrayToObject')){
     function arrayToObject($d) {
         if (is_array($d)) {
             /*
@@ -35,7 +34,7 @@ public class Objects {
             return $d;
         }
     }
-
 }
+
 
 ?>

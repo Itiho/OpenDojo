@@ -33,8 +33,8 @@ class MY_Model extends CI_Model
      * This model's default primary key or unique identifier.
      * Used by the get(), update() and delete() functions.
      */
-    protected $primary_key = 'id';
-
+    //protected $primary_key = 'id';
+    protected $primary_key;
     /**
      * Support for soft deletes and this model's 'deleted' key
      */
@@ -106,8 +106,10 @@ class MY_Model extends CI_Model
         $this->load->helper('inflector');
 
         $this->_fetch_table();
+        
 
         $this->_database = $this->db;
+        
 
         array_unshift($this->before_create, 'protect_attributes');
         array_unshift($this->before_update, 'protect_attributes');
@@ -124,7 +126,8 @@ class MY_Model extends CI_Model
      */
     public function get($primary_value)
     {
-		return $this->get_by($this->primary_key, $primary_value);
+        $this->_fetch_primary_key();
+	return $this->get_by($this->primary_key, $primary_value);
     }
 
     /**
@@ -202,7 +205,7 @@ class MY_Model extends CI_Model
         return $result;
     }
 
-       public function get_join($data)
+       public function get_all_join($data, $colunas = '*')
     {
         $this->trigger('before_get');
 
@@ -211,13 +214,14 @@ class MY_Model extends CI_Model
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
 
-
+        $this->db->select($colunas);
         $this->db->from($this->_table);
         
 
         $this->db->join($data['tabela'],$data['condicao']);
         $result = $this->db->get()->{$this->_return_type(1)}();
-        
+        //$result = $this->db->get()->result_array();
+        //var_dump($result);
         $this->_temporary_return_type = $this->return_type;  
 
 
@@ -279,6 +283,7 @@ class MY_Model extends CI_Model
      */
     public function update($primary_value, $data, $skip_validation = FALSE)
     {
+        $this->_fetch_primary_key();
         $data = $this->trigger('before_update', $data);
 
         if ($skip_validation === FALSE)

@@ -1,9 +1,16 @@
-<h1><?=$cabecalho ?></h1>
 <div class="container-fluid">
-  <div class="row">		
+<h1><?=$cabecalho ?></h1>
+
+<?=anchor('graduacao/add', '<i class="fa fa-plus-circle fa-4x"></i>') ?>
+
+		
 
 	<p><?=anchor('graduacao/criar', 'Criar Grupo') ?></p>
 
+<?php if (isset($message)) { 
+    echo $message;
+}
+?>
 
         
 <table class="table table-bordered">
@@ -34,8 +41,8 @@
                 <?=$graduacao->nomeArteMarcial ?>
             </td>
             <td>
-                <?=anchor('graduacao/editar/' . $graduacao->idGraduacao, 'Editar') ?> |
-                <?=anchor('graduacao/deletar/' . $graduacao->idGraduacao, 'Deletar') ?>
+                <?=anchor('graduacao/edit/' . $graduacao->idGraduacao, 'Editar') ?> |
+                <?=anchor('graduacao/delete/' . $graduacao->idGraduacao, 'Deletar') ?>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -46,5 +53,5 @@
 </table>
 
 
- </div>
+
 </div>

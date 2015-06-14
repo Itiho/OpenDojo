@@ -10,7 +10,7 @@
     $attributes_submit = array('class' => 'btn btn-default');
     
     echo form_open('graduacao/save',$attributes_form);
-    echo form_hidden('idGraduacao',$graduacao['idGraduacao']);
+    //echo form_hidden('idGraduacao',$graduacao['idGraduacao']);
             
 ?>
 <div class="form-group">
@@ -23,7 +23,7 @@
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
     $attributes_text['id']  = 'nomeGraduacao';
-    $attributes_text['value'] = $graduacao['nomeGraduacao'];
+    //$attributes_text['value'] = $graduacao['nomeGraduacao'];
     
     echo form_input($attributes_text);
 ?>
@@ -42,7 +42,7 @@ foreach ($artesMarciais as $arteMarcial){
     $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
 }
 
-echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attributes_dropdown);
+echo form_dropdown('arteMarcial', $options, '', $attributes_dropdown);
     
 ?>
 </div>
@@ -52,7 +52,7 @@ echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attribut
 <?php
     echo form_submit($attributes_submit, 'Salvar'); 
             
-    $options = 'onClick="window.location=\''.site_url('graduacao').'\'" class="btn"';
+    $options = 'onClick="window.location=\''.site_url('graduacao').'\'" class="btn" id="arteMarcial"';
     echo form_button('cancel', 'Cancelar', $options); 
 ?>
     </div>

@@ -1,7 +1,18 @@
-<?php echo doctype('xhtml11');?>
+<?php 
+    echo doctype('xhtml11');
+    
+    //Declarações de tipo para formulário
+    $attributes_form = array('class' => 'form-horizontal');
+    $attributes_label = array('class' => 'col-sm-2 control-label');
+    $attributes_text = array('class' => 'form-control');
+    $attributes_dropdown = 'class="form-control"';
+?>
+
+
+
 <html>
 <head>
-	<title>OpenDojo</title>
+	<title><?=$titulo ?> - <?=$cabecalho ?></title>
 
 
 
@@ -20,4 +31,5 @@
 
 </head>
 <body>
+    
 

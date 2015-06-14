@@ -14,7 +14,7 @@ class Graduacao_Model extends MY_Model {
     var $idGraduacao;   // KEY ATTR. WITH AUTOINCREMENT
     var $nomeGraduacao;   // (normal Attribute)
     var $arteMarcial;   // (normal Attribute)
-    var $_table = 'Graduacao'; // Nome da tabela
+    protected $_table = 'Graduacao'; // Nome da tabela
 
 // **********************
 // GETTER METHODS

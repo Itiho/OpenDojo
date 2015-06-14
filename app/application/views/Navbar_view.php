@@ -18,7 +18,7 @@
                         <li><a href="#">Academias</a></li>
                         <li><a href="#">Dojos</a></li>
                         <li><a href="#">Arte Marciais</a></li>
-                        <li><a href="#">Graduações</a></li>
+                        <li><?=anchor('graduacao', 'Graduações') ?></li>
                         <li class="divider"></li>
                         <li><a href="#">Turmas</a></li>
                         <li><a href="#">Horários</a></li>
