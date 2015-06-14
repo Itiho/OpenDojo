@@ -1,73 +1,53 @@
-
-<!-- begin of generated class -->
 <?php
+
 /*
-*
-* -------------------------------------------------------
-* CLASSNAME:        Graduacao_Model
-* FOR MYSQL TABLE:  Graduacao
-* FOR MYSQL DB:     OpenDojo
-* -------------------------------------------------------
-*/
+ *
+ * -------------------------------------------------------
+ * CLASSNAME:        Graduacao_Model
+ * FOR MYSQL TABLE:  Graduacao
+ * FOR MYSQL DB:     OpenDojo
+ * -------------------------------------------------------
+ */
 
+class Graduacao_Model extends MY_Model {
 
-class Graduacao_Model extends MY_Model
-{ 
-
-
-
-var $idGraduacao;   // KEY ATTR. WITH AUTOINCREMENT
-
-var $nomeGraduacao;   // (normal Attribute)
-var $arteMarcial;   // (normal Attribute)
-
-//Insira aqui no mome da tabela
-var $_table = 'Graduacao';
-
-
+    var $idGraduacao;   // KEY ATTR. WITH AUTOINCREMENT
+    var $nomeGraduacao;   // (normal Attribute)
+    var $arteMarcial;   // (normal Attribute)
+    var $_table = 'Graduacao'; // Nome da tabela
 
 // **********************
 // GETTER METHODS
 // **********************
 
+    function get_idGraduacao() {
+        return $this->idGraduacao;
+    }
 
-function get_idGraduacao()
-{
-    return $this->idGraduacao;
-}
+    function get_nomeGraduacao() {
+        return $this->nomeGraduacao;
+    }
 
-function get_nomeGraduacao()
-{
-    return $this->nomeGraduacao;
-}
-
-function get_arteMarcial()
-{
-    return $this->arteMarcial;
-}
+    function get_arteMarcial() {
+        return $this->arteMarcial;
+    }
 
 // **********************
 // SETTER METHODS
 // **********************
 
 
-function set_idGraduacao($val)
-{
-    $this->idGraduacao =  $val;
+    function set_idGraduacao($val) {
+        $this->idGraduacao = $val;
+    }
+
+    function set_nomeGraduacao($val) {
+        $this->nomeGraduacao = $val;
+    }
+
+    function set_arteMarcial($val) {
+        $this->arteMarcial = $val;
+    }
+
 }
-
-function set_nomeGraduacao($val)
-{
-    $this->nomeGraduacao =  $val;
-}
-
-function set_arteMarcial($val)
-{
-    $this->arteMarcial =  $val;
-}
-
-
-} 
-
 ?>
-
