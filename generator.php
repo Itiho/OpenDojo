@@ -133,9 +133,7 @@ var $$col;   // (normal Attribute)";
 $cdb = "$" . "database";
 $cdb2 = "database";
 $c.="
-
-//Insira aqui no mome da tabela
-var $_table = '';
+    var $_table = '$table'; //Nome da tabela
 
 ";
 
