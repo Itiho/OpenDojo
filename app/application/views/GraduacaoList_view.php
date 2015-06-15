@@ -1,11 +1,9 @@
 <div class="container-fluid">
 <h1><?=$cabecalho ?></h1>
 
-<?=anchor('graduacao/add', '<i class="fa fa-plus-circle fa-4x"></i>') ?>
+<?=anchor('graduacao/add', '<i class="fa fa-plus-circle fa-4x"></i> Adicionar Graduação') ?>
 
 		
-
-	<p><?=anchor('graduacao/criar', 'Criar Grupo') ?></p>
 
 <?php if (isset($message)) { 
     echo $message;
@@ -40,9 +38,11 @@
             <td>
                 <?=$graduacao->nomeArteMarcial ?>
             </td>
-            <td>
-                <?=anchor('graduacao/edit/' . $graduacao->idGraduacao, 'Editar') ?> |
-                <?=anchor('graduacao/delete/' . $graduacao->idGraduacao, 'Deletar') ?>
+            <td style="text-align: center;">
+                <a class="btn btn-success" href="<?=site_url('graduacao/edit/'.$graduacao->idGraduacao) ?>">
+                    <i class="fa fa-pencil fa-lg"></i> Editar</a>
+                <a class="btn btn-danger" href="<?=site_url('graduacao/delete/'.$graduacao->idGraduacao) ?>">
+                    <i class="fa fa-trash-o fa-lg"></i> Deletar</a>
             </td>
         </tr>
         <?php endforeach; ?>
