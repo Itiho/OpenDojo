@@ -41,8 +41,9 @@
             <td style="text-align: center;">
                 <a class="btn btn-success" href="<?=site_url('graduacao/edit/'.$graduacao->idGraduacao) ?>">
                     <i class="fa fa-pencil fa-lg"></i> Editar</a>
-                <a class="btn btn-danger" href="<?=site_url('graduacao/delete/'.$graduacao->idGraduacao) ?>">
-                    <i class="fa fa-trash-o fa-lg"></i> Deletar</a>
+                <a class="btn btn-danger" href="<?=site_url('graduacao/delete/'.$graduacao->idGraduacao) ?>"
+                   title="Deseja realmente excluir a graduação?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
+                    <i class="fa fa-trash-o fa-lg" title="Excluir a Graduação"></i> Deletar</a>
             </td>
         </tr>
         <?php endforeach; ?>

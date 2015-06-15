@@ -6,6 +6,7 @@ Modelagem feita com Mysql Workbench
 ##Frameworks utilizados
 * [CodeIgniter 3.0.0](http://www.codeigniter.com/) - Framework PHP
 * [Bootstrap 3.3.4](http://getbootstrap.com/) - Framework CSS e JavaScript
+* [Bootstrap Confirmation 2.1.1](http://mistic100.github.io/Bootstrap-Confirmation/) - Plugin JavaScript para diálogo de confirmação
 * [Font Awesome 4.3.0](http://fortawesome.github.io/Font-Awesome/) - Framework CSS com ícones
 * [JQuery 1.9.1](https://jquery.com/) - Framework JavaScript
 
