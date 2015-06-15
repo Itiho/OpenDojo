@@ -33,5 +33,9 @@
 
 </head>
 <body>
+
+<?php
+	$this->view('Navbar_view');
+?>
     
 

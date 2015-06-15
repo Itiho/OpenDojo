@@ -1,16 +1,23 @@
-<div class="container-fluid">
-<h1><?=$cabecalho ?></h1>
-
-<?=anchor('graduacao/add', '<i class="fa fa-plus-circle fa-4x"></i> Adicionar Graduação') ?>
-
-		
-
-<?php if (isset($message)) { 
-    echo $message;
-}
+<?php
+	$this->view('Header_view');
 ?>
+<div class="row">
+  <div class="col-md-10"><h1><?=$cabecalho ?></h1></div>
+  <div class="col-md-2"><?=anchor('graduacao/add', '<i class="fa fa-plus-circle fa-4x"></i><br />Adicionar') ?></div>
+</div>
 
-        
+<?php 
+if (isset($message)) { 
+    if($type_message){
+        echo '<div class="alert alert-success">';
+    } else {
+        echo '<div class="alert alert-danger">';
+    }
+    echo $message; 
+    echo '</div>';
+} 
+?>
+   
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -56,3 +63,7 @@
 
 
 </div>
+
+<?php
+	$this->view('Footer_view');
+?>

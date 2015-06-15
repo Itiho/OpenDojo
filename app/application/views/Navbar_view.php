@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
+<div class="container-fluid">
+	<nav class="navbar navbar-default">  
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="#">Home</a></li>
@@ -30,6 +30,5 @@
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+	</nav>
 

@@ -1,4 +1,6 @@
-
+<?php
+	$this->view('Header_view');
+?>
 <div class="container-fluid">
     <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
 
@@ -65,3 +67,6 @@ echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attribut
 
 
 </div>
+<?php
+	$this->view('Footer_view');
+?>

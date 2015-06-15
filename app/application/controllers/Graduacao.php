@@ -11,11 +11,8 @@ class Graduacao extends CI_Controller
     }
 
     function index() {
-        $this->data['titulo'] = "OpenDojo";
-        $this->data['cabecalho'] = "Graduações";
 
-        $this->load->view('Header_view', $this->data);
-        $this->load->view('Navbar_view');
+        $this->data['cabecalho'] = "Graduações";
 
         $consulta = array('tabela' => 'ArteMarcial', 'condicao' => 'Graduacao.arteMarcial = ArteMarcial.idArteMarcial');
         $this->graduacao_model->order_by('idGraduacao');
@@ -23,45 +20,28 @@ class Graduacao extends CI_Controller
         $this->data['graduacoes'] = $this->graduacao_model->get_all_join($consulta, $colunas);
 
         $this->load->view('GraduacaoList_view', $this->data);
-        $this->load->view('Footer_view');
     }
 
     function edit($id = 0){
-
-        $this->data['titulo'] = "OpenDojo";
         $this->data['cabecalho'] = "Graduação";
-     
-        
-        $this->load->view('Header_view', $this->data);
-        $this->load->view('Navbar_view');    
         
         if($id > 0){
             $graduacao = $this->graduacao_model->get($id);
             $this->data['graduacao'] = objectToArray($graduacao);
-        } else{
-            //aqui entrará a parte da nova graduação
-            
-        }
-
+        } 
         $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
         
-        $this->load->view('GraduacaoEdit_view', $this->data);
-        $this->load->view('Footer_view');
-        
+        $this->load->view('GraduacaoEdit_view', $this->data);        
     }
     
     function add() {
-        $this->data['titulo'] = "OpenDojo";
         $this->data['cabecalho'] = "Graduação";
-        $this->load->view('Header_view', $this->data);
-        $this->load->view('Navbar_view');
         
         $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
         //Adiciona um item vazio no início
         array_unshift($this->data['artesMarciais'],array('idArteMarcial'=> 0, 'nomeArteMarcial' => ''));
         
         $this->load->view('GraduacaoAdd_view', $this->data);
-        $this->load->view('Footer_view');
     }
 
     function save() {
@@ -73,17 +53,22 @@ class Graduacao extends CI_Controller
         if ($this->input->post('idGraduacao') == NULL) {
             if ($this->graduacao_model->insert($graduacao)) {
                 $this->data['message'] = 'Graduação cadastrada com sucesso';
+                $this->data['type_message'] = '1'; //Sucesso
             } else {
                 $this->data['message'] = 'Erro no cadastro da Graduação';
+                $this->data['type_message'] = '0'; //Erro
             }
             $this->index();
         } else {
+            //Se a tela vier do update
             $graduacao->set_idGraduacao($this->input->post('idGraduacao'));
             if ($this->graduacao_model->update($graduacao->idGraduacao, $graduacao)) {
                 $this->data['message'] = 'Graduação atualizada com sucesso';
+                $this->data['type_message'] = '1'; //Sucesso
             } else {
                 $this->data['message'] = 'Erro na atualização da Graduação';
-            }
+                $this->data['type_message'] = '0'; //Erro
+            } 
             $this->index();
         }
     }
