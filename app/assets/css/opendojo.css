@@ -6,6 +6,18 @@
 .popover-content a{
     margin: 0 5px;
 }
+.table-bordered th{
+   background-color:#f5f5f5;
+}
+
+.table-bordered tbody tr:nth-child(even){
+   background-color:#f7f7f7;
+}
+
+.table-bordered tbody tr:nth-child(odd){
+   
+   background-color:#f9f9f9;
+}
 
 .bs-filter:after {
   content: "Filtros";
