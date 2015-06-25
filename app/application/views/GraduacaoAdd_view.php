@@ -1,23 +1,24 @@
 <?php
-	$this->view('Header_view');
-?>
-<div class="container-fluid">
-    <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
-
-<?php
+    $this->view('Header_view');
+        
+    //Declarações de tipo para formulário
     $attributes_form = array('class' => 'form-horizontal');
     $attributes_label = array('class' => 'col-sm-2 control-label');
     $attributes_text = array('class' => 'form-control');
     $attributes_dropdown = 'class="form-control"';
     $attributes_submit = array('class' => 'btn btn-default');
-    
+?>
+<div class="container-fluid">
+    <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
+
+<?php
+
     echo form_open('graduacao/save',$attributes_form);
-    //echo form_hidden('idGraduacao',$graduacao['idGraduacao']);
             
 ?>
 <div class="form-group">
 <?php
-
+    echo form_error('nomeGraduacao');
     echo form_label('Graduação', 'nomeGraduacao', $attributes_label);
 ?>
     <div class="col-sm-10">
@@ -25,15 +26,13 @@
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
     $attributes_text['id']  = 'nomeGraduacao';
-    //$attributes_text['value'] = $graduacao['nomeGraduacao'];
-    
     echo form_input($attributes_text);
 ?>
 </div>
 </div>
  <div class="form-group">
 <?php
-
+    echo form_error('arteMarcial');
     echo form_label('Arte Marcial', 'arteMarcial', $attributes_label);
 ?>
     <div class="col-sm-10">

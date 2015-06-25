@@ -7,7 +7,6 @@
  * @copyright Copyright (c) 2012, Jamie Rumbelow <http://jamierumbelow.net>
  */
 
-//$this->load->library('Abstract_model');
 
 class MY_Model extends CI_Model
 {
@@ -77,6 +76,13 @@ class MY_Model extends CI_Model
      * as validation rules passed to the Form_validation library.
      */
     protected $validate = array();
+    
+    /**
+     * Usado para guardar condições
+     */
+    protected $where_params = array();
+
+
 
     /**
      * Optionally skip the validation. Used in conjunction with
@@ -107,7 +113,8 @@ class MY_Model extends CI_Model
 
         $this->_fetch_table();
         
-
+        //Deixa campo nulo
+        //$this->where_params = NULL;
         $this->_database = $this->db;
         
 
@@ -205,8 +212,11 @@ class MY_Model extends CI_Model
         return $result;
     }
 
-       public function get_all_join($data, $colunas = '*')
+
+
+        public function get_all_join($data, $colunas = '*')
     {
+        $this->_set_where();
         $this->trigger('before_get');
 
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
@@ -907,60 +917,45 @@ class MY_Model extends CI_Model
         }
     }
 
+    public function set_where($condicao){
+        array_push($this->where_params, $condicao);
+        //var_dump($this->where_params);
+    }
+    
+    
     /**
      * Set WHERE parameters, cleverly
      */
-    protected function _set_where($params)
-    {
-        if (count($params) == 1 && is_array($params[0]))
-        {
-            foreach ($params[0] as $field => $filter)
-            {
-                if (is_array($filter))
-                {
-                    $this->_database->where_in($field, $filter);
-                }
-                else
-                {
-                    if (is_int($field))
-                    {
-                        $this->_database->where($filter);
-                    }
-                    else
-                    {
-                        $this->_database->where($field, $filter);
+    protected function _set_where() {
+        if (count($this->where_params) > 0) {
+            if (count($this->where_params) == 1 && is_array($this->where_params[0])) {
+                foreach ($this->where_params[0] as $field => $filter) {
+                    if (is_array($filter)) {
+                        $this->_database->where_in($field, $filter);
+                    } else {
+                        if (is_int($field)) {
+                            $this->_database->where($filter);
+                        } else {
+                            $this->_database->where($field, $filter);
+                        }
                     }
                 }
-            }
-        } 
-        else if (count($params) == 1)
-        {
-            $this->_database->where($params[0]);
-        }
-    	else if(count($params) == 2)
-		{
-            if (is_array($params[1]))
-            {
-                $this->_database->where_in($params[0], $params[1]);    
-            }
-            else
-            {
-                $this->_database->where($params[0], $params[1]);
-            }
-		}
-		else if(count($params) == 3)
-		{
-			$this->_database->where($params[0], $params[1], $params[2]);
-		}
-        else
-        {
-            if (is_array($params[1]))
-            {
-                $this->_database->where_in($params[0], $params[1]);    
-            }
-            else
-            {
-                $this->_database->where($params[0], $params[1]);
+            } else if (count($this->where_params) == 1) {
+                $this->_database->where($this->where_params[0]);
+            } else if (count($this->where_params) == 2) {
+                if (is_array($this->where_params[1])) {
+                    $this->_database->where_in($this->where_params[0], $this->where_params[1]);
+                } else {
+                    $this->_database->where($this->where_params[0], $this->where_params[1]);
+                }
+            } else if (count($this->where_params) == 3) {
+                $this->_database->where($this->where_params[0], $this->where_params[1], $this->where_params[2]);
+            } else {
+                if (is_array($this->where_params[1])) {
+                    $this->_database->where_in($this->where_params[0], $this->where_params[1]);
+                } else {
+                    $this->_database->where($this->where_params[0], $this->where_params[1]);
+                }
             }
         }
     }

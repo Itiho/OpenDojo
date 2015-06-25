@@ -7,3 +7,19 @@
     margin: 0 5px;
 }
 
+.bs-filter:after {
+  content: "Filtros";
+  position: relative;
+  top:  -55px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bs-filter {
+  //border: 1px solid #cccccc;
+  padding-top: 20px;
+}

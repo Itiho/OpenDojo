@@ -1,41 +1,29 @@
-<?php 
-    echo doctype('xhtml11');
-    
-    //Declarações de tipo para formulário
-    $attributes_form = array('class' => 'form-horizontal');
-    $attributes_label = array('class' => 'col-sm-2 control-label');
-    $attributes_text = array('class' => 'form-control');
-    $attributes_dropdown = 'class="form-control"';
+<?php
+echo doctype('xhtml11');
 ?>
-
-
 
 <html>
-<head>
-	<title><?=$titulo ?> - <?=$cabecalho ?></title>
+    <head>
+        <title><?= $titulo ?> - <?= $cabecalho ?></title>
 
+        <!--CSS
+        ==========================================================-->
+        <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/css/opendojo.css" rel="stylesheet">
 
+        <!--JavaScript
+        ==========================================================-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap-confirmation.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/opendojo.js"></script>
 
+    </head>
+    <body>
 
-
-<!--CSS
-==========================================================-->
-<link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/css/opendojo.css" rel="stylesheet">
- 
-<!--JavaScript
-==========================================================-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/bootstrap-confirmation.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/opendojo.js"></script>
-
-</head>
-<body>
-
-<?php
-	$this->view('Navbar_view');
-?>
+        <?php
+        $this->view('Navbar_view');
+        ?>
     
 
