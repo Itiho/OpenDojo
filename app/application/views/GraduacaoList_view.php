@@ -83,6 +83,9 @@ echo form_dropdown('arteMarcial', $options, $filtro_arteMarcial, $attributes_dro
             <th>
                 Arte Marcial
             </th>
+            <th>
+                Opções
+            </th>
         </tr>
     </thead>
     <tbody>
