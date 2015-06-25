@@ -1,0 +1,6 @@
+# Apache configuration file (see httpd.apache.org/docs/2.2/mod/quickreference.html)
+
+# disable directory listing
+RewriteEngine on
+RewriteCond $1 !^(index\.php|assets|robots\.txt)
+RewriteRule ^(.*)$ index.php/$1 [L]
