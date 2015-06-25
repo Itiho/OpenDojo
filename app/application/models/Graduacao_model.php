@@ -15,39 +15,18 @@ class Graduacao_Model extends MY_Model {
     var $nomeGraduacao;   // (normal Attribute)
     var $arteMarcial;   // (normal Attribute)
     protected $_table = 'Graduacao'; // Nome da tabela
+    protected $primary_key = 'idGraduacao';
 
-// **********************
-// GETTER METHODS
-// **********************
+    
+    public function get_graduacoes() {
 
-    function get_idGraduacao() {
-        return $this->idGraduacao;
+        $query = $this->db
+                ->select('idGraduacao, nomeGraduacao, nomeArteMarcial')
+                ->from($this->_table)
+                ->join('ArteMarcial', 'Graduacao.arteMarcial = ArteMarcial.idArteMarcial')
+                ->get();
+        return $query->result();
     }
-
-    function get_nomeGraduacao() {
-        return $this->nomeGraduacao;
-    }
-
-    function get_arteMarcial() {
-        return $this->arteMarcial;
-    }
-
-// **********************
-// SETTER METHODS
-// **********************
-
-
-    function set_idGraduacao($val) {
-        $this->idGraduacao = $val;
-    }
-
-    function set_nomeGraduacao($val) {
-        $this->nomeGraduacao = $val;
-    }
-
-    function set_arteMarcial($val) {
-        $this->arteMarcial = $val;
-    }
-
 }
+
 ?>

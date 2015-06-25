@@ -12,6 +12,7 @@ class Graduacao extends CI_Controller
     }
 
     function index() {
+        $this->data['cabecalho'] = "Graduações";
         if ($this->input->post('nomeGraduacao') <> '') {
             $this->graduacao_model->_database->like('nomeGraduacao', $this->input->post('nomeGraduacao'));
             $this->data['filtro_nomeGraduacao'] = $this->input->post('nomeGraduacao');
@@ -25,18 +26,12 @@ class Graduacao extends CI_Controller
         } else{
             $this->data['filtro_arteMarcial'] = '';
         }
-
-        $this->data['cabecalho'] = "Graduações";
         
-
-        $consulta = array('tabela' => 'ArteMarcial', 'condicao' => 'Graduacao.arteMarcial = ArteMarcial.idArteMarcial');
-        $this->graduacao_model->order_by('idGraduacao');
-        $colunas = 'idGraduacao, nomeGraduacao, nomeArteMarcial';
-        $this->data['graduacoes'] = $this->graduacao_model->get_all_join($consulta, $colunas);
+        $this->data['graduacoes']= $this->graduacao_model->get_graduacoes();
         $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
         array_unshift($this->data['artesMarciais'],array('idArteMarcial'=> 0, 'nomeArteMarcial' => 'Arte marcial'));
         $this->load->view('GraduacaoList_view', $this->data);
-        //var_dump($this->data);
+
     }
 
     function edit($id = 0){
