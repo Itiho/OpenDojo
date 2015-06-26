@@ -12,8 +12,8 @@
     <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
 
 <?php
-
-    echo form_open('graduacao/save',$attributes_form);
+    //echo validation_errors();
+    echo form_open('graduacao/add',$attributes_form);
             
 ?>
 <div class="form-group">
@@ -26,6 +26,9 @@
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
     $attributes_text['id']  = 'nomeGraduacao';
+    if(isset($nomeGraduacao_value)){
+        $attributes_text['value']  = $nomeGraduacao_value;
+    }
     echo form_input($attributes_text);
 ?>
 </div>
@@ -38,13 +41,16 @@
     <div class="col-sm-10">
 <?php   
     
-$options = array();
-foreach ($artesMarciais as $arteMarcial){
-    $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
-}
-
-echo form_dropdown('arteMarcial', $options, '', $attributes_dropdown);
-    
+    $options = array();
+    foreach ($artesMarciais as $arteMarcial) {
+        $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
+    }
+    if (isset($arteMarcial_value)) {
+        $selecionado = $arteMarcial_value;
+    } else {
+        $selecionado = '';
+    }
+    echo form_dropdown('arteMarcial', $options, $selecionado , $attributes_dropdown);
 ?>
 </div>
 </div>

@@ -47,14 +47,28 @@ class Graduacao extends CI_Controller
     }
     
     function add() {
-
+        //var_dump($this->form_validation);
         $this->data['cabecalho'] = "Graduação";
         
         $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
         //Adiciona um item vazio no início
         array_unshift($this->data['artesMarciais'],array('idArteMarcial'=> 0, 'nomeArteMarcial' => ''));
         
-        $this->load->view('GraduacaoAdd_view', $this->data);
+        if (count($this->input->post()) == 0) {
+            $this->load->view('GraduacaoAdd_view', $this->data);
+        } else {
+            $graduacao = array(
+                        'nomeGraduacao' => $this->input->post('nomeGraduacao'),
+                        'arteMarcial' => $this->input->post('arteMarcial'));
+            $resultado = $this->graduacao_model->insert($graduacao);
+            if ($resultado) {
+                $this->index();
+            } else {
+                $this->data['nomeGraduacao_value'] = $this->input->post('nomeGraduacao');
+                $this->data['arteMarcial_value'] = $this->input->post('arteMarcial');
+                $this->load->view('GraduacaoAdd_view', $this->data);
+            }
+        }
     }
 
     function save() {
@@ -62,14 +76,14 @@ class Graduacao extends CI_Controller
         
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         //Validating Name Field
-        $this->form_validation->set_rules('nomeArteMarcial', 'nomeArteMarcial', 'required|min_length[5]|max_length[25]');
+        //$this->form_validation->set_rules('nomeArteMarcial', 'nomeArteMarcial', 'required|min_length[5]|max_length[25]');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('GraduacaoAdd_view', $this->data);
         } else {
             $graduacao = new Graduacao_Model();
-            $graduacao->set_nomeGraduacao($this->input->post('nomeGraduacao'));
-            $graduacao->set_arteMarcial($this->input->post('arteMarcial'));
+            $graduacao->nomeGraduacao = $this->input->post('nomeGraduacao');
+            $graduacao->arteMarcial = $this->input->post('arteMarcial');
 
             //Se vier da tela de cadastro
             if ($this->input->post('idGraduacao') == NULL) {
