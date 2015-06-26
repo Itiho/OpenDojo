@@ -12,16 +12,17 @@
     <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
 
 <?php
-    //echo validation_errors();
     echo form_open('graduacao/add',$attributes_form);
-            
-?>
-<div class="form-group">
-<?php
-    echo form_error('nomeGraduacao');
+
+    if(form_error('nomeGraduacao')){
+        echo '<div class="form-group has-error">';
+    } else{
+        echo '<div class="form-group">';
+    }
+
     echo form_label('Graduação', 'nomeGraduacao', $attributes_label);
 ?>
-    <div class="col-sm-10">
+    <div class="col-xs-4">
 <?php
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
@@ -30,15 +31,21 @@
         $attributes_text['value']  = $nomeGraduacao_value;
     }
     echo form_input($attributes_text);
+    
 ?>
 </div>
-</div>
- <div class="form-group">
 <?php
-    echo form_error('arteMarcial');
-    echo form_label('Arte Marcial', 'arteMarcial', $attributes_label);
+    echo form_error('nomeGraduacao');
+
+    if (form_error('arteMarcial')) {
+        echo '</div><div class="form-group has-error">';
+    } else {
+        echo '</div><div class="form-group">';
+    }
+
+echo form_label('Arte Marcial', 'arteMarcial', $attributes_label);
 ?>
-    <div class="col-sm-10">
+    <div class="col-xs-4">
 <?php   
     
     $options = array();
@@ -53,6 +60,9 @@
     echo form_dropdown('arteMarcial', $options, $selecionado , $attributes_dropdown);
 ?>
 </div>
+<?php
+    echo form_error('arteMarcial');
+?>
 </div>
  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

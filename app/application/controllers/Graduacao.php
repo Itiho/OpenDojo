@@ -8,6 +8,7 @@ class Graduacao extends CI_Controller
         $this->load->model('graduacao_model');
         $this->load->model('artemarcial_model');
         $this->data['titulo'] = "OpenDojo";
+        $this->form_validation->set_error_delimiters('<div class="col-xs-5 messageContainer help-block">', '</div>');
         
     }
 

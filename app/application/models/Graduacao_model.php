@@ -23,10 +23,12 @@ class Graduacao_Model extends MY_Model {
             'rules' => 'required'),
         array('field' => 'arteMarcial',
             'label' => 'Arte Marcial',
-            'rules' => 'required|greater_than[0]',
-            array('greater_than[0]' => '{field} é obrigatório')));
+            'rules' => 'required|greater_than[0]'));
     
-
+    protected $validate_messages = array(
+        array(
+            'rule'=> 'greater_than',
+            'message' => '{field} é obrigatório'));
 
 
     public function get_graduacoes() {
