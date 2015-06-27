@@ -12,9 +12,17 @@
 class ArteMarcial_Model extends MY_Model {
 
     var $idArteMarcial;   // KEY ATTR. WITH AUTOINCREMENT
-    var $nome;   // (normal Attribute)
-    protected $_table = 'ArteMarcial';
-    protected $primary_key = 'idArteMarcial';
+    var $nomeArteMarcial;   // (normal Attribute)
+    public $table = 'ArteMarcial';
+    public $primary_key = 'idArteMarcial';
 
+    function __construct() {
+        $this->has_many['graduacoes'] = 'Graduacao_Model';
+        parent::__construct();
+        
+        $this->pagination_delimiters = array('<li>', '</li>');
+        $this->pagination_arrows = array('&lt;', '&gt;');
+    }
+    
 }
 ?>

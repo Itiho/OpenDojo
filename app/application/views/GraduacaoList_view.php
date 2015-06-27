@@ -12,17 +12,19 @@ $attributes_submit = array('class' => 'btn btn-default');
 </div>
 
 <?php
-if (isset($message)) {
-    if ($type_message) {
+//var_dump($this->session->flashdata('message'));
+if ($this->session->flashdata('message') <> '' ) {
+    if ($this->session->flashdata('type_message')) {
         echo '<div class="alert alert-success">';
     } else {
         echo '<div class="alert alert-danger">';
     }
-    echo $message;
+    echo $this->session->flashdata('message');
     echo '</div>';
 }
 ?>
-
+<div class="row">
+    <div class="col-md-7">
 <div class="bs-filter">
     <?php
     echo form_open('graduacao', $attributes_form);
@@ -70,7 +72,14 @@ echo form_dropdown('filtro_arteMarcial', $options, $filtro_arteMarcial, $attribu
 
     ?>
 </div>
+    </div>
 
+    <div class="col-md-5">
+        <ul class="pagination">
+            <?= $all_pages ?>
+        </ul>
+    </div>
+</div>  
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -99,7 +108,7 @@ echo form_dropdown('filtro_arteMarcial', $options, $filtro_arteMarcial, $attribu
                         <?= $graduacao->nomeGraduacao ?>
                     </td>
                     <td>
-                        <?= $graduacao->nomeArteMarcial ?>
+                        <?= $graduacao->arteMarcial_fk->nomeArteMarcial ?>
                     </td>
                     <td style="text-align: center;">
                         <a class="btn btn-success" href="<?= site_url('graduacao/edit/' . $graduacao->idGraduacao) ?>">

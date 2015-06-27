@@ -21,7 +21,7 @@
 .bs-filter:after {
   content: "Filtros";
   position: relative;
-  top:  -55px;
+  top:  -65px;
   left: 15px;
   font-size: 12px;
   font-weight: bold;
@@ -32,4 +32,23 @@
 
 .bs-filter {
   padding-top: 20px;
+}
+
+
+.pagination > li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+.pagination > li > a{
+    color: #337ab7;
+    padding: 0px;
+    margin-left: 0px;
+    border: none;
 }
