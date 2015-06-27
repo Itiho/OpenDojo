@@ -714,8 +714,6 @@ class MY_Model extends CI_Model {
                 foreach ($this->validate_messages as $validate_message) {
                     $this->form_validation->set_message($validate_message['rule'], $validate_message['message']);
                 }
-                $this->form_validation->set_message('rule', 'Error Message');
-                
                 if ($this->form_validation->run() === TRUE) {
                     return $data;
                 } else {
