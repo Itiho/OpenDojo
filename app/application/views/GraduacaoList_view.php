@@ -29,14 +29,14 @@ if (isset($message)) {
     ?>
     <div class="form-group">
         <?php
-        echo form_error('nomeGraduacao');
-        echo form_label('Graduação', 'nomeGraduacao', $attributes_label);
+        echo form_error('filtro_nomeGraduacao');
+        echo form_label('Graduação', 'filtro_nomeGraduacao', $attributes_label);
         ?>
         
         <?php
-        $attributes_text['name'] = 'nomeGraduacao';
+        $attributes_text['name'] = 'filtro_nomeGraduacao';
         $attributes_text['placeholder'] = 'Graduação';
-        $attributes_text['id'] = 'nomeGraduacao';
+        $attributes_text['id'] = 'filtro_nomeGraduacao';
         $attributes_text['value'] = $filtro_nomeGraduacao;
 
         echo form_input($attributes_text);
@@ -44,8 +44,8 @@ if (isset($message)) {
         </div>
     <div class="form-group">
         <?php
-        echo form_error('arteMarcial');
-        echo form_label('Arte Marcial', 'arteMarcial', $attributes_label);
+        echo form_error('filtro_arteMarcial');
+        echo form_label('Arte Marcial', 'filtro_arteMarcial', $attributes_label);
         ?>
 <?php
 $options = array();
@@ -53,7 +53,7 @@ foreach ($artesMarciais as $arteMarcial) {
     $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
 }
 
-echo form_dropdown('arteMarcial', $options, $filtro_arteMarcial, $attributes_dropdown);
+echo form_dropdown('filtro_arteMarcial', $options, $filtro_arteMarcial, $attributes_dropdown);
 ?>
         </div>
 

@@ -14,16 +14,16 @@ class Graduacao extends CI_Controller
 
     function index() {
         $this->data['cabecalho'] = "Graduações";
-        if ($this->input->post('nomeGraduacao') <> '') {
-            $this->graduacao_model->_database->like('nomeGraduacao', $this->input->post('nomeGraduacao'));
-            $this->data['filtro_nomeGraduacao'] = $this->input->post('nomeGraduacao');
+        if ($this->input->post('filtro_nomeGraduacao') <> '') {
+            $this->graduacao_model->_database->like('nomeGraduacao', $this->input->post('filtro_nomeGraduacao'));
+            $this->data['filtro_nomeGraduacao'] = $this->input->post('filtro_nomeGraduacao');
         } else{
             $this->data['filtro_nomeGraduacao'] = '';
         }
         
-        if ($this->input->post('arteMarcial') > 0) {
-            $this->graduacao_model->_database->where('arteMarcial', $this->input->post('arteMarcial'));
-            $this->data['filtro_arteMarcial'] = $this->input->post('arteMarcial');
+        if ($this->input->post('filtro_arteMarcial') > 0) {
+            $this->graduacao_model->_database->where('arteMarcial', $this->input->post('filtro_arteMarcial'));
+            $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
         } else{
             $this->data['filtro_arteMarcial'] = '';
         }
