@@ -43,7 +43,7 @@
         echo '</div><div class="form-group">';
     }
 
-echo form_label('Arte Marcial', 'arteMarcial', $attributes_label);
+echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
 ?>
     <div class="col-xs-4">
 <?php   

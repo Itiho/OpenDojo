@@ -92,7 +92,7 @@ class Graduacao extends CI_Controller
                         'arteMarcial' => $this->input->post('arteMarcial'));
             $resultado = $this->graduacao_model->from_form()->insert();
             if ($resultado) {
-                $this->session->set_flashdata('message', 'Graduação cadastrada com sucesso');
+                $this->session->set_flashdata('message', 'Graduação "'.$this->input->post('nomeGraduacao').'" cadastrada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/graduacao');
             } else {

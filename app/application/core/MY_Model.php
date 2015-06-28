@@ -131,7 +131,7 @@ class MY_Model extends CI_Model
     /* validation */
     private $validated = TRUE;
     private $row_fields_to_update = array();
-
+    protected $validate_messages = array();
 
     /**
      * The various callbacks available to the model. Each are

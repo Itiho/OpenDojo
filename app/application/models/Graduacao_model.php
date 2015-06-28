@@ -23,24 +23,11 @@ class Graduacao_Model extends MY_Model {
                 'label'=>'Nome',
                 'rules'=>'required'),
             'arteMarcial' => array('field'=>'arteMarcial',
-                'label'=>'Arte Marcial',
-                'rules'=>'required|greater_than[0]')
+                'label'=>'Arte marcial',
+                'rules'=>'required|greater_than[0]',
+                'errors' => array('greater_than' => '{field} é obrigatório'))
         )
     );
-    
-
-//    protected $rules = array(
-//        array('field' => 'nomeGraduacao',
-//            'label' => 'Nome',
-//            'rules' => 'required'),
-//        array('field' => 'arteMarcial',
-//            'label' => 'Arte Marcial',
-//            'rules' => 'required|greater_than[0]'));
-    
-    protected $validate_messages = array(
-        array(
-            'rule'=> 'greater_than',
-            'message' => '{field} é obrigatório'));
 
 
     function __construct() {
