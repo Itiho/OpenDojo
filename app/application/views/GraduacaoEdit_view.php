@@ -1,26 +1,29 @@
 <?php
-	$this->view('Header_view');
-?>
-<div class="container-fluid">
-    <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
-
-<?php
+    $this->view('Header_view');
+        
+    //Declarações de tipo para formulário
     $attributes_form = array('class' => 'form-horizontal');
     $attributes_label = array('class' => 'col-sm-2 control-label');
     $attributes_text = array('class' => 'form-control');
     $attributes_dropdown = 'class="form-control"';
     $attributes_submit = array('class' => 'btn btn-default');
-    
-    echo form_open('graduacao/save',$attributes_form);
+?>
+<div class="container-fluid">
+    <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
+
+<?php
+    echo form_open('graduacao/edit/'.$graduacao['idGraduacao'],$attributes_form);
     echo form_hidden('idGraduacao',$graduacao['idGraduacao']);
             
-?>
-<div class="form-group">
-<?php
+    if(form_error('nomeGraduacao')){
+        echo '<div class="form-group has-error">';
+    } else{
+        echo '<div class="form-group">';
+    }
 
     echo form_label('Graduação', 'nomeGraduacao', $attributes_label);
 ?>
-    <div class="col-sm-10">
+    <div class="col-xs-4">
 <?php
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
@@ -30,24 +33,34 @@
     echo form_input($attributes_text);
 ?>
 </div>
-</div>
- <div class="form-group">
 <?php
-
-    echo form_label('Arte Marcial', 'arteMarcial', $attributes_label);
+    echo form_error('nomeGraduacao');
 ?>
-    <div class="col-sm-10">
+</div>
+<?php
+    if (form_error('arteMarcial')) {
+        echo '<div class="form-group has-error">';
+    } else {
+        echo '<div class="form-group">';
+    }
+
+echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
+?>
+    <div class="col-xs-4">
 <?php   
     
-$options = array();
-foreach ($artesMarciais as $arteMarcial){
-    $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
-}
+    $options = array();
+    foreach ($artesMarciais as $arteMarcial){
+        $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
+    }
 
 echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attributes_dropdown);
     
 ?>
 </div>
+<?php
+    echo form_error('arteMarcial');
+?>
 </div>
  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -64,8 +77,6 @@ echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attribut
 <?php 
     echo form_close(); 
 ?>
-
-
 </div>
 <?php
 	$this->view('Footer_view');

@@ -21,11 +21,16 @@ class Graduacao_Model extends MY_Model {
         'insert' => array(
             'nomeGraduacao' => array('field'=>'nomeGraduacao',
                 'label'=>'Nome',
-                'rules'=>'required'),
+                'rules'=>'required|min_length'),
             'arteMarcial' => array('field'=>'arteMarcial',
                 'label'=>'Arte marcial',
                 'rules'=>'required|greater_than[0]',
                 'errors' => array('greater_than' => '{field} é obrigatório'))
+        ),
+        'update' => array(
+            'nomeGraduacao' => array('field'=>'nomeGraduacao',
+                'label'=>'Nome',
+                'rules'=>'required')
         )
     );
 

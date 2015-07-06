@@ -36,28 +36,26 @@
 </div>
 <?php
     echo form_error('nomeGraduacao');
-
+?>
+</div>    
+<?php
     if (form_error('arteMarcial')) {
-        echo '</div><div class="form-group has-error">';
+        echo '<div class="form-group has-error">';
     } else {
-        echo '</div><div class="form-group">';
+        echo '<div class="form-group">';
     }
 
 echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
 ?>
     <div class="col-xs-4">
 <?php   
-    
-    $options = array();
-    foreach ($artesMarciais as $arteMarcial) {
-        $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
-    }
+
     if (isset($arteMarcial_value)) {
         $selecionado = $arteMarcial_value;
     } else {
         $selecionado = '';
     }
-    echo form_dropdown('arteMarcial', $options, $selecionado , $attributes_dropdown);
+    echo form_dropdown('arteMarcial', $artesMarciais, $selecionado , $attributes_dropdown);
 ?>
 </div>
 <?php
@@ -69,7 +67,7 @@ echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
 <?php
     echo form_submit($attributes_submit, 'Salvar'); 
             
-    $options = 'onClick="window.location=\''.site_url('graduacao').'\'" class="btn" id="arteMarcial"';
+    $options = 'onClick="window.location=\''.site_url('graduacao').'\'" class="btn"';
     echo form_button('cancel', 'Cancelar', $options); 
 ?>
     </div>
