@@ -16,13 +16,21 @@ class ArteMarcial_Model extends MY_Model {
     public $table = 'ArteMarcial';
     public $primary_key = 'idArteMarcial';
 
+     protected $rules = array(
+            'nomeArteMarcial' => array('field'=>'nomeArteMarcial',
+                'label'=>'Nome',
+                'rules'=>'required|min_length[3]'));
+    
+    
     function __construct() {
-        $this->has_many['graduacoes'] = 'Graduacao_Model';
+        $this->timestamps = FALSE;
+        $this->has_many['graduacoes'] =  array('Graduacao_Model','arteMarcial', 'idArteMarcial');
         parent::__construct();
-        
+
         $this->pagination_delimiters = array('<li>', '</li>');
         $this->pagination_arrows = array('&lt;', '&gt;');
     }
-    
+
 }
+
 ?>
