@@ -65,6 +65,7 @@ class Graduacao extends CI_Controller {
     }
 
     function edit($id = 0) {
+        $this->load->library('form_validation');
         $this->data['cabecalho'] = "Graduação";
         $graduacao = $this->graduacao_model->get($id);
         $this->data['graduacao'] = objectToArray($graduacao);
@@ -77,18 +78,22 @@ class Graduacao extends CI_Controller {
                 'arteMarcial' => $this->input->post('arteMarcial'));
             $rules = array(
                array(
-                     'field'   => 'nomeGraduacao',
-                     'label'   => 'Nome',
-                     'rules'   => 'required'
-                  )
+                    'field'   => 'nomeGraduacao',
+                    'label'   => 'Nome',
+                    'rules'   => 'required|greater_than[3]',
+                    'errors' => array('greater_than' => '%s deve ter no mínimo %s caracteres'))
             );
-			
-            $resultado = $this->graduacao_model->from_form($rules)->update($graduacao, $this->input->post('idGraduacao'));
-            if ($resultado) {
+//            $this->form_validation->set_message('greater_than', '{field} é obrigatório'');
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == TRUE) {
+                echo "teste";
+//            if ($resultado) {
+            $resultado = $this->graduacao_model->update($graduacao, $this->input->post('idGraduacao'));
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nomeGraduacao') . '" editada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/graduacao');
             } else {
+                echo "teste".$this->input->post('nomeGraduacao');
                 $this->data['idGraduacao'] = $this->input->post('idGraduacao');
                 $this->data['nomeGraduacao_value'] = $this->input->post('nomeGraduacao');
                 $this->data['arteMarcial_value'] = $this->input->post('arteMarcial');
@@ -122,8 +127,19 @@ class Graduacao extends CI_Controller {
             }
         }
     }
-
-    function save() {
+    
+    function delete($id = null){
+        if (isset($id)){
+            $graduacao = $this->graduacao_model->get($id);
+//            var_dump($graduacao);
+            $this->graduacao_model->delete($id);
+            $this->session->set_flashdata('message', 'Graduação "' . $graduacao->nomeGraduacao . '" deletada com sucesso');
+                $this->session->set_flashdata('type_message', '1'); //Sucesso
+                redirect('/graduacao');
+            
+        }
+    }
+                function save() {
         $this->data['cabecalho'] = "Graduação";
 
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');

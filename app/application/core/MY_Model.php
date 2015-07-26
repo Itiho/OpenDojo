@@ -1,5 +1,22 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*
+* Copyright (C) 2014 @avenirer [avenir.ro@gmail.com]
+* Everyone is permitted to copy and distribute verbatim or modified copies of this license document, 
+* and changing it is allowed as long as the name is changed.
+* DON'T BE A DICK PUBLIC LICENSE TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+*
+***** Do whatever you like with the original work, just don't be a dick.
+***** Being a dick includes - but is not limited to - the following instances:
+********* 1a. Outright copyright infringement - Don't just copy this and change the name.
+********* 1b. Selling the unmodified original with no work done what-so-ever, that's REALLY being a dick.
+********* 1c. Modifying the original work to contain hidden harmful content. That would make you a PROPER dick.
+***** If you become rich through modifications, related works/services, or supporting the original work, share the love. Only a dick would make loads off this work and not buy the original works creator(s) a pint.
+***** Code is provided with no warranty. 
+*********** Using somebody else's code and bitching when it goes wrong makes you a DONKEY dick. 
+*********** Fix the problem yourself. A non-dick would submit the fix back.
+ * 
+ */
+ 
 /** how to extend MY_Model:
  *	class User_model extends MY_Model
  *	{
@@ -727,14 +744,12 @@ class MY_Model extends CI_Model
             $this->load->driver('cache');
             $cache_name = $this->_cache['cache_name'];
             $seconds = $this->_cache['seconds'];
-        }
-        if(isset($this->_cache) && !empty($this->_cache))
-        {
             $data = $this->cache->{$this->cache_driver}->get($cache_name);
         }
 
         if(isset($data) && $data !== FALSE)
         {
+            $this->_database->reset_query();
             return $data;
         }
         else
@@ -784,15 +799,12 @@ class MY_Model extends CI_Model
             $this->load->driver('cache');
             $cache_name = $this->_cache['cache_name'];
             $seconds = $this->_cache['seconds'];
-        }
-
-        if(isset($this->_cache) && !empty($this->_cache))
-        {
             $data = $this->cache->{$this->cache_driver}->get($cache_name);
         }
 
         if(isset($data) && $data !== FALSE)
         {
+            $this->_database->reset_query();
             return $data;
         }
         else
@@ -863,7 +875,14 @@ class MY_Model extends CI_Model
                 foreach($arguments as $argument)
                 {
                     $elements = explode(':',$argument);
-                    $parameters[$elements[0]] = $elements[1];
+                    if(sizeof($elements)==2)
+                    {
+                        $parameters[$elements[0]] = $elements[1];
+                    }
+                    else
+                    {
+                        show_error('MY_Model: Parameters for with() method must be of the form: "...->with(\'where:...|fields:...\')"');
+                    }
                 }
             }
             $this->_requested[$request]['parameters'] = $parameters;
@@ -895,6 +914,7 @@ class MY_Model extends CI_Model
      */
     protected function join_temporary_results($data)
     {
+        $order_by = array();
         foreach($this->_requested as $requested_key => $request)
         {
             $pivot_table = NULL;
@@ -909,36 +929,44 @@ class MY_Model extends CI_Model
             $local_key_values = array();
             foreach($data as $key => $element)
             {
-                if(isset($element[$local_key]))
+                if(isset($element[$local_key]) and !empty($element[$local_key]))
                 {
                     $id = $element[$local_key];
                     $local_key_values[$key] = $id;
                 }
             }
+            if(!$local_key_values)
+            {
+                $data[$key][$relation_key] = NULL;
+                continue;
+            }
             if(!isset($pivot_table))
             {
-                $sub_results = $this->{$relation['foreign_model']}->as_array();
+                $sub_results = $this->{$relation['foreign_model']};
+                $select = array();
+                $select[] = '`'.$foreign_table.'`.`'.$foreign_key.'`';
                 if(!empty($request['parameters']))
                 {
                     if(array_key_exists('fields',$request['parameters']))
                     {
                         $fields = explode(',',$request['parameters']['fields']);
-                        $select = array();
                         foreach($fields as $field)
                         {
                             $select[] = '`'.$foreign_table.'`.`'.trim($field).'`';
                         }
                         $the_select = implode(',',$select);
                     }
-                    $sub_results = (isset($the_select)) ? $sub_results->fields($the_select.','.$foreign_table.'.'.$foreign_key) : $sub_results;
+                    $sub_results = (isset($the_select)) ? $sub_results->fields($the_select) : $sub_results;
                     $sub_results = (array_key_exists('where',$request['parameters'])) ? $sub_results->where($request['parameters']['where'],NULL,NULL,FALSE,FALSE,TRUE) : $sub_results;
                 }
                 $sub_results = $sub_results->where($foreign_key, $local_key_values)->get_all();
             }
             else
             {
-                $this->_database->join($pivot_table, $foreign_table.'.'.$foreign_key.' = '.$pivot_table.'.'.singular($foreign_table).'_'.$foreign_key, 'inner');
-                $this->_database->join($this->table, $pivot_table.'.'.singular($this->table).'_'.$local_key.' = '.$this->table.'.'.$local_key,'inner');
+                $this->_database->join($pivot_table, $foreign_table.'.'.$foreign_key.' = '.$pivot_table.'.'.singular($foreign_table).'_'.$foreign_key, 'left');
+                $this->_database->join($this->table, $pivot_table.'.'.singular($this->table).'_'.$local_key.' = '.$this->table.'.'.$local_key,'left');
+                $this->_database->select($foreign_table.'.'.$foreign_key);
+                $this->_database->select($pivot_table.'.'.singular($this->table).'_'.$local_key);
                 if(!empty($request['parameters']))
                 {
                     if(array_key_exists('fields',$request['parameters']))
@@ -951,7 +979,6 @@ class MY_Model extends CI_Model
                         }
                         $the_select = implode(',',$select);
                         $this->_database->select($the_select);
-                        $this->_database->select($foreign_table.'.'.$foreign_key);
                     }
 
                     if(array_key_exists('where',$request['parameters']))
@@ -966,13 +993,28 @@ class MY_Model extends CI_Model
 
             if(isset($sub_results) && !empty($sub_results)) {
                 $subs = array();
+
                 foreach ($sub_results as $result) {
-                    $the_foreign_key = $result[$foreign_key];
-                    if(isset($request['parameters']['fields']) && !strstr($request['parameters']['fields'], $foreign_key))
+                    $result_array = (array)$result;
+                    $the_foreign_key = $result_array[$foreign_key];
+                    if(isset($pivot_table))
                     {
-                        unset($result[$foreign_key]);
+                        $the_local_key = $result_array[singular($this->table) . '_' . $local_key];
+                        $subs[$the_local_key][$the_foreign_key] = $result;
                     }
-                    $subs[$the_foreign_key][] = $result;
+                    else
+                    {
+                        if($type=='has_one')
+                        {
+                         $subs[$the_foreign_key] = $result;
+                        }
+                        else
+                        {
+                         $subs[$the_foreign_key][] = $result;
+                        }
+                    }
+
+
                 }
                 $sub_results = $subs;
 
@@ -980,18 +1022,31 @@ class MY_Model extends CI_Model
                 {
                     if(array_key_exists($value,$sub_results))
                     {
-                        if ($type == 'has_one')
-                        {
-                            $data[$key][$relation_key] = $sub_results[$value][0];
-                        }
-                        else
-                        {
-                            $data[$key][$relation_key] = $sub_results[$value];
-                        }
+                        $data[$key][$relation_key] = $sub_results[$value];
                     }
                 }
             }
+            if(array_key_exists('order_by',$request['parameters']))
+            {
+                $elements = explode(',', $request['parameters']['order_by']);
+                if(sizeof($elements)==2)
+                {
+                    $order_by[$relation_key] = array(trim($elements[0]), trim($elements[1]));
+                }
+                else
+                {                
+                    $order_by[$relation_key] = array(trim($elements[0]), 'desc');
+                }
+            }
             unset($this->_requested[$requested_key]);
+        }
+        if($order_by)
+        {
+            foreach($order_by as $field => $row)
+            {                
+                list($key, $value) = $row;
+                $data = $this->_build_sorter($data, $field, $key, $value);
+            }
         }
         return $data;
         //if(sizeof($data)==1) $data = $data[0];
@@ -1218,8 +1273,13 @@ class MY_Model extends CI_Model
         return $this;
     }
 
-    public function as_dropdown($field)
+    public function as_dropdown($field = NULL)
     {
+        if(!isset($field))
+        {
+            show_error('MY_Model: You must set a field to be set as value for the key: ...->as_dropdown(\'field\')->...');
+            exit;
+        }
         $this->return_as = 'dropdown';
         $this->_dropdown_field = $field;
         $this->_select = array($this->primary_key, $field);
@@ -1370,10 +1430,6 @@ class MY_Model extends CI_Model
             $this->load->driver('cache');
             $cache_name = $this->_cache['cache_name'].'_'.$page_number;
             $seconds = $this->_cache['seconds'];
-        }
-
-        if(isset($this->_cache) && !empty($this->_cache))
-        {
             $data = $this->cache->{$this->cache_driver}->get($cache_name);
         }
 
@@ -1456,5 +1512,14 @@ class MY_Model extends CI_Model
             return $this;
         }
         else echo 'No method with that name ('.$method.') in MY_Model.';
+    }
+    
+    private function _build_sorter($data, $field, $order_by, $sort_by = 'DESC') 
+    {
+        usort($data, function($a, $b) use ($field, $order_by, $sort_by) {
+            return strtoupper($sort_by) ==  "DESC" ? ($a[$field][$order_by] < $b[$field][$order_by]) : ($a[$field][$order_by] > $b[$field][$order_by]);
+        }); 
+
+        return $data;
     }
 }
