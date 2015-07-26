@@ -54,4 +54,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //$route['graduacao/add'] = "tutorials/add"; 
-$route['graduacao/(:num)'] = "graduacao/index"; 
+$route['graduacao/(:num)'] = "graduacao/index";
+$route['artemarcial/(:num)'] = "artemarcial/index"; 
