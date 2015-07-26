@@ -9,11 +9,11 @@ class Graduacao extends CI_Controller {
         $this->load->model('graduacao_model');
         $this->load->model('artemarcial_model');
         $this->data['titulo'] = "OpenDojo";
+        $this->data['cabecalho'] = "Graduações";
         $this->form_validation->set_error_delimiters('<div class="col-xs-5 messageContainer help-block">', '</div>');
     }
 
     function index($pagina = 1) {
-        $this->data['cabecalho'] = "Graduações";
         if ($this->input->post('filtro_nomeGraduacao') <> '') {
             $this->data['filtro_nomeGraduacao'] = $this->input->post('filtro_nomeGraduacao');
 
@@ -66,7 +66,6 @@ class Graduacao extends CI_Controller {
 
     function edit($id = 0) {
         $this->load->library('form_validation');
-        $this->data['cabecalho'] = "Graduação";
         $graduacao = $this->graduacao_model->get($id);
         $this->data['graduacao'] = objectToArray($graduacao);
         $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
@@ -77,23 +76,17 @@ class Graduacao extends CI_Controller {
                 'nomeGraduacao' => $this->input->post('nomeGraduacao'),
                 'arteMarcial' => $this->input->post('arteMarcial'));
             $rules = array(
-               array(
-                    'field'   => 'nomeGraduacao',
-                    'label'   => 'Nome',
-                    'rules'   => 'required|greater_than[3]',
-                    'errors' => array('greater_than' => '%s deve ter no mínimo %s caracteres'))
-            );
-//            $this->form_validation->set_message('greater_than', '{field} é obrigatório'');
+                array(
+                    'field' => 'nomeGraduacao',
+                    'label' => 'Nome',
+                    'rules' => 'required'));
             $this->form_validation->set_rules($rules);
             if ($this->form_validation->run() == TRUE) {
-                echo "teste";
-//            if ($resultado) {
-            $resultado = $this->graduacao_model->update($graduacao, $this->input->post('idGraduacao'));
+                $resultado = $this->graduacao_model->update($graduacao, $this->input->post('idGraduacao'));
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nomeGraduacao') . '" editada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/graduacao');
+                redirect('/Graduacao');
             } else {
-                echo "teste".$this->input->post('nomeGraduacao');
                 $this->data['idGraduacao'] = $this->input->post('idGraduacao');
                 $this->data['nomeGraduacao_value'] = $this->input->post('nomeGraduacao');
                 $this->data['arteMarcial_value'] = $this->input->post('arteMarcial');
@@ -103,8 +96,6 @@ class Graduacao extends CI_Controller {
     }
 
     function add() {
-        $this->data['cabecalho'] = "Graduação";
-
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         //Adiciona um item vazio no início
         array_unshift($this->data['artesMarciais'], '');
@@ -119,7 +110,7 @@ class Graduacao extends CI_Controller {
             if ($resultado) {
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nomeGraduacao') . '" cadastrada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/graduacao');
+                redirect('/Graduacao');
             } else {
                 $this->data['nomeGraduacao_value'] = $this->input->post('nomeGraduacao');
                 $this->data['arteMarcial_value'] = $this->input->post('arteMarcial');
@@ -127,55 +118,14 @@ class Graduacao extends CI_Controller {
             }
         }
     }
-    
-    function delete($id = null){
-        if (isset($id)){
+
+    function delete($id = null) {
+        if (isset($id)) {
             $graduacao = $this->graduacao_model->get($id);
-//            var_dump($graduacao);
             $this->graduacao_model->delete($id);
             $this->session->set_flashdata('message', 'Graduação "' . $graduacao->nomeGraduacao . '" deletada com sucesso');
-                $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/graduacao');
-            
+            $this->session->set_flashdata('type_message', '1'); //Sucesso
+            redirect('/Graduacao');
         }
     }
-                function save() {
-        $this->data['cabecalho'] = "Graduação";
-
-        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        //Validating Name Field
-        //$this->form_validation->set_rules('nomeArteMarcial', 'nomeArteMarcial', 'required|min_length[5]|max_length[25]');
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('GraduacaoAdd_view', $this->data);
-        } else {
-            $graduacao = new Graduacao_Model();
-            $graduacao->nomeGraduacao = $this->input->post('nomeGraduacao');
-            $graduacao->arteMarcial = $this->input->post('arteMarcial');
-
-            //Se vier da tela de cadastro
-            if ($this->input->post('idGraduacao') == NULL) {
-                if ($this->graduacao_model->insert($graduacao)) {
-                    $this->data['message'] = 'Graduação cadastrada com sucesso';
-                    $this->data['type_message'] = '1'; //Sucesso
-                } else {
-                    $this->data['message'] = 'Erro no cadastro da Graduação';
-                    $this->data['type_message'] = '0'; //Erro
-                }
-                $this->index();
-            } else {
-                //Se a tela vier do update
-                $graduacao->set_idGraduacao($this->input->post('idGraduacao'));
-                if ($this->graduacao_model->update($graduacao->idGraduacao, $graduacao)) {
-                    $this->data['message'] = 'Graduação atualizada com sucesso';
-                    $this->data['type_message'] = '1'; //Sucesso
-                } else {
-                    $this->data['message'] = 'Erro na atualização da Graduação';
-                    $this->data['type_message'] = '0'; //Erro
-                }
-                $this->index();
-            }
-        }
-    }
-
 }
