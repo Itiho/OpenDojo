@@ -12,7 +12,7 @@
     <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
 
 <?php
-    echo form_open('graduacao/edit/'.$graduacao['idGraduacao'],$attributes_form);
+    echo form_open('Graduacao/edit/'.$graduacao['idGraduacao'],$attributes_form);
     echo form_hidden('idGraduacao',$graduacao['idGraduacao']);
             
     if(form_error('nomeGraduacao')){
@@ -67,7 +67,7 @@ echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attribut
 <?php
     echo form_submit($attributes_submit, 'Salvar'); 
             
-    $options = 'onClick="window.location=\''.site_url('graduacao').'\'" class="btn"';
+    $options = 'onClick="window.location=\''.site_url('Graduacao').'\'" class="btn"';
     echo form_button('cancel', 'Cancelar', $options); 
 ?>
     </div>
