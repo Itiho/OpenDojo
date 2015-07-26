@@ -79,7 +79,7 @@ class Graduacao extends CI_Controller {
                 array(
                     'field' => 'nomeGraduacao',
                     'label' => 'Nome',
-                    'rules' => 'required'));
+                    'rules' => 'required|min_length[3]'));
             $this->form_validation->set_rules($rules);
             if ($this->form_validation->run() == TRUE) {
                 $resultado = $this->graduacao_model->update($graduacao, $this->input->post('idGraduacao'));
