@@ -8,9 +8,7 @@
 * -------------------------------------------------------
 */
 
-
-
-class Academia_Model extends AbstractModel {
+class Academia_Model extends MY_Model {
 
     var $idAcademia;   // KEY ATTR. WITH AUTOINCREMENT
     var $nome;   // (normal Attribute)
@@ -22,82 +20,37 @@ class Academia_Model extends AbstractModel {
     var $estado;   // (normal Attribute)
 
     //Insira aqui no mome da tabela
-    var $_table = 'Academia';
+    public $table = 'Academia';
+    public $primary_key = 'idAcademia';
 
-// **********************
-// GETTER METHODS
-// **********************
+    protected $rules = array(
+            'nome' => array('field'=>'nome',
+                'label'=>'Nome',
+                'rules'=>'required|min_length[3]'),
+            'logradouro' => array('field'=>'logradouro',
+                'label'=>'Logradouro'),
+            'numero' => array('field'=>'numero',
+                'label'=>'Numero'),
+            'complemento' => array('field'=>'complemento',
+                'label'=>'Complemento'),
+            'bairro' => array('field'=>'bairro',
+                'label'=>'Bairro'),
+            'cidade' => array('field'=>'cidade',
+                'label'=>'Cidade',
+                'rules'=>'required|min_length[5]'),
+            'estado' => array('field'=>'estado',
+                'label'=>'Estado',
+                'rules'=>'exact_length[2]',
+                'errors' => array ('exact_length' => '%s é obrigatório')));
+    
+    function __construct() {
+        $this->timestamps = FALSE;
+        $this->has_many['dojos'] =  array('Dojo_Model','Academia_idAcademia', 'idAcademia');
+        parent::__construct();
 
-
-    function get_idAcademia() {
-        return $this->idAcademia;
+        $this->pagination_delimiters = array('<li>', '</li>');
+        $this->pagination_arrows = array('&lt;', '&gt;');
     }
-
-    function get_nome() {
-        return $this->nome;
-    }
-
-    function get_logradouro() {
-        return $this->logradouro;
-    }
-
-    function get_numero() {
-        return $this->numero;
-    }
-
-    function get_complemento() {
-        return $this->complemento;
-    }
-
-    function get_bairro() {
-        return $this->bairro;
-    }
-
-    function get_cidade() {
-        return $this->cidade;
-    }
-
-    function get_estado() {
-        return $this->estado;
-    }
-
-// **********************
-// SETTER METHODS
-// **********************
-
-
-    function set_idAcademia($val) {
-        $this->idAcademia = $val;
-    }
-
-    function set_nome($val) {
-        $this->nome = $val;
-    }
-
-    function set_logradouro($val) {
-        $this->logradouro = $val;
-    }
-
-    function set_numero($val) {
-        $this->numero = $val;
-    }
-
-    function set_complemento($val) {
-        $this->complemento = $val;
-    }
-
-    function set_bairro($val) {
-        $this->bairro = $val;
-    }
-
-    function set_cidade($val) {
-        $this->cidade = $val;
-    }
-
-    function set_estado($val) {
-        $this->estado = $val;
-    }
-
 }
 ?>
 

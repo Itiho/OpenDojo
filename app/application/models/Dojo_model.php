@@ -9,7 +9,7 @@
  * -------------------------------------------------------
  */
 
-class Dojo_Model extends AbstractModel {
+class Dojo_Model extends MY_Model {
 
     var $idDojo;   // KEY ATTR. WITH AUTOINCREMENT
     var $nome;   // (normal Attribute)
@@ -17,48 +17,23 @@ class Dojo_Model extends AbstractModel {
     var $ArteMarcial_idArteMarcial;   // (normal Attribute)
     
     //Insira aqui no mome da tabela
-    var $_table = 'Dojo';
+    public $table = 'Dojo';
+    public $primary_key = 'idDojo';
 
-// **********************
-// GETTER METHODS
-// **********************
+    protected $rules = array(
+            'nome' => array('field'=>'nomeDojo',
+                'label'=>'Nome',
+                'rules'=>'required|min_length[3]'));
+    
+    
+    function __construct() {
+        $this->timestamps = FALSE;
+        $this->has_one['arteMarcial'] = array('ArteMarcial_Model','idArteMarcial','ArteMarcial_idArteMarcial');
+        $this->has_one['academia'] = array('Academia_Model','idAcademia','Academia_idAcademia');
+        parent::__construct();
 
-
-    function get_idDojo() {
-        return $this->idDojo;
-    }
-
-    function get_nome() {
-        return $this->nome;
-    }
-
-    function get_Academia_idAcademia() {
-        return $this->Academia_idAcademia;
-    }
-
-    function get_ArteMarcial_idArteMarcial() {
-        return $this->ArteMarcial_idArteMarcial;
-    }
-
-// **********************
-// SETTER METHODS
-// **********************
-
-
-    function set_idDojo($val) {
-        $this->idDojo = $val;
-    }
-
-    function set_nome($val) {
-        $this->nome = $val;
-    }
-
-    function set_Academia_idAcademia($val) {
-        $this->Academia_idAcademia = $val;
-    }
-
-    function set_ArteMarcial_idArteMarcial($val) {
-        $this->ArteMarcial_idArteMarcial = $val;
+        $this->pagination_delimiters = array('<li>', '</li>');
+        $this->pagination_arrows = array('&lt;', '&gt;');
     }
 
 }
