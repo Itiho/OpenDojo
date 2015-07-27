@@ -20,6 +20,7 @@ class ArteMarcial extends CI_Controller {
                     ->count();
             $this->data['artesmarciais'] = $this->artemarcial_model
                     ->with_graduacoes()
+                    ->with_dojos()
                     ->where('nomeArteMarcial', 'like', $this->input->post('filtro_nomeArteMarcial'))
                     ->paginate(10, $total_graduacoes, $pagina);
         } else {
@@ -27,6 +28,7 @@ class ArteMarcial extends CI_Controller {
             $total_graduacoes = $this->artemarcial_model->count();
             $this->data['artesmarciais'] = $this->artemarcial_model
                     ->with_graduacoes()
+                    ->with_dojos()
                     ->paginate(10, $total_graduacoes, $pagina);
         }
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
