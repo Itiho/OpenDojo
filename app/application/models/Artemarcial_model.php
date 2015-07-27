@@ -25,6 +25,7 @@ class ArteMarcial_Model extends MY_Model {
     function __construct() {
         $this->timestamps = FALSE;
         $this->has_many['graduacoes'] =  array('Graduacao_Model','arteMarcial', 'idArteMarcial');
+        $this->has_many['dojos'] =  array('Dojo_Model','idDojo', 'idArteMarcial');
         parent::__construct();
 
         $this->pagination_delimiters = array('<li>', '</li>');
