@@ -8,53 +8,23 @@
  * -------------------------------------------------------
  */
 
-class Turma_Model extends AbstractModel {
+class Turma_Model extends MY_Model {
 
     var $idTurma;   // KEY ATTR. WITH AUTOINCREMENT
     var $nome;   // (normal Attribute)
     var $ativo;   // (normal Attribute)
     var $Dojo_idDojo;   // (normal Attribute)
-    var $_table = 'Turma'; // Nome da tabela
+    public $table = 'Turma'; // Nome da tabela
+    public $primary_key = 'idTurma';
 
-// **********************
-// GETTER METHODS
-// **********************
+     function __construct() {
+        $this->timestamps = FALSE;
+        $this->has_one['dojo'] = array('Dojo_Model','idDojo','Dojo_idDojo');
 
-    function get_idTurma() {
-        return $this->idTurma;
-    }
+        parent::__construct();
 
-    function get_nome() {
-        return $this->nome;
-    }
-
-    function get_ativo() {
-        return $this->ativo;
-    }
-
-    function get_Dojo_idDojo() {
-        return $this->Dojo_idDojo;
-    }
-
-// **********************
-// SETTER METHODS
-// **********************
-
-
-    function set_idTurma($val) {
-        $this->idTurma = $val;
-    }
-
-    function set_nome($val) {
-        $this->nome = $val;
-    }
-
-    function set_ativo($val) {
-        $this->ativo = $val;
-    }
-
-    function set_Dojo_idDojo($val) {
-        $this->Dojo_idDojo = $val;
+        $this->pagination_delimiters = array('<li>', '</li>');
+        $this->pagination_arrows = array('&lt;', '&gt;');
     }
 
 }

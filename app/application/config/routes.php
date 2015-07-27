@@ -57,3 +57,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['Graduacao/(:num)'] = "Graduacao/index";
 $route['ArteMarcial/(:num)'] = "ArteMarcial/index"; 
 $route['Academia/(:num)'] = "Academia/index"; 
+$route['Dojo/(:num)'] = "Dojo/index"; 
