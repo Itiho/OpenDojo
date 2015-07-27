@@ -85,9 +85,8 @@ class ArteMarcial extends CI_Controller {
 
     function delete($id = null) {
         if (isset($id)) {
-            $artemarcial = $this->artemarcial_model->get($id);
-            $resultado = $this->artemarcial_model->delete($id);
-            if ($resultado) {
+            $artemarcial = $this->artemarcial_model->fields('nomeArteMarcial')->get($id);
+            if ($this->artemarcial_model->delete($id)) {
                 $this->session->set_flashdata('message', 'Arte marcial "' . $artemarcial->nomeArteMarcial . '" deletada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
             } else {
