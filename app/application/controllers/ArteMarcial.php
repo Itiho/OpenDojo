@@ -13,10 +13,9 @@ class ArteMarcial extends CI_Controller {
     }
 
     function index($pagina = 1) {
-        if ($this->input->post('filtro_$nomeArteMarcial') <> '') {
+        if ($this->input->post('filtro_nomeArteMarcial') <> '') {
             $this->data['filtro_nomeArteMarcial'] = $this->input->post('filtro_nomeArteMarcial');
             $total_artesmarciais = $this->artemarcial_model
-                    ->with_graduacoes()
                     ->where('nomeArteMarcial', 'like', $this->input->post('filtro_nomeArteMarcial'))
                     ->count();
             $this->data['artesmarciais'] = $this->artemarcial_model
