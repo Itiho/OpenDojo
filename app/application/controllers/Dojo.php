@@ -19,116 +19,6 @@ class Dojo extends CI_Controller {
                         $this->input->post('filtro_arteMarcial'), 
                         $this->input->post('filtro_nomeDojo'),
                         $pagina);
-//        if ($this->input->post('filtro_nomeDojo') <> '') {
-//            $this->data['filtro_nomeDojo'] = $this->input->post('filtro_nomeDojo');
-//
-//            if ($this->input->post('filtro_arteMarcial') > 0) {
-//                $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
-//
-//                if ($this->input->post('filtro_academia') > 0) {
-//                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
-//                    $total_dojos = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                } else {
-//                    $this->data['filtro_academia'] = '';
-//                    $total_dojos = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                }
-//            } else {
-//                $this->data['filtro_arteMarcial'] = '';
-//                if ($this->input->post('filtro_academia') > 0) {
-//                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
-//                    $total_dojos = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                } else {
-//                    $this->data['filtro_academia'] = '';
-//                    $total_dojos = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                }
-//            }
-//        } else {
-//            $this->data['filtro_nomeDojo'] = '';
-//            if ($this->input->post('filtro_arteMarcial') > 0) {
-//                $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
-//
-//                if ($this->input->post('filtro_academia') > 0) {
-//                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
-//                    $total_dojos = $this->dojo_model
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                } else {
-//                    $this->data['filtro_academia'] = '';
-//                    $total_dojos = $this->dojo_model
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                }
-//            } else {
-//                $this->data['filtro_arteMarcial'] = '';
-//                if ($this->input->post('filtro_academia') > 0) {
-//                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
-//                    $total_dojos = $this->dojo_model
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                } else {
-//                    $this->data['filtro_academia'] = '';
-//                    $total_dojos = $this->dojo_model
-//                            ->count();
-//                    $this->data['dojos'] = $this->dojo_model
-//                            ->with_artemarcial()
-//                            ->with_academia()
-//                            ->paginate(10, $total_dojos, $pagina);
-//                }
-//            }
-//        }
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         //Insere o primeiro item       
@@ -140,23 +30,23 @@ class Dojo extends CI_Controller {
     }
     
     private function filtrar($filtro_academia, $filtro_arteMarcial, $filtro_nomeDojo, $pagina) {
-                if ($this->input->post('filtro_nomeDojo') <> '') {
-            $this->data['filtro_nomeDojo'] = $this->input->post('filtro_nomeDojo');
+                if ($filtro_nomeDojo <> '') {
+            $this->data['filtro_nomeDojo'] = $filtro_nomeDojo;
 
-            if ($this->input->post('filtro_arteMarcial') > 0) {
-                $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
+            if ($filtro_arteMarcial > 0) {
+                $this->data['filtro_arteMarcial'] = $filtro_arteMarcial;
 
-                if ($this->input->post('filtro_academia') > 0) {
-                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
+                if ($filtro_academia > 0) {
+                    $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -164,12 +54,12 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -177,15 +67,15 @@ class Dojo extends CI_Controller {
                 }
             } else {
                 $this->data['filtro_arteMarcial'] = '';
-                if ($this->input->post('filtro_academia') > 0) {
-                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
+                if ($filtro_academia > 0) {
+                    $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -193,10 +83,10 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $this->input->post('filtro_nomeDojo'))
+                            ->where('nome', 'like', $filtro_nomeDojo)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -205,18 +95,18 @@ class Dojo extends CI_Controller {
             }
         } else {
             $this->data['filtro_nomeDojo'] = '';
-            if ($this->input->post('filtro_arteMarcial') > 0) {
-                $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
+            if ($filtro_arteMarcial > 0) {
+                $this->data['filtro_arteMarcial'] = $filtro_arteMarcial;
 
-                if ($this->input->post('filtro_academia') > 0) {
-                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
+                if ($filtro_academia > 0) {
+                    $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -224,10 +114,10 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('ArteMarcial_idArteMarcial', $this->input->post('filtro_arteMarcial'))
+                            ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -235,13 +125,13 @@ class Dojo extends CI_Controller {
                 }
             } else {
                 $this->data['filtro_arteMarcial'] = '';
-                if ($this->input->post('filtro_academia') > 0) {
-                    $this->data['filtro_academia'] = $this->input->post('filtro_academia');
+                if ($filtro_academia > 0) {
+                    $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('Academia_idAcademia', $this->input->post('filtro_academia'))
+                            ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
