@@ -197,7 +197,7 @@ echo form_label('Estado', 'estado', $attributes_label);
 <?php
     echo form_submit($attributes_submit, 'Salvar'); 
             
-    $options = 'onClick="window.location=\''.site_url('graduacao').'\'" class="btn"';
+    $options = 'onClick="window.location=\''.site_url('Academia').'\'" class="btn"';
     echo form_button('cancel', 'Cancelar', $options); 
 ?>
     </div>
