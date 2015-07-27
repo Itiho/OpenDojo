@@ -15,7 +15,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Configurações<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Academias</a></li>
+                        <li><?=anchor('Academia', 'Academias') ?></li>
                         <li><a href="#">Dojos</a></li>
                         <li><?=anchor('ArteMarcial', 'Artes Marciais') ?></li>
                         <li><?=anchor('Graduacao', 'Graduações') ?></li>
