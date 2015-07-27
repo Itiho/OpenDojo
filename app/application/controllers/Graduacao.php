@@ -14,39 +14,48 @@ class Graduacao extends CI_Controller {
     }
 
     function index($pagina = 1) {
-        if ($this->input->post('filtro_nomeGraduacao') <> '') {
-            $this->data['filtro_nomeGraduacao'] = $this->input->post('filtro_nomeGraduacao');
+        $this->filtrar($this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeGraduacao'), $pagina);
+        $this->data['all_pages'] = $this->graduacao_model->all_pages;
+        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all('nomeArteMarcial');
+        //Insere o primeiro item       
+        array_unshift($this->data['artesMarciais'], '');
+        $this->load->view('GraduacaoList_view', $this->data);
+    }
 
-            if ($this->input->post('filtro_arteMarcial') > 0) {
-                $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
+    private function filtrar($filtro_arteMarcial, $filtro_nomeGraduacao, $pagina) {
+        if ($filtro_nomeGraduacao <> '') {
+            $this->data['filtro_nomeGraduacao'] = $filtro_nomeGraduacao;
+
+            if ($filtro_arteMarcial > 0) {
+                $this->data['filtro_arteMarcial'] = $filtro_arteMarcial;
                 $total_graduacoes = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $this->input->post('filtro_nomeGraduacao'))
-                        ->where('arteMarcial', $this->input->post('filtro_arteMarcial'))
+                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
+                        ->where('arteMarcial', $filtro_arteMarcial)
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $this->input->post('filtro_nomeGraduacao'))
-                        ->where('arteMarcial', $this->input->post('filtro_arteMarcial'))
+                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
+                        ->where('arteMarcial', $filtro_arteMarcial)
                         ->with_arteMarcial_fk()
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
                 $total_graduacoes = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $this->input->post('filtro_nomeGraduacao'))
+                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $this->input->post('filtro_nomeGraduacao'))
+                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
                         ->with_arteMarcial_fk()
                         ->paginate(10, $total_graduacoes, $pagina);
             }
         } else {
             $this->data['filtro_nomeGraduacao'] = '';
-            if ($this->input->post('filtro_arteMarcial') > 0) {
-                $this->data['filtro_arteMarcial'] = $this->input->post('filtro_arteMarcial');
+            if ($filtro_arteMarcial > 0) {
+                $this->data['filtro_arteMarcial'] = $filtro_arteMarcial;
                 $total_graduacoes = $this->graduacao_model
-                        ->where('arteMarcial', $this->input->post('filtro_arteMarcial'))
+                        ->where('arteMarcial', $filtro_arteMarcial)
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->where('arteMarcial', $this->input->post('filtro_arteMarcial'))
+                        ->where('arteMarcial', $filtro_arteMarcial)
                         ->with_arteMarcial_fk()
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
@@ -57,11 +66,6 @@ class Graduacao extends CI_Controller {
                         ->paginate(10, $total_graduacoes, $pagina);
             }
         }
-        $this->data['all_pages'] = $this->graduacao_model->all_pages;
-        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all('nomeArteMarcial');
-        //Insere o primeiro item       
-        array_unshift($this->data['artesMarciais'], '');
-        $this->load->view('GraduacaoList_view', $this->data);
     }
 
     function edit($id = 0) {
@@ -131,4 +135,5 @@ class Graduacao extends CI_Controller {
             redirect('/Graduacao');
         }
     }
+
 }
