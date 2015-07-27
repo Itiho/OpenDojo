@@ -12,7 +12,7 @@
     <h1><i class="fa fa-pencil  fa-3x"></i> <?=$cabecalho ?></h1>
 
 <?php
-    echo form_open('graduacao/add',$attributes_form);
+    echo form_open('Graduacao/add',$attributes_form);
 
     if(form_error('nomeGraduacao')){
         echo '<div class="form-group has-error">';
