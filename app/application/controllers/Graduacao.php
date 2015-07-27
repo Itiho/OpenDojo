@@ -58,9 +58,9 @@ class Graduacao extends CI_Controller {
             }
         }
         $this->data['all_pages'] = $this->graduacao_model->all_pages;
-        $this->data['artesMarciais'] = $this->artemarcial_model->as_array()->get_all('nomeArteMarcial');
+        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all('nomeArteMarcial');
         //Insere o primeiro item       
-        array_unshift($this->data['artesMarciais'], array('idArteMarcial' => '0', 'nomeArteMarcial' => 'Arte Marcial'));
+        array_unshift($this->data['artesMarciais'], '');
         $this->load->view('GraduacaoList_view', $this->data);
     }
 

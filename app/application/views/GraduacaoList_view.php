@@ -50,12 +50,8 @@ if ($this->session->flashdata('message') <> '' ) {
         echo form_label('Arte Marcial', 'filtro_arteMarcial', $attributes_label);
         ?>
 <?php
-$options = array();
-foreach ($artesMarciais as $arteMarcial) {
-    $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
-}
 
-echo form_dropdown('filtro_arteMarcial', $options, $filtro_arteMarcial, $attributes_dropdown);
+echo form_dropdown('filtro_arteMarcial', $artesMarciais, $filtro_arteMarcial, $attributes_dropdown);
 ?>
         </div>
 
