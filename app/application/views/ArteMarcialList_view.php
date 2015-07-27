@@ -49,7 +49,7 @@ if ($this->session->flashdata('message') <> '' ) {
     echo form_submit($attributes_submit, 'Filtrar');
     $attributes_button = array(
     'class' => 'btn btn-default',
-    'onClick' => "location= 'graduacao'",
+    'onClick' => "location= 'ArteMarcial'",
     'value' => 'true',
     'type' => 'reset',
 );
