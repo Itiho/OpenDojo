@@ -63,7 +63,7 @@ echo form_dropdown('filtro_arteMarcial', $options, $filtro_arteMarcial, $attribu
     echo form_submit($attributes_submit, 'Filtrar');
     $attributes_button = array(
     'class' => 'btn btn-default',
-    'onClick' => "location= 'graduacao'",
+    'onClick' => "location= 'Graduacao'",
     'value' => 'true',
     'type' => 'reset',
 );
