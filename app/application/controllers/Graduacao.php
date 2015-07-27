@@ -66,9 +66,8 @@ class Graduacao extends CI_Controller {
 
     function edit($id = 0) {
         $this->load->library('form_validation');
-        $graduacao = $this->graduacao_model->get($id);
-        $this->data['graduacao'] = objectToArray($graduacao);
-        $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
+        $this->data['graduacao'] = $this->graduacao_model->as_array()->get($id);
+        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         if (count($this->input->post()) == 0) {
             $this->load->view('GraduacaoEdit_view', $this->data);
         } else {

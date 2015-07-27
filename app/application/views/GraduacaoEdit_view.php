@@ -49,12 +49,7 @@ echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
     <div class="col-xs-4">
 <?php   
     
-    $options = array();
-    foreach ($artesMarciais as $arteMarcial){
-        $options[$arteMarcial['idArteMarcial']] = $arteMarcial['nomeArteMarcial'];
-    }
-
-echo form_dropdown('arteMarcial', $options, $graduacao['arteMarcial'], $attributes_dropdown);
+echo form_dropdown('arteMarcial', $artesMarciais, $graduacao['arteMarcial'], $attributes_dropdown);
     
 ?>
 </div>
