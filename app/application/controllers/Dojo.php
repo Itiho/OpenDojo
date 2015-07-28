@@ -15,10 +15,7 @@ class Dojo extends CI_Controller {
     function index($pagina = 1) {
         $this->load->model('artemarcial_model');
         $this->load->model('academia_model');
-        $this->filtrar( $this->input->post('filtro_academia'), 
-                        $this->input->post('filtro_arteMarcial'), 
-                        $this->input->post('filtro_nomeDojo'),
-                        $pagina);
+        $this->filtrar($this->input->post('filtro_academia'), $this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeDojo'), $pagina);
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         //Insere o primeiro item       
@@ -28,9 +25,9 @@ class Dojo extends CI_Controller {
         array_unshift($this->data['academias'], 'Academia');
         $this->load->view('DojoList_view', $this->data);
     }
-    
+
     private function filtrar($filtro_academia, $filtro_arteMarcial, $filtro_nomeDojo, $pagina) {
-                if ($filtro_nomeDojo <> '') {
+        if ($filtro_nomeDojo <> '') {
             $this->data['filtro_nomeDojo'] = $filtro_nomeDojo;
 
             if ($filtro_arteMarcial > 0) {
