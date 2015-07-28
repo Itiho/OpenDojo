@@ -24,7 +24,7 @@ class ArteMarcial_Model extends MY_Model {
     
     function __construct() {
         $this->timestamps = FALSE;
-        $this->has_many['graduacoes'] =  array('Graduacao_Model','arteMarcial', 'idArteMarcial');
+        $this->has_many['graduacoes'] =  array('Graduacao_Model','ArteMarcial_idArte_Marcial', 'idArteMarcial');
         $this->has_many['dojos'] =  array('Dojo_Model','idDojo', 'idArteMarcial');
         parent::__construct();
 

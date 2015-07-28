@@ -104,7 +104,7 @@ echo form_dropdown('filtro_arteMarcial', $artesMarciais, $filtro_arteMarcial, $a
                         <?= $graduacao->nomeGraduacao ?>
                     </td>
                     <td>
-                        <?= $graduacao->arteMarcial_fk->nomeArteMarcial ?>
+                        <?= $graduacao->arteMarcial->nomeArteMarcial ?>
                     </td>
                     <td style="text-align: center;">
                         <a class="btn btn-success" href="<?= site_url('Graduacao/edit/' . $graduacao->idGraduacao) ?>">

@@ -87,7 +87,7 @@ if ($this->session->flashdata('message') <> '' ) {
                         <?= $academia->idAcademia ?>
                     </td>
                     <td>
-                        <?= $academia->nome ?>
+                        <?= $academia->nomeAcademia ?>
                     </td>
                     <td style="text-align: center;">
                         <a class="btn btn-success" href="<?= site_url('Academia/edit/' . $academia->idAcademia) ?>">

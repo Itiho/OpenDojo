@@ -35,7 +35,7 @@ class Graduacao extends CI_Controller {
                 $this->data['graduacoes'] = $this->graduacao_model
                         ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
                         ->where('arteMarcial', $filtro_arteMarcial)
-                        ->with_arteMarcial_fk()
+                        ->with_arteMarcial()
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
@@ -44,7 +44,7 @@ class Graduacao extends CI_Controller {
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
                         ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
-                        ->with_arteMarcial_fk()
+                        ->with_arteMarcial()
                         ->paginate(10, $total_graduacoes, $pagina);
             }
         } else {
@@ -56,13 +56,13 @@ class Graduacao extends CI_Controller {
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
                         ->where('arteMarcial', $filtro_arteMarcial)
-                        ->with_arteMarcial_fk()
+                        ->with_arteMarcial()
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
                 $total_graduacoes = $this->graduacao_model->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->with_arteMarcial_fk()
+                        ->with_arteMarcial()
                         ->paginate(10, $total_graduacoes, $pagina);
             }
         }
@@ -106,9 +106,9 @@ class Graduacao extends CI_Controller {
         if (count($this->input->post()) == 0) {
             $this->load->view('GraduacaoAdd_view', $this->data);
         } else {
-            $graduacao = array(
-                'nomeGraduacao' => $this->input->post('nomeGraduacao'),
-                'arteMarcial' => $this->input->post('arteMarcial'));
+//            $graduacao = array(
+//                'nomeGraduacao' => $this->input->post('nomeGraduacao'),
+//                'arteMarcial' => $this->input->post('arteMarcial'));
             $resultado = $this->graduacao_model->from_form()->insert();
             if ($resultado) {
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nomeGraduacao') . '" cadastrada com sucesso');

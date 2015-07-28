@@ -14,19 +14,19 @@
 <?php
     echo form_open('Academia/add',$attributes_form);
 
-    if(form_error('nome')){
+    if(form_error('nomeAcademia')){
         echo '<div class="form-group has-error">';
     } else{
         echo '<div class="form-group">';
     }
 
-    echo form_label('Academia', 'nome', $attributes_label);
+    echo form_label('Academia', 'nomeAcademia', $attributes_label);
 ?>
     <div class="col-xs-4">
 <?php
     //atributos extra do campo texto
-    $attributes_text['name'] = 'nome';
-    $attributes_text['id']  = 'nome';
+    $attributes_text['name'] = 'nomeAcademia';
+    $attributes_text['id']  = 'nomeAcademia';
     if(isset($nomeAcademia_value)){
         $attributes_text['value']  = $nomeAcademia_value;
     }
@@ -35,7 +35,7 @@
 ?>
 </div>
 <?php
-    echo form_error('nome');
+    echo form_error('nomeAcademia');
 ?>
 </div> 
 <?php

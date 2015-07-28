@@ -30,8 +30,8 @@ if ($this->session->flashdata('message') <> '' ) {
     ?>
     <div class="form-group">
         <?php
-        echo form_error('filtro_nomeArteMarcial');
-        echo form_label('Arte Marcial', 'filtro_nomeArteMarcial', $attributes_label);
+        echo form_error('filtro_nomeDojo');
+        echo form_label('Dojo', 'filtro_nomeDojo', $attributes_label);
         ?>
         
         <?php
@@ -106,19 +106,19 @@ if ($this->session->flashdata('message') <> '' ) {
                         <?= $dojo->idDojo ?>
                     </td>
                     <td>
-                        <?= $dojo->nome ?>
+                        <?= $dojo->nomeDojo ?>
                     </td>
                     <td>
                         <?= $dojo->artemarcial->nomeArteMarcial ?>
                     </td>
                     <td>
-                        <?= $dojo->academia->nome ?>
+                        <?= $dojo->academia->nomeAcademia ?>
                     </td>
                     <td style="text-align: center;">
-                        <a class="btn btn-success" href="<?= site_url('ArteMarcial/edit/' . $dojo->idDojo) ?>">
+                        <a class="btn btn-success" href="<?= site_url('Dojo/edit/' . $dojo->idDojo) ?>">
                             <i class="fa fa-pencil fa-lg"></i> Editar</a>
                         <?php if(!isset($dojo->turmas)) { ?>
-                        <a class="btn btn-danger" href="<?= site_url('ArteMarcial/delete/' . $dojo->idDojo) ?>"
+                        <a class="btn btn-danger" href="<?= site_url('Dojo/delete/' . $dojo->idDojo) ?>"
                            title="Deseja realmente excluir a graduação?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
                             <i class="fa fa-trash-o fa-lg" title="Excluir a Graduação"></i> Deletar</a>
                         <?php } ?>

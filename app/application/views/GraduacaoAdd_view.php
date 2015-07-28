@@ -39,13 +39,13 @@
 ?>
 </div>    
 <?php
-    if (form_error('arteMarcial')) {
+    if (form_error('ArteMarcial_idArte_Marcial')) {
         echo '<div class="form-group has-error">';
     } else {
         echo '<div class="form-group">';
     }
 
-echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
+echo form_label('Arte marcial', 'ArteMarcial_idArte_Marcial', $attributes_label);
 ?>
     <div class="col-xs-4">
 <?php   
@@ -55,11 +55,11 @@ echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
     } else {
         $selecionado = '';
     }
-    echo form_dropdown('arteMarcial', $artesMarciais, $selecionado , $attributes_dropdown);
+    echo form_dropdown('ArteMarcial_idArte_Marcial', $artesMarciais, $selecionado , $attributes_dropdown);
 ?>
 </div>
 <?php
-    echo form_error('arteMarcial');
+    echo form_error('ArteMarcial_idArte_Marcial');
 ?>
 </div>
  <div class="form-group">

@@ -16,19 +16,19 @@ class Academia extends CI_Controller {
     function index($pagina = 1) {
         if ($this->input->post('filtro_nomeAcademia') <> '') {
             $this->data['filtro_nomeAcademia'] = $this->input->post('filtro_nomeAcademia');
-            $total_artesmarciais = $this->academia_model
-                    ->where('nome', 'like', $this->input->post('filtro_nomeAcademia'))
+            $total_academias = $this->academia_model
+                    ->where('nomeAcademia', 'like', $this->input->post('filtro_nomeAcademia'))
                     ->count();
             $this->data['academias'] = $this->academia_model
                     ->with_dojos()
-                    ->where('nome', 'like', $this->input->post('filtro_nomeAcademia'))
-                    ->paginate(10, $total_artesmarciais, $pagina);
+                    ->where('nomeAcademia', 'like', $this->input->post('filtro_nomeAcademia'))
+                    ->paginate(10, $total_academias, $pagina);
         } else {
             $this->data['filtro_nomeAcademia'] = '';
-            $total_artesmarciais = $this->academia_model->count();
+            $total_academias = $this->academia_model->count();
             $this->data['academias'] = $this->academia_model
                     ->with_dojos()
-                    ->paginate(10, $total_artesmarciais, $pagina);
+                    ->paginate(10, $total_academias, $pagina);
         }
         $this->data['all_pages'] = $this->academia_model->all_pages;
         $this->load->view('AcademiaList_view', $this->data);
@@ -37,10 +37,7 @@ class Academia extends CI_Controller {
     function edit($id = 0) {
         $this->load->model('estado_model');
         $this->data['estados'] = $this->estado_model->get_estados();
-//        $this->load->library('form_validation');
-//        $academia = $this->academia_model->get($id);
         $this->data['academia'] = $this->academia_model->as_array()->get($id);
-//        $this->data['artesMarciais'] = objectToArray($this->artemarcial_model->get_all());
         if (count($this->input->post()) == 0) {
             $this->load->view('AcademiaEdit_view', $this->data);
         } else {
@@ -52,20 +49,13 @@ class Academia extends CI_Controller {
                 'bairro' => $this->input->post('bairro'),
                 'cidade' => $this->input->post('cidade'),
                 'estado' => $this->input->post('estado'));
-//            $rules = array(
-//                array(
-//                    'field' => 'nomeGraduacao',
-//                    'label' => 'Nome',
-//                    'rules' => 'required|min_length[3]'));
-//            $this->form_validation->set_rules($rules);
-//            if ($this->form_validation->run() == TRUE) {
             $resultado = $this->academia_model->update($academia, $this->input->post('idAcademia'));
             if ($resultado) {
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nome') . '" editada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Academia');
             } else {
-                $this->data['nomeAcademia_value'] = $this->input->post('nome');
+                $this->data['nomeAcademia_value'] = $this->input->post('nomeAcademia');
                 $this->data['logradouro_value'] = $this->input->post('logradouro');
                 $this->data['numero_value'] = $this->input->post('numero');
                 $this->data['complemento_value'] = $this->input->post('complemento');
@@ -85,21 +75,21 @@ class Academia extends CI_Controller {
         if (count($this->input->post()) == 0) {
             $this->load->view('AcademiaAdd_view', $this->data);
         } else {
-            $academia = array(
-                'nome' => $this->input->post('nome'),
-                'logradouro' => $this->input->post('logradouro'),
-                'numero' => $this->input->post('numero'),
-                'complemento' => $this->input->post('complemento'),
-                'bairro' => $this->input->post('bairro'),
-                'cidade' => $this->input->post('cidade'),
-                'estado' => $this->input->post('estado'));
+//            $academia = array(
+//                'nome' => $this->input->post('nome'),
+//                'logradouro' => $this->input->post('logradouro'),
+//                'numero' => $this->input->post('numero'),
+//                'complemento' => $this->input->post('complemento'),
+//                'bairro' => $this->input->post('bairro'),
+//                'cidade' => $this->input->post('cidade'),
+//                'estado' => $this->input->post('estado'));
             $resultado = $this->academia_model->from_form()->insert();
             if ($resultado) {
                 $this->session->set_flashdata('message', 'Academia "' . $this->input->post('nome') . '" cadastrada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Academia');
             } else {
-                $this->data['nomeAcademia_value'] = $this->input->post('nome');
+                $this->data['nomeAcademia_value'] = $this->input->post('nomeAcademia');
                 $this->data['logradouro_value'] = $this->input->post('logradouro');
                 $this->data['numero_value'] = $this->input->post('numero');
                 $this->data['complemento_value'] = $this->input->post('complemento');

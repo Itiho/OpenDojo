@@ -7,20 +7,20 @@ class Dojo extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('dojo_model');
+        $this->load->model('artemarcial_model');
+        $this->load->model('academia_model');
         $this->data['titulo'] = 'OpenDojo';
         $this->data['cabecalho'] = 'Dojo';
         $this->form_validation->set_error_delimiters('<div class="col-xs-5 messageContainer help-block">', '</div>');
     }
 
     function index($pagina = 1) {
-        $this->load->model('artemarcial_model');
-        $this->load->model('academia_model');
         $this->filtrar($this->input->post('filtro_academia'), $this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeDojo'), $pagina);
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         //Insere o primeiro item       
         array_unshift($this->data['artesMarciais'], 'Arte Marcial');
-        $this->data['academias'] = $this->academia_model->as_dropdown('nome')->get_all();
+        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
         //Insere o primeiro item       
         array_unshift($this->data['academias'], 'Academia');
         $this->load->view('DojoList_view', $this->data);
@@ -36,12 +36,12 @@ class Dojo extends CI_Controller {
                 if ($filtro_academia > 0) {
                     $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial()
@@ -51,11 +51,11 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->with_artemarcial()
                             ->with_academia()
@@ -67,11 +67,11 @@ class Dojo extends CI_Controller {
                 if ($filtro_academia > 0) {
                     $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial()
                             ->with_academia()
@@ -80,10 +80,10 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nome', 'like', $filtro_nomeDojo)
+                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->with_artemarcial()
                             ->with_academia()
                             ->with_turmas()
@@ -154,9 +154,11 @@ class Dojo extends CI_Controller {
             $artemarcial = $this->artemarcial_model->get($id);
             $this->data['artemarcial'] = objectToArray($artemarcial);
             if (count($this->input->post()) == 0) {
-                $this->load->view('ArteMarcialEdit_view', $this->data);
+                $this->load->view('DojoEdit_view', $this->data);
             } else {
                 $artemarcial = array('nomeArteMarcial' => $this->input->post('nomeArteMarcial'));
+//                Alterar para from_form depois
+                
                 $rules = array(
                     array(
                         'field' => 'nomeArteMarcial',
@@ -167,11 +169,11 @@ class Dojo extends CI_Controller {
                     $resultado = $this->artemarcial_model->update($artemarcial, $this->input->post('idArteMarcial'));
                     $this->session->set_flashdata('message', 'Arte marcial "' . $this->input->post('nomeArteMarcial') . '" editada com sucesso');
                     $this->session->set_flashdata('type_message', '1'); //Sucesso
-                    redirect('/ArteMarcial');
+                    redirect('/Dojo');
                 } else {
                     $this->data['idArteMarcial'] = $this->input->post('idArteMarcial');
                     $this->data['nomeArteMarcial'] = $this->input->post('nomeArteMarcial');
-                    $this->load->view('ArteMarcialEdit_view', $this->data);
+                    $this->load->view('DojoEdit_view', $this->data);
                 }
             }
         } else {
@@ -180,19 +182,26 @@ class Dojo extends CI_Controller {
     }
 
     function add() {
-//        $this->data['cabecalho'] = "Arte Marcial";
+        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
+        //Insere o primeiro item       
+        array_unshift($this->data['artesMarciais'], 'Arte Marcial');
+        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
+        //Insere o primeiro item       
+        array_unshift($this->data['academias'], 'Academia');
         if (count($this->input->post()) == 0) {
-            $this->load->view('ArteMarcialAdd_view', $this->data);
+            $this->load->view('DojoAdd_view', $this->data);
         } else {
-            $artemarcial = array('nomeArteMarcial' => $this->input->post('nomeArteMarcial'));
-            $resultado = $this->artemarcial_model->from_form()->insert();
+            $resultado = $this->dojo_model->from_form()->insert();
+            var_dump($resultado);
             if ($resultado) {
-                $this->session->set_flashdata('message', 'Arte marcial "' . $this->input->post('nomeArteMarcial') . '" cadastrada com sucesso');
+                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" cadastrado com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/ArteMarcial');
+                redirect('/Dojo');
             } else {
-                $this->data['nomeArteMarcial'] = $this->input->post('nomeArteMarcial');
-                $this->load->view('ArteMarcialAdd_view', $this->data);
+                $this->data['nomeDojo_value'] = $this->input->post('nomeDojo');
+                $this->data['academia_value'] = $this->input->post('Academia_idAcademia');
+                $this->data['artemarcial_value'] = $this->input->post('ArteMarcial_idArte_Marcial');
+                $this->load->view('DojoAdd_view', $this->data);
             }
         }
     }

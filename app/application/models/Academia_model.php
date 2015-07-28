@@ -11,7 +11,7 @@
 class Academia_Model extends MY_Model {
 
     var $idAcademia;   // KEY ATTR. WITH AUTOINCREMENT
-    var $nome;   // (normal Attribute)
+    var $nomeAcademia;   // (normal Attribute)
     var $logradouro;   // (normal Attribute)
     var $numero;   // (normal Attribute)
     var $complemento;   // (normal Attribute)
@@ -24,7 +24,7 @@ class Academia_Model extends MY_Model {
     public $primary_key = 'idAcademia';
 
     protected $rules = array(
-            'nome' => array('field'=>'nome',
+            'nomeAcademia' => array('field'=>'nomeAcademia',
                 'label'=>'Nome',
                 'rules'=>'required|min_length[3]'),
             'logradouro' => array('field'=>'logradouro',

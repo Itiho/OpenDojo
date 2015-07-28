@@ -12,21 +12,24 @@ class Graduacao_Model extends MY_Model {
 
     var $idGraduacao;   // KEY ATTR. WITH AUTOINCREMENT
     var $nomeGraduacao;   // (normal Attribute)
-    var $arteMarcial;   // (normal Attribute)
+    var $ArteMarcial_idArte_Marcial;   // (normal Attribute)
     public $table = 'Graduacao'; // Nome da tabela
     public $primary_key = 'idGraduacao';
     
     protected $rules = array(
-            'nomeGraduacao' => array('field'=>'nomeGraduacao',
+            'nomeGraduacao' => array(
+                'field'=>'nomeGraduacao',
                 'label'=>'Nome',
                 'rules'=>'required|min_length[3]'),
-            'arteMarcial' => array('field'=>'arteMarcial',
+            'ArteMarcial_idArte_Marcial' => array(
+                'field'=>'ArteMarcial_idArte_Marcial',
                 'label'=>'Arte marcial',
-                'rules'=>'required'));
+                'rules'=>'greater_than[0]',
+                'errors' => array ('greater_than' => '%s é obrigatório')));
 
     function __construct() {
         $this->timestamps = FALSE;
-        $this->has_one['arteMarcial_fk'] = array('ArteMarcial_Model','idArteMarcial','arteMarcial');
+        $this->has_one['arteMarcial'] = array('ArteMarcial_Model','idArteMarcial','ArteMarcial_idArte_Marcial');
         parent::__construct();
         
         $this->pagination_delimiters = array('<li>', '</li>');

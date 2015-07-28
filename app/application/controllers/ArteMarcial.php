@@ -22,21 +22,20 @@ class ArteMarcial extends CI_Controller {
                     ->with_graduacoes()
                     ->with_dojos()
                     ->where('nomeArteMarcial', 'like', $this->input->post('filtro_nomeArteMarcial'))
-                    ->paginate(10, $total_graduacoes, $pagina);
+                    ->paginate(10, $total_artesmarciais, $pagina);
         } else {
             $this->data['filtro_nomeArteMarcial'] = '';
-            $total_graduacoes = $this->artemarcial_model->count();
+            $total_artesmarciais = $this->artemarcial_model->count();
             $this->data['artesmarciais'] = $this->artemarcial_model
                     ->with_graduacoes()
                     ->with_dojos()
-                    ->paginate(10, $total_graduacoes, $pagina);
+                    ->paginate(10, $total_artesmarciais, $pagina);
         }
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->load->view('ArteMarcialList_view', $this->data);
     }
 
     function edit($id = 0) {
-//        $this->data['cabecalho'] = "Arte Marcial";
         if ($id > 0) {
             $this->load->library('form_validation');
             $artemarcial = $this->artemarcial_model->get($id);
