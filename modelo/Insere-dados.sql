@@ -40,35 +40,35 @@ INSERT INTO `OpenDojo`.`ArteMarcial` (`idArteMarcial`, `nomeArteMarcial`) VALUES
 -- -----------------------------------------------------
 
 
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('20º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('19º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('18º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('17º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('16º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('15º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('14º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('13º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('12º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('11º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('10º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('9º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('8º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('7º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('6º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('5º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('4º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('3º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('2º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('1º Kyu', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('2º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('3º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('4º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('5º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('6º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('7º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('8º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('9º Dan', 1);
-INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `arteMarcial`) VALUES ('10º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('20º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('19º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('18º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('17º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('16º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('15º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('14º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('13º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('12º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('11º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('10º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('9º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('8º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('7º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('6º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('5º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('4º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('3º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('2º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('1º Kyu', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('2º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('3º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('4º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('5º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('6º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('7º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('8º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('9º Dan', 1);
+INSERT INTO `OpenDojo`.`Graduacao` (`nomeGraduacao`, `ArteMarcial_idArte_Marcial`) VALUES ('10º Dan', 1);
 
 
 
