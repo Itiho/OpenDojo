@@ -113,10 +113,10 @@ class Graduacao extends CI_Controller {
         if (isset($id)) {
             $graduacao = $this->graduacao_model->fields('nomeGraduacao')->get($id);
             if ($this->graduacao_model->delete($id)) {
-                $this->session->set_flashdata('message', 'Graduação "' . $artemarcial->nomeGraduacao . '" deletada com sucesso');
+                $this->session->set_flashdata('message', 'Graduação "' . $graduacao->nomeGraduacao . '" deletada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
             } else {
-                $this->session->set_flashdata('message', 'Graduação "' . $artemarcial->nomeGraduacao . '" não pôde ser deletada');
+                $this->session->set_flashdata('message', 'Graduação "' . $graduacao->nomeGraduacao . '" não pôde ser deletada');
                 $this->session->set_flashdata('type_message', '0'); //Erro
             }
             redirect('/Graduacao');
