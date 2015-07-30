@@ -27,9 +27,10 @@ $attributes_submit = array('class' => 'btn btn-default');
         //atributos extra do campo texto
         $attributes_text['name'] = 'nomeDojo';
         $attributes_text['id'] = 'nomeDojo';
-        if (isset($nomeDojo_value)) {
-            $attributes_text['value'] = $nomeDojo_value;
+        if (isset($academia['nomeDojo'])) {
+            $attributes_text['value'] = $dojo['nomeDojo'];
         }
+
         echo form_input($attributes_text);
         ?>
     </div>
@@ -44,18 +45,18 @@ $attributes_submit = array('class' => 'btn btn-default');
         echo '<div class="form-group">';
     }
 
-        echo form_label('Arte Marcial', 'ArteMarcial_idArte_Marcial', $attributes_label);
-        if (isset($artemarcial_value)) {
-            $selected = $artemarcial_value;
-        } else{
-            $selected = '';
-        }
-        ?>
-    <div class="col-xs-4">
-        <?php echo form_dropdown('ArteMarcial_idArte_Marcial', $artesMarciais, $selected, $attributes_dropdown); ?>
-    </div>
-        <?php echo form_error('ArteMarcial_idArte_Marcial'); ?>
-    </div>
+    echo form_label('Arte Marcial', 'ArteMarcial_idArte_Marcial', $attributes_label);
+    if (isset($academia['ArteMarcial_idArte_Marcial'])) {
+        $selected = $dojo['ArteMarcial_idArte_Marcial'];
+    } else {
+        $selected = '';
+    }
+?>
+<div class="col-xs-4">
+    <?php echo form_dropdown('ArteMarcial_idArte_Marcial', $artesMarciais, $selected, $attributes_dropdown); ?>
+</div>
+<?php echo form_error('ArteMarcial_idArte_Marcial'); ?>
+</div>
 
 <?php
     if (form_error('Academia_idAcademia')) {
@@ -64,18 +65,18 @@ $attributes_submit = array('class' => 'btn btn-default');
         echo '<div class="form-group">';
     }
 
-        echo form_label('Academia', 'Academia_idAcademia', $attributes_label);
-        if (isset($academia_value)) {
-            $selected = $academia_value;
-        } else{
-            $selected = '';
-        }
-        ?>
-    <div class="col-xs-4">
-        <?php echo form_dropdown('Academia_idAcademia', $academias, $selected, $attributes_dropdown); ?>
-    </div>
-        <?php echo form_error('Academia_idAcademia'); ?>
-    </div>
+    echo form_label('Academia', 'Academia_idAcademia', $attributes_label);
+    if (isset($academia['Academia_idAcademia'])) {
+        $selected = $dojo['Academia_idAcademia'];
+    } else {
+        $selected = '';
+    }
+?>
+<div class="col-xs-4">
+    <?php echo form_dropdown('Academia_idAcademia', $academias, $selected, $attributes_dropdown); ?>
+</div>
+<?php echo form_error('Academia_idAcademia'); ?>
+</div>
 </div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

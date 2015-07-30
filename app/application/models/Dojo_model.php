@@ -20,7 +20,7 @@ class Dojo_Model extends MY_Model {
     public $table = 'Dojo';
     public $primary_key = 'idDojo';
 
-    protected $rules = array(
+    public $rules = array(
             'nomeDojo' => array(
                 'field'=>'nomeDojo',
                 'label'=>'Dojo',

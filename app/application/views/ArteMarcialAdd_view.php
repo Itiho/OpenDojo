@@ -27,8 +27,8 @@ $attributes_submit = array('class' => 'btn btn-default');
         //atributos extra do campo texto
         $attributes_text['name'] = 'nomeArteMarcial';
         $attributes_text['id'] = 'nomeArteMarcial';
-        if (isset($nomeArteMarcial)) {
-            $attributes_text['value'] = $nomeArteMarcial;
+        if (isset($academia['nomeArteMarcial'])) {
+            $attributes_text['value'] = $academia['nomeArteMarcial'];
         }
         echo form_input($attributes_text);
         ?>

@@ -28,11 +28,7 @@ $attributes_submit = array('class' => 'btn btn-default');
         //atributos extra do campo texto
         $attributes_text['name'] = 'nomeAcademia';
         $attributes_text['id'] = 'nomeAcademia';
-        if (isset($nomeAcademia_value)) {
-            $attributes_text['value'] = $nomeAcademia_value;
-        } else {
-            $attributes_text['value'] = $academia['nomeAcademia'];
-        }
+        $attributes_text['value'] = $academia['nomeAcademia'];
         echo form_input($attributes_text);
         ?>
     </div>
@@ -52,11 +48,7 @@ echo form_label('Endereço', 'logradouro', $attributes_label);
     //atributos extra do campo texto
     $attributes_text['name'] = 'logradouro';
     $attributes_text['id'] = 'logradouro';
-    if (isset($logradouro_value)) {
-        $attributes_text['value'] = $logradouro_value;
-    } else {
-        $attributes_text['value'] = $academia['logradouro'];
-    }
+    $attributes_text['value'] = $academia['logradouro'];
 
     echo form_input($attributes_text);
     ?>
@@ -77,11 +69,7 @@ echo form_label('Número', 'numero', $attributes_label);
     //atributos extra do campo texto
     $attributes_text['name'] = 'numero';
     $attributes_text['id'] = 'numero';
-    if (isset($numero_value)) {
-        $attributes_text['value'] = $numero_value;
-    } else {
-        $attributes_text['value'] = $academia['numero'];
-    }
+    $attributes_text['value'] = $academia['numero'];
     echo form_input($attributes_text);
     ?>
 </div>
@@ -102,11 +90,7 @@ echo form_label('Complemento', 'complemento', $attributes_label);
     //atributos extra do campo texto
     $attributes_text['name'] = 'complemento';
     $attributes_text['id'] = 'complemento';
-    if (isset($complemento_value)) {
-        $attributes_text['value'] = $complemento_value;
-    } else {
-        $attributes_text['value'] = $academia['complemento'];
-    }
+    $attributes_text['value'] = $academia['complemento'];
     echo form_input($attributes_text);
     ?>
 </div>
@@ -126,11 +110,7 @@ echo form_label('Bairro', 'bairro', $attributes_label);
     <?php
     $attributes_text['name'] = 'bairro';
     $attributes_text['id'] = 'bairro';
-    if (isset($bairro_value)) {
-        $attributes_text['value'] = $bairro_value;
-    } else {
-        $attributes_text['value'] = $academia['bairro'];
-    }
+    $attributes_text['value'] = $academia['bairro'];
 
     echo form_input($attributes_text);
     ?>
@@ -151,11 +131,7 @@ echo form_label('Cidade', 'cidade', $attributes_label);
     <?php
     $attributes_text['name'] = 'cidade';
     $attributes_text['id'] = 'cidade';
-    if (isset($cidade_value)) {
-        $attributes_text['value'] = $cidade_value;
-    } else {
-        $attributes_text['value'] = $academia['cidade'];
-    }
+    $attributes_text['value'] = $academia['cidade'];
     echo form_input($attributes_text);
     ?>
 </div>
@@ -172,7 +148,11 @@ if (form_error('estado')) {
 echo form_label('Estado', 'estado', $attributes_label);
 ?>
 <div class="col-xs-4">
-    <?php echo form_dropdown('estado', $estados, $academia['estado'], $attributes_dropdown); ?>
+    <?php
+    $selected = $academia['estado'];
+
+    echo form_dropdown('estado', $estados, $selected, $attributes_dropdown);
+    ?>
 </div>
 <?php echo form_error('estado'); ?>
 </div>

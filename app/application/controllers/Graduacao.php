@@ -75,24 +75,15 @@ class Graduacao extends CI_Controller {
         if (count($this->input->post()) == 0) {
             $this->load->view('GraduacaoEdit_view', $this->data);
         } else {
-            $graduacao = array(
-                'nomeGraduacao' => $this->input->post('nomeGraduacao'),
-                'arteMarcial' => $this->input->post('arteMarcial'));
-            $rules = array(
-                array(
-                    'field' => 'nomeGraduacao',
-                    'label' => 'Nome',
-                    'rules' => 'required|min_length[3]'));
-            $this->form_validation->set_rules($rules);
+            $graduacao = $this->input->post();
+            $this->form_validation->set_rules($this->graduacao_model->rules);
             if ($this->form_validation->run() == TRUE) {
                 $resultado = $this->graduacao_model->update($graduacao, $this->input->post('idGraduacao'));
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nomeGraduacao') . '" editada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Graduacao');
             } else {
-                $this->data['idGraduacao'] = $this->input->post('idGraduacao');
-                $this->data['nomeGraduacao_value'] = $this->input->post('nomeGraduacao');
-                $this->data['arteMarcial_value'] = $this->input->post('arteMarcial');
+                $this->data['graduacao'] = $this->input->post();
                 $this->load->view('GraduacaoEdit_view', $this->data);
             }
         }
@@ -106,17 +97,13 @@ class Graduacao extends CI_Controller {
         if (count($this->input->post()) == 0) {
             $this->load->view('GraduacaoAdd_view', $this->data);
         } else {
-//            $graduacao = array(
-//                'nomeGraduacao' => $this->input->post('nomeGraduacao'),
-//                'arteMarcial' => $this->input->post('arteMarcial'));
             $resultado = $this->graduacao_model->from_form()->insert();
             if ($resultado) {
                 $this->session->set_flashdata('message', 'Graduação "' . $this->input->post('nomeGraduacao') . '" cadastrada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Graduacao');
             } else {
-                $this->data['nomeGraduacao_value'] = $this->input->post('nomeGraduacao');
-                $this->data['arteMarcial_value'] = $this->input->post('arteMarcial');
+                $this->data['graduacao'] = $this->input->post();
                 $this->load->view('GraduacaoAdd_view', $this->data);
             }
         }

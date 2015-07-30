@@ -27,8 +27,8 @@
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
     $attributes_text['id']  = 'nomeGraduacao';
-    if(isset($nomeGraduacao_value)){
-        $attributes_text['value']  = $nomeGraduacao_value;
+    if(isset($graduacao['nomeGraduacao'])){
+        $attributes_text['value']  = $graduacao['nomeGraduacao'];
     }
     echo form_input($attributes_text);
     
@@ -49,9 +49,8 @@ echo form_label('Arte marcial', 'ArteMarcial_idArte_Marcial', $attributes_label)
 ?>
     <div class="col-xs-4">
 <?php   
-
-    if (isset($arteMarcial_value)) {
-        $selecionado = $arteMarcial_value;
+    if (isset($graduacao['ArteMarcial_idArte_Marcial'])) {
+        $selecionado = $graduacao['ArteMarcial_idArte_Marcial'];
     } else {
         $selecionado = '';
     }

@@ -16,7 +16,7 @@ class ArteMarcial_Model extends MY_Model {
     public $table = 'ArteMarcial';
     public $primary_key = 'idArteMarcial';
 
-     protected $rules = array(
+    public $rules = array(
             'nomeArteMarcial' => array('field'=>'nomeArteMarcial',
                 'label'=>'Nome',
                 'rules'=>'required|min_length[3]'));

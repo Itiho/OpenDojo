@@ -148,76 +148,61 @@ class Dojo extends CI_Controller {
     }
 
     function edit($id = 0) {
-//        $this->data['cabecalho'] = "Arte Marcial";
-        if ($id > 0) {
-            $this->load->library('form_validation');
-            $artemarcial = $this->artemarcial_model->get($id);
-            $this->data['artemarcial'] = objectToArray($artemarcial);
-            if (count($this->input->post()) == 0) {
-                $this->load->view('DojoEdit_view', $this->data);
-            } else {
-                $artemarcial = array('nomeArteMarcial' => $this->input->post('nomeArteMarcial'));
-//                Alterar para from_form depois
-                
-                $rules = array(
-                    array(
-                        'field' => 'nomeArteMarcial',
-                        'label' => 'Nome',
-                        'rules' => 'required|min_length[3]'));
-                $this->form_validation->set_rules($rules);
-                if ($this->form_validation->run() == TRUE) {
-                    $resultado = $this->artemarcial_model->update($artemarcial, $this->input->post('idArteMarcial'));
-                    $this->session->set_flashdata('message', 'Arte marcial "' . $this->input->post('nomeArteMarcial') . '" editada com sucesso');
-                    $this->session->set_flashdata('type_message', '1'); //Sucesso
-                    redirect('/Dojo');
-                } else {
-                    $this->data['idArteMarcial'] = $this->input->post('idArteMarcial');
-                    $this->data['nomeArteMarcial'] = $this->input->post('nomeArteMarcial');
-                    $this->load->view('DojoEdit_view', $this->data);
-                }
-            }
-        } else {
-            redirect('/ArteMarcial');
-        }
-    }
-
-    function add() {
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
-        //Insere o primeiro item       
-        array_unshift($this->data['artesMarciais'], 'Arte Marcial');
         $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-        //Insere o primeiro item       
-        array_unshift($this->data['academias'], 'Academia');
+        $this->data['dojo'] = $this->dojo_model->as_array()->get($id);
         if (count($this->input->post()) == 0) {
-            $this->load->view('DojoAdd_view', $this->data);
+            $this->load->view('DojoEdit_view', $this->data);
         } else {
-            $resultado = $this->dojo_model->from_form()->insert();
-            var_dump($resultado);
-            if ($resultado) {
-                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" cadastrado com sucesso');
+            $dojo = $this->input->post();
+            $this->form_validation->set_rules($this->dojo_model->rules);
+            if ($this->form_validation->run() == TRUE) {
+                $resultado = $this->dojo_model->update($dojo, $this->input->post('idDojo'));
+                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" editado com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Dojo');
             } else {
-                $this->data['nomeDojo_value'] = $this->input->post('nomeDojo');
-                $this->data['academia_value'] = $this->input->post('Academia_idAcademia');
-                $this->data['artemarcial_value'] = $this->input->post('ArteMarcial_idArte_Marcial');
+                $this->data['dojo'] = $dojo;
+                $this->load->view('DojoEdit_view', $this->data);
+            }
+        }
+    }
+
+        function add() {
+            $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
+            //Insere o primeiro item       
+            array_unshift($this->data['artesMarciais'], 'Arte Marcial');
+            $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
+            //Insere o primeiro item       
+            array_unshift($this->data['academias'], 'Academia');
+            if (count($this->input->post()) == 0) {
                 $this->load->view('DojoAdd_view', $this->data);
-            }
-        }
-    }
-
-    function delete($id = null) {
-        if (isset($id)) {
-            $artemarcial = $this->artemarcial_model->fields('nomeArteMarcial')->get($id);
-            if ($this->artemarcial_model->delete($id)) {
-                $this->session->set_flashdata('message', 'Arte marcial "' . $artemarcial->nomeArteMarcial . '" deletada com sucesso');
-                $this->session->set_flashdata('type_message', '1'); //Sucesso
             } else {
-                $this->session->set_flashdata('message', 'Arte marcial "' . $artemarcial->nomeArteMarcial . '" não pôde ser deletada');
-                $this->session->set_flashdata('type_message', '0'); //Erro
+                $resultado = $this->dojo_model->from_form()->insert();
+                if ($resultado) {
+                    $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" cadastrado com sucesso');
+                    $this->session->set_flashdata('type_message', '1'); //Sucesso
+                    redirect('/Dojo');
+                } else {
+                    $this->data['dojo'] = $this->input->post();
+                    $this->load->view('DojoAdd_view', $this->data);
+                }
             }
-            redirect('/ArteMarcial');
         }
-    }
 
-}
+        function delete($id = null) {
+            if (isset($id)) {
+                $dojo = $this->dojo_model->fields('nomeDojo')->get($id);
+                if ($this->dojo_model->delete($id)) {
+                    $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" deletado com sucesso');
+                    $this->session->set_flashdata('type_message', '1'); //Sucesso
+                } else {
+                    $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" não pôde ser deletada');
+                    $this->session->set_flashdata('type_message', '0'); //Erro
+                }
+                redirect('/Dojo');
+            }
+        }
+
+    }
+    

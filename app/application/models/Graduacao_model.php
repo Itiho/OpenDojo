@@ -16,7 +16,7 @@ class Graduacao_Model extends MY_Model {
     public $table = 'Graduacao'; // Nome da tabela
     public $primary_key = 'idGraduacao';
     
-    protected $rules = array(
+    public $rules = array(
             'nomeGraduacao' => array(
                 'field'=>'nomeGraduacao',
                 'label'=>'Nome',

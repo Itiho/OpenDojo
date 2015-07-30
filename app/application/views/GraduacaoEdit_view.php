@@ -28,7 +28,9 @@
     //atributos extra do campo texto
     $attributes_text['name'] = 'nomeGraduacao';
     $attributes_text['id']  = 'nomeGraduacao';
-    $attributes_text['value'] = $graduacao['nomeGraduacao'];
+    if(isset($graduacao['nomeGraduacao'])){
+        $attributes_text['value']  = $graduacao['nomeGraduacao'];
+    }
     
     echo form_input($attributes_text);
 ?>
@@ -38,23 +40,27 @@
 ?>
 </div>
 <?php
-    if (form_error('arteMarcial')) {
+    if (form_error('ArteMarcial_idArte_Marcial')) {
         echo '<div class="form-group has-error">';
     } else {
         echo '<div class="form-group">';
     }
 
-echo form_label('Arte marcial', 'arteMarcial', $attributes_label);
+echo form_label('Arte marcial', 'ArteMarcial_idArte_Marcial', $attributes_label);
 ?>
     <div class="col-xs-4">
 <?php   
-    
-echo form_dropdown('arteMarcial', $artesMarciais, $graduacao['arteMarcial'], $attributes_dropdown);
+    if (isset($graduacao['ArteMarcial_idArte_Marcial'])) {
+        $selected = $graduacao['ArteMarcial_idArte_Marcial'];
+    } else {
+        $selected = '';
+    }
+echo form_dropdown('ArteMarcial_idArte_Marcial', $artesMarciais, $selected, $attributes_dropdown);
     
 ?>
 </div>
 <?php
-    echo form_error('arteMarcial');
+    echo form_error('ArteMarcial_idArte_Marcial');
 ?>
 </div>
  <div class="form-group">

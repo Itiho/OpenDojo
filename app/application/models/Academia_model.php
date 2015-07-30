@@ -23,7 +23,7 @@ class Academia_Model extends MY_Model {
     public $table = 'Academia';
     public $primary_key = 'idAcademia';
 
-    protected $rules = array(
+    public $rules = array(
             'nomeAcademia' => array('field'=>'nomeAcademia',
                 'label'=>'Nome',
                 'rules'=>'required|min_length[3]'),

@@ -12,7 +12,6 @@ $attributes_submit = array('class' => 'btn btn-default');
 </div>
 
 <?php
-//var_dump($this->session->flashdata('message'));
 if ($this->session->flashdata('message') <> '' ) {
     if ($this->session->flashdata('type_message')) {
         echo '<div class="alert alert-success">';
