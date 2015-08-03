@@ -68,12 +68,13 @@ echo form_dropdown('filtro_arteMarcial', $artesMarciais, $filtro_arteMarcial, $a
     ?>
 </div>
     </div>
-
+<?php if ($graduacoes != false): ?>
     <div class="col-md-5">
         <ul class="pagination">
             <?= $all_pages ?>
         </ul>
     </div>
+    <?php endif ?>
 </div>  
 <table class="table table-bordered">
     <thead>

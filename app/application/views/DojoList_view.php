@@ -71,12 +71,13 @@ if ($this->session->flashdata('message') <> '' ) {
     ?>
 </div>
     </div>
-
+<?php if ($dojos != false): ?>
     <div class="col-md-5">
         <ul class="pagination">
             <?= $all_pages ?>
         </ul>
     </div>
+    <?php endif ?>
 </div>  
 <table class="table table-bordered">
     <thead>
