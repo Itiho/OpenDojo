@@ -25,14 +25,14 @@ class Academia extends CI_Controller {
                     ->where('nomeAcademia', 'like', $filtro_nomeAcademia)
                     ->count();
             $this->data['academias'] = $this->academia_model
-                    ->with_dojos()
+                    ->with_dojos('fields:*count*')
                     ->where('nomeAcademia', 'like', $filtro_nomeAcademia)
                     ->paginate(10, $total_academias, $pagina);
         } else {
             $this->data['filtro_nomeAcademia'] = '';
             $total_academias = $this->academia_model->count();
             $this->data['academias'] = $this->academia_model
-                    ->with_dojos()
+                    ->with_dojos('fields:*count*')
                     ->paginate(10, $total_academias, $pagina);
         }
     }

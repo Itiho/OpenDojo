@@ -20,7 +20,7 @@
                         <li><?=anchor('ArteMarcial', 'Artes Marciais') ?></li>
                         <li><?=anchor('Graduacao', 'Graduações') ?></li>
                         <li class="divider"></li>
-                        <li><a href="#">Turmas</a></li>
+                        <li><?=anchor('Turma', 'Turmas') ?></li>
                         <li><a href="#">Horários</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Tipos de Contato</a></li>

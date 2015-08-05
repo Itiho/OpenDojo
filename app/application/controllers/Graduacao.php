@@ -35,7 +35,7 @@ class Graduacao extends CI_Controller {
                 $this->data['graduacoes'] = $this->graduacao_model
                         ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
                         ->where('arteMarcial', $filtro_arteMarcial)
-                        ->with_arteMarcial()
+                        ->with_arteMarcial('fields:nomeArteMarcial')
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
@@ -44,7 +44,7 @@ class Graduacao extends CI_Controller {
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
                         ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
-                        ->with_arteMarcial()
+                        ->with_arteMarcial('fields:nomeArteMarcial')
                         ->paginate(10, $total_graduacoes, $pagina);
             }
         } else {
@@ -56,13 +56,13 @@ class Graduacao extends CI_Controller {
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
                         ->where('arteMarcial', $filtro_arteMarcial)
-                        ->with_arteMarcial()
+                        ->with_arteMarcial('fields:nomeArteMarcial')
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
                 $total_graduacoes = $this->graduacao_model->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->with_arteMarcial()
+                        ->with_arteMarcial('fields:nomeArteMarcial')
                         ->paginate(10, $total_graduacoes, $pagina);
             }
         }

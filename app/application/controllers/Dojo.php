@@ -44,9 +44,9 @@ class Dojo extends CI_Controller {
                             ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->where('Academia_idAcademia', $filtro_academia)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 } else {
                     $this->data['filtro_academia'] = '';
@@ -57,9 +57,9 @@ class Dojo extends CI_Controller {
                     $this->data['dojos'] = $this->dojo_model
                             ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 }
             } else {
@@ -73,9 +73,9 @@ class Dojo extends CI_Controller {
                     $this->data['dojos'] = $this->dojo_model
                             ->where('nomeDojo', 'like', $filtro_nomeDojo)
                             ->where('Academia_idAcademia', $filtro_academia)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 } else {
                     $this->data['filtro_academia'] = '';
@@ -84,9 +84,9 @@ class Dojo extends CI_Controller {
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
                             ->where('nomeDojo', 'like', $filtro_nomeDojo)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 }
             }
@@ -104,9 +104,9 @@ class Dojo extends CI_Controller {
                     $this->data['dojos'] = $this->dojo_model
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->where('Academia_idAcademia', $filtro_academia)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 } else {
                     $this->data['filtro_academia'] = '';
@@ -115,9 +115,9 @@ class Dojo extends CI_Controller {
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 }
             } else {
@@ -129,18 +129,18 @@ class Dojo extends CI_Controller {
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
                             ->where('Academia_idAcademia', $filtro_academia)
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->with_artemarcial()
-                            ->with_academia()
-                            ->with_turmas()
+                            ->with_artemarcial('fields:nomeArteMarcial')
+                            ->with_academia('fields:nomeAcademia')
+                            ->with_turmas('fields:*count*')
                             ->paginate(10, $total_dojos, $pagina);
                 }
             }

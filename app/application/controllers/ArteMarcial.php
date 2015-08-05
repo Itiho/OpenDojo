@@ -25,16 +25,16 @@ class ArteMarcial extends CI_Controller {
                     ->where('nomeArteMarcial', 'like', $filtro_nomeArteMarcial)
                     ->count();
             $this->data['artesmarciais'] = $this->artemarcial_model
-                    ->with_graduacoes()
-                    ->with_dojos()
+                    ->with_graduacoes('fields:*count*')
+                    ->with_dojos('fields:*count*')
                     ->where('nomeArteMarcial', 'like', $filtro_nomeArteMarcial)
                     ->paginate(10, $total_artesmarciais, $pagina);
         } else {
             $this->data['filtro_nomeArteMarcial'] = '';
             $total_artesmarciais = $this->artemarcial_model->count();
             $this->data['artesmarciais'] = $this->artemarcial_model
-                    ->with_graduacoes()
-                    ->with_dojos()
+                    ->with_graduacoes('fields:*count*')
+                    ->with_dojos('fields:*count*')
                     ->paginate(10, $total_artesmarciais, $pagina);
         }
     }
