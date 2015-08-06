@@ -8,7 +8,7 @@ $attributes_submit = array('class' => 'btn btn-default');
 ?>
 <div class="row">
     <div class="col-md-10"><h1><?= $cabecalho ?></h1></div>
-    <div class="col-md-2"><?= anchor('Dojo/add', '<i class="fa fa-plus-circle fa-4x"></i><br />Adicionar') ?></div>
+    <div class="col-md-2"><?= anchor('Turma/add', '<i class="fa fa-plus-circle fa-4x"></i><br />Adicionar') ?></div>
 </div>
 
 <?php

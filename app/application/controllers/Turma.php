@@ -39,7 +39,7 @@ class Turma extends CI_Controller {
                 $this->data['turmas'] = $this->turma_model
                         ->where('idDojo', $filtro_dojo)
                         ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
-                        ->with_dojos()
+                        ->with_dojo()
                         ->paginate(10, $total_turmas, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
@@ -49,7 +49,7 @@ class Turma extends CI_Controller {
                 $this->data['turmas'] = $this->dojo_model
                         ->where('idDojo', $filtro_dojo)
                         ->with_artemarcial()
-                        ->with_dojos()
+                        ->with_dojo()
                         ->paginate(10, $total_turmas, $pagina);
             }
         } else {
@@ -63,14 +63,14 @@ class Turma extends CI_Controller {
                         ->count();
                 $this->data['turmas'] = $this->dojo_model
                         ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
-                        ->with_dojos()
+                        ->with_dojo()
                         ->paginate(10, $total_turmas, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
                 $total_turmas = $this->turma_model
                         ->count();
                 $this->data['turmas'] = $this->turma_model
-                        ->with_dojos()
+                        ->with_dojo()
                         ->paginate(10, $total_turmas, $pagina);
             }
         }
@@ -98,23 +98,24 @@ class Turma extends CI_Controller {
     }
 
     function add() {
-        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
-//Insere o primeiro item       
-        array_unshift($this->data['artesMarciais'], 'Arte Marcial');
-        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-//Insere o primeiro item       
-        array_unshift($this->data['academias'], 'Academia');
+        $this->load->model('dojo_model');
+        $this->data['dojos'] = $this->dojo_model->as_dropdown('nomeDojo')->get_all();
+        //Insere o primeiro item       
+        array_unshift($this->data['dojos'], 'Dojo');
+        $this->data['options_active'] = array(
+                '1' => 'Ativo',
+                '2' => 'inativo');
         if (count($this->input->post()) == 0) {
-            $this->load->view('DojoAdd_view', $this->data);
+            $this->load->view('TurmaAdd_view', $this->data);
         } else {
-            $resultado = $this->dojo_model->from_form()->insert();
+            $resultado = $this->turma_model->from_form()->insert();
             if ($resultado) {
-                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" cadastrado com sucesso');
+                $this->session->set_flashdata('message', 'Turma "' . $this->input->post('nomeTurma') . '" cadastrada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/Dojo');
+                redirect('/Turma');
             } else {
-                $this->data['dojo'] = $this->input->post();
-                $this->load->view('DojoAdd_view', $this->data);
+                $this->data['turma'] = $this->input->post();
+                $this->load->view('TurmaAdd_view', $this->data);
             }
         }
     }
