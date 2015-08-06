@@ -103,7 +103,7 @@ $autoload['helper'] = array('url', 'file','html','form','objects');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('theme');
 
 
 /*

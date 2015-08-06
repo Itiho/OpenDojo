@@ -14,10 +14,11 @@ echo doctype('xhtml11');
         <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
         -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <?php echo '<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/'.$this->config->item('theme').'/bootstrap.min.css" rel="stylesheet">' ?>
+
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link href="<?php echo base_url(); ?>assets/css/opendojo.min.css" rel="stylesheet">
-
+        
         <!--JavaScript
         ==========================================================-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

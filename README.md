@@ -5,14 +5,15 @@ Modelagem feita com Mysql Workbench
 
 ##Frameworks utilizados
 * [CodeIgniter 3.0.0](http://www.codeigniter.com/) - Framework PHP
-* [Bootstrap 3.3.4](http://getbootstrap.com/) - Framework CSS e JavaScript
-* [Bootstrap Confirmation 2.1.1](http://mistic100.github.io/Bootstrap-Confirmation/) - Plugin JavaScript para diálogo de confirmação
+* [Bootstrap 3.3.5](http://getbootstrap.com/) - Framework CSS e JavaScript
+* [Bootswatch 3.3.5](http://bootswatch.com/) - Themes for Bootstrap
+* [Bootstrap Confirmation 2.1.3](https://github.com/mistic100/Bootstrap-Confirmation) - Plugin JavaScript para diálogo de confirmação
 * [Font Awesome 4.3.0](http://fortawesome.github.io/Font-Awesome/) - Framework CSS com ícones
 * [JQuery 1.9.1](https://jquery.com/) - Framework JavaScript
 * [MY_Model](https://github.com/avenirer/CodeIgniter-MY_Model)
 
 
-
+Atualizado o bootstrap-confirmation para a ultima versão (compatível com a versão 3,3.5 do bootstrap)
 
 ##Padronização de nomes e diretórios
 Alguns são necessários pelo próprio codeigniter outros foram escolhidos por mim
