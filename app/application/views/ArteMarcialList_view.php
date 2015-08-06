@@ -96,8 +96,8 @@ if ($this->session->flashdata('message') <> '' ) {
                             <i class="fa fa-pencil fa-lg"></i> Editar</a>
                         <?php if(!isset($artemarcial->graduacoes) && !isset($artemarcial->dojos)) { ?>
                         <a class="btn btn-danger" href="<?= site_url('ArteMarcial/delete/' . $artemarcial->idArteMarcial) ?>"
-                           title="Deseja realmente excluir a graduação?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
-                            <i class="fa fa-trash-o fa-lg" title="Excluir a Graduação"></i> Deletar</a>
+                           title="Deseja realmente deletar a arte marcial?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
+                            <i class="fa fa-trash-o fa-lg" title="Deletar a arte marcial"></i> Deletar</a>
                         <?php } ?>
                     </td>
                 </tr>

@@ -120,8 +120,8 @@ if ($this->session->flashdata('message') <> '' ) {
                             <i class="fa fa-pencil fa-lg"></i> Editar</a>
                         <?php if(!isset($dojo->turmas)) { ?>
                         <a class="btn btn-danger" href="<?= site_url('Dojo/delete/' . $dojo->idDojo) ?>"
-                           title="Deseja realmente excluir a graduação?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
-                            <i class="fa fa-trash-o fa-lg" title="Excluir a Graduação"></i> Deletar</a>
+                           title="Deseja realmente deletar o dojo?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
+                            <i class="fa fa-trash-o fa-lg" title="Deletar o dojo"></i> Deletar</a>
                         <?php } ?>
                     </td>
                 </tr>
