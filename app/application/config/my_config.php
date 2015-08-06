@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
  * -------------------------------------------------------------------
- * THEME CONFIG
+ * Theme
  * -------------------------------------------------------------------
- * Use bootswatch themes - http://bootswatch.com/
+ * bootswatch themes - http://bootswatch.com/
  * 
  * Options:
  * default - Padrão do bootstrap
@@ -29,3 +29,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config['theme']   = 'default';
+
+/*
+|--------------------------------------------------------------------------
+| CDN
+|--------------------------------------------------------------------------
+|
+| Use External CDN to host CSS and JavaScript
+| Observação: Os themas só funcionam com CDN
+*/
+$config['cdn'] = FALSE;
