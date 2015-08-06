@@ -197,7 +197,7 @@ class Dojo extends CI_Controller {
                     $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" deletado com sucesso');
                     $this->session->set_flashdata('type_message', '1'); //Sucesso
                 } else {
-                    $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" não pôde ser deletada');
+                    $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" não pôde ser deletado');
                     $this->session->set_flashdata('type_message', '0'); //Erro
                 }
                 redirect('/Dojo');
