@@ -12,7 +12,8 @@ $attributes_submit = array('class' => 'btn btn-default');
     <h1><i class="fa fa-pencil  fa-3x"></i> <?= $cabecalho ?></h1>
 
     <?php
-    echo form_open('Turma/add', $attributes_form);
+    echo form_open('Turma/edit', $attributes_form);
+    echo form_hidden('idTurma', $turma['idTurma']);
 
     if (form_error('nomeTurma')) {
         echo '<div class="form-group has-error">';

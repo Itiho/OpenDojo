@@ -77,22 +77,25 @@ class Turma extends CI_Controller {
     }
 
     function edit($id = 0) {
-        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
-        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-        $this->data['dojo'] = $this->dojo_model->as_array()->get($id);
+        $this->load->model('dojo_model');
+        $this->data['dojos'] = $this->dojo_model->as_dropdown('nomeDojo')->get_all();
+        $this->data['options_active'] = array(
+                '1' => 'Ativo',
+                '2' => 'Inativo');
+        $this->data['turma'] = $this->turma_model->as_array()->get($id);
         if (count($this->input->post()) == 0) {
-            $this->load->view('DojoEdit_view', $this->data);
+            $this->load->view('TurmaEdit_view', $this->data);
         } else {
-            $dojo = $this->input->post();
-            $this->form_validation->set_rules($this->dojo_model->rules);
+            $turma = $this->input->post();
+            $this->form_validation->set_rules($this->turma_model->rules);
             if ($this->form_validation->run() == TRUE) {
-                $resultado = $this->dojo_model->update($dojo, $this->input->post('idDojo'));
-                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" editado com sucesso');
+                $resultado = $this->turma_model->update($turma, $this->input->post('idTurma'));
+                $this->session->set_flashdata('message', 'Turma "' . $this->input->post('nomeTurma') . '" editada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/Dojo');
+                redirect('/Turma');
             } else {
-                $this->data['dojo'] = $dojo;
-                $this->load->view('DojoEdit_view', $this->data);
+                $this->data['turma'] = $turma;
+                $this->load->view('TurmaEdit_view', $this->data);
             }
         }
     }
@@ -104,7 +107,7 @@ class Turma extends CI_Controller {
         array_unshift($this->data['dojos'], 'Dojo');
         $this->data['options_active'] = array(
                 '1' => 'Ativo',
-                '2' => 'inativo');
+                '2' => 'Inativo');
         if (count($this->input->post()) == 0) {
             $this->load->view('TurmaAdd_view', $this->data);
         } else {
@@ -122,15 +125,15 @@ class Turma extends CI_Controller {
 
     function delete($id = null) {
         if (isset($id)) {
-            $dojo = $this->dojo_model->fields('nomeDojo')->get($id);
-            if ($this->dojo_model->delete($id)) {
-                $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" deletado com sucesso');
+            $turma = $this->turma_model->fields('nomeTurma')->get($id);
+            if ($this->turma_model->delete($id)) {
+                $this->session->set_flashdata('message', 'Dojo "' . $turma->nomeTurma . '" deletada com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
             } else {
-                $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" não pôde ser deletada');
+                $this->session->set_flashdata('message', 'Dojo "' . $turma->nomeTurma . '" não pôde ser deletada');
                 $this->session->set_flashdata('type_message', '0'); //Erro
             }
-            redirect('/Dojo');
+            redirect('/Turma');
         }
     }
 
