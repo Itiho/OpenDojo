@@ -1,6 +1,17 @@
 # OpenDojo
 Sistema para gerenciamento de academias de arte marcial - Dojo
 
+##Instalação
+
+Descompacte o arquivo zip e mova o conteúdo do diretório app para dentro do diretório do apache
+
+Altere a configuração dos seguintes arquivos
+
+* application/config/database.php - Configurações do banco de dados
+* application/config/opendojo.php - Configuração de themas e uso de CDN
+
+Importe no mysql o arquivo de criação do banco de dados BD/install.sql
+
 Modelagem feita com Mysql Workbench
 
 ##Frameworks utilizados

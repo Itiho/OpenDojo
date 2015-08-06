@@ -103,7 +103,7 @@ $autoload['helper'] = array('url', 'file','html','form','objects');
 |
 */
 
-$autoload['config'] = array('my_config');
+$autoload['config'] = array('opendojo');
 
 
 /*
