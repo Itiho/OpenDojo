@@ -83,7 +83,7 @@ $attributes_submit = array('class' => 'btn btn-default');
         <?php
         echo form_submit($attributes_submit, 'Salvar');
 
-        $options = 'onClick="window.location=\'' . site_url('ArteMarcial') . '\'" class="btn"';
+        $options = 'onClick="window.location=\'' . site_url('Dojo') . '\'" class="btn"';
         echo form_button('cancel', 'Cancelar', $options);
         ?>
     </div>
