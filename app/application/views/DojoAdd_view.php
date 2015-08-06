@@ -27,7 +27,7 @@ $attributes_submit = array('class' => 'btn btn-default');
         //atributos extra do campo texto
         $attributes_text['name'] = 'nomeDojo';
         $attributes_text['id'] = 'nomeDojo';
-        if (isset($academia['nomeDojo'])) {
+        if (isset($dojo['nomeDojo'])) {
             $attributes_text['value'] = $dojo['nomeDojo'];
         }
 
@@ -46,7 +46,7 @@ $attributes_submit = array('class' => 'btn btn-default');
     }
 
     echo form_label('Arte Marcial', 'ArteMarcial_idArte_Marcial', $attributes_label);
-    if (isset($academia['ArteMarcial_idArte_Marcial'])) {
+    if (isset($dojo['ArteMarcial_idArte_Marcial'])) {
         $selected = $dojo['ArteMarcial_idArte_Marcial'];
     } else {
         $selected = '';
@@ -66,7 +66,7 @@ $attributes_submit = array('class' => 'btn btn-default');
     }
 
     echo form_label('Academia', 'Academia_idAcademia', $attributes_label);
-    if (isset($academia['Academia_idAcademia'])) {
+    if (isset($dojo['Academia_idAcademia'])) {
         $selected = $dojo['Academia_idAcademia'];
     } else {
         $selected = '';
