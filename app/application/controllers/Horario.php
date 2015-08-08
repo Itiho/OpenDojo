@@ -66,18 +66,16 @@ class Horario extends CI_Controller {
     }
 
     function add() {
-        $this->data['artesMarciais'] = $this->dojo_model->as_dropdown('nomeArtemarcial')->get_all();
+        $this->data['turmas'] = $this->turma_model->as_dropdown('nomeTurma')->get_all();
         //Insere o primeiro item
-        $this->data['artesMarciais'] = array('0' => 'Arte Marcial') + $this->data['artesMarciais'];
-        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-        //Insere o primeiro item
-        $this->data['academias'] = array('0' => 'Academia') + $this->data['academias'];
+        $this->data['turmas'] = array('0' => 'Turmal') + $this->data['turmas'];
+        $this->data['diasSemana'] = array('0' => '') + $this->diaSemana_model->get_diasSemana();
         if (count($this->input->post()) == 0) {
             $this->load->view('HorarioAdd_view', $this->data);
         } else {
             $resultado = $this->horario_model->from_form()->insert();
             if ($resultado) {
-                $this->session->set_flashdata('message', 'Horario "' . $this->input->post('nomeHorario') . '" cadastrado com sucesso');
+                $this->session->set_flashdata('message', 'Horario cadastrado com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Horario');
             } else {

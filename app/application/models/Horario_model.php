@@ -24,15 +24,16 @@ class Horario_Model extends MY_Model {
             'diaSemana' => array(
                 'field'=>'diaSemana',
                 'label'=>'Dia da semana',
-                'rules'=>'required'),
+                'rules'=>'greater_than[0]',
+                'errors' => array ('greater_than' => '%s é obrigatório')),
             'horaInicio' => array(
                 'field'=>'horaInicio',
                 'label'=>'Hora de início',
-                'rules'=>'required,regex_match[[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]]'),
+                'rules'=>'required'),
             'horaFim' => array(
                 'field'=>'horaFim',
                 'label'=>'Hora de término',
-                'rules'=>'required,regex_match[[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]]'),
+                'rules'=>'required'),
             'Turma_idTurma' => array(
                 'field'=>'Turma_idTurma',
                 'label'=>'Turma',
