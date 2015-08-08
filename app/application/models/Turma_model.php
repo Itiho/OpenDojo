@@ -37,6 +37,7 @@ class Turma_Model extends MY_Model {
      function __construct() {
         $this->timestamps = FALSE;
         $this->has_one['dojo'] = array('Dojo_Model','idDojo','Dojo_idDojo');
+        $this->has_many['horarios'] =  array('Horario_Model','Turma_idTurma', 'idTurma');
 
         parent::__construct();
 
