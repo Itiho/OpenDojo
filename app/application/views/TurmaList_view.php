@@ -109,7 +109,7 @@ if ($this->session->flashdata('message') <> '' ) {
                     <td style="text-align: center;">
                         <a class="btn btn-success" href="<?= site_url('Turma/edit/' . $turma->idTurma) ?>">
                             <i class="fa fa-pencil fa-lg"></i> Editar</a>
-                        <?php if(!isset($dojo->turmas)) { ?>
+                        <?php if(!isset($turma->horarios)) { ?>
                         <a class="btn btn-danger" href="<?= site_url('Turma/delete/' . $turma->idTurma) ?>"
                            title="Deseja realmente deletar a turma?" data-toggle="confirmation-delete" data-singleton="true" data-placement="top">
                             <i class="fa fa-trash-o fa-lg" title="Deletar a Turma"></i> Deletar</a>
