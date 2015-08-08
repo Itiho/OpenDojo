@@ -18,11 +18,11 @@ class Dojo extends CI_Controller {
         $this->filtrar($this->input->post('filtro_academia'), $this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeDojo'), $pagina);
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
-        //Insere o primeiro item       
-        array_unshift($this->data['artesMarciais'], 'Arte Marcial');
+        //Insere o primeiro item
+        $this->data['artesMarciais'] = array('0' => 'Arte Marcial') + $this->data['artesMarciais'];
         $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-        //Insere o primeiro item       
-        array_unshift($this->data['academias'], 'Academia');
+        //Insere o primeiro item
+        $this->data['academias'] = array('0' => 'Academia') + $this->data['academias'];
         $this->load->view('DojoList_view', $this->data);
     }
 
@@ -170,11 +170,11 @@ class Dojo extends CI_Controller {
 
         function add() {
             $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
-            //Insere o primeiro item       
-            array_unshift($this->data['artesMarciais'], 'Arte Marcial');
+            //Insere o primeiro item
+            $this->data['artesMarciais'] = array('0' => 'Arte Marcial') + $this->data['artesMarciais'];
             $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-            //Insere o primeiro item       
-            array_unshift($this->data['academias'], 'Academia');
+            //Insere o primeiro item
+            $this->data['academias'] = array('0' => 'Academia') + $this->data['academias'];
             if (count($this->input->post()) == 0) {
                 $this->load->view('DojoAdd_view', $this->data);
             } else {

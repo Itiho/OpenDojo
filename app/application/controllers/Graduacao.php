@@ -17,8 +17,8 @@ class Graduacao extends CI_Controller {
         $this->filtrar($this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeGraduacao'), $pagina);
         $this->data['all_pages'] = $this->graduacao_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all('nomeArteMarcial');
-        //Insere o primeiro item       
-        array_unshift($this->data['artesMarciais'], '');
+        //Insere o primeiro item 
+        $this->data['artesMarciais'] = array('0' => '') + $this->data['artesMarciais'];
         $this->load->view('GraduacaoList_view', $this->data);
     }
 
@@ -92,8 +92,7 @@ class Graduacao extends CI_Controller {
     function add() {
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         //Adiciona um item vazio no início
-        array_unshift($this->data['artesMarciais'], '');
-
+        $this->data['artesMarciais'] = array('0' => '') + $this->data['artesMarciais'];
         if (count($this->input->post()) == 0) {
             $this->load->view('GraduacaoAdd_view', $this->data);
         } else {

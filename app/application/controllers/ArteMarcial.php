@@ -69,7 +69,6 @@ class ArteMarcial extends CI_Controller {
                 redirect('/ArteMarcial');
             } else {
                 $this->data['artemarcial'] = $this->input->post();
-//                $this->data['nomeArteMarcial'] = $this->input->post('nomeArteMarcial');
                 $this->load->view('ArteMarcialAdd_view', $this->data);
             }
         }

@@ -62,7 +62,7 @@ class Academia extends CI_Controller {
         $this->load->model('estado_model');
         $this->data['estados'] = $this->estado_model->get_estados();
         //Adiciona um item vazio no início
-        array_unshift($this->data['estados'], '');
+        $this->data['estados'] = array('0' => '') + $this->data['estados'];
         if (count($this->input->post()) == 0) {
             $this->load->view('AcademiaAdd_view', $this->data);
         } else {

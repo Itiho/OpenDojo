@@ -18,11 +18,11 @@ class Turma extends CI_Controller {
         $this->filtrar($this->input->post('filtro_arteMarcial'), $this->input->post('filtro_dojo'), $pagina);
         $this->data['all_pages'] = $this->turma_model->all_pages;
         $this->data['dojos'] = $this->dojo_model->as_dropdown('nomeDojo')->get_all();
-        //Insere o primeiro item       
-        array_unshift($this->data['dojos'], 'Dojo');
+        //Insere o primeiro item 
+        $this->data['dojos'] = array('0' => 'Dojo') + $this->data['dojos'];
         $this->data['artesmarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
         //Insere o primeiro item       
-        array_unshift($this->data['artesmarciais'], 'Arte Marcial');
+        $this->data['artesmarciais'] = array('0' => 'Arte Marcial') + $this->data['artesmarciais'];
         $this->load->view('TurmaList_view', $this->data);
     }
 
@@ -40,6 +40,7 @@ class Turma extends CI_Controller {
                         ->where('idDojo', $filtro_dojo)
                         ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                         ->with_dojo()
+                        ->with_horarios('fields:*count*')
                         ->paginate(10, $total_turmas, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
@@ -50,6 +51,7 @@ class Turma extends CI_Controller {
                         ->where('idDojo', $filtro_dojo)
                         ->with_artemarcial()
                         ->with_dojo()
+                        ->with_horarios('fields:*count*')
                         ->paginate(10, $total_turmas, $pagina);
             }
         } else {
@@ -64,6 +66,7 @@ class Turma extends CI_Controller {
                 $this->data['turmas'] = $this->dojo_model
                         ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                         ->with_dojo()
+                        ->with_horarios('fields:*count*')
                         ->paginate(10, $total_turmas, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
@@ -71,6 +74,7 @@ class Turma extends CI_Controller {
                         ->count();
                 $this->data['turmas'] = $this->turma_model
                         ->with_dojo()
+                        ->with_horarios('fields:*count*')
                         ->paginate(10, $total_turmas, $pagina);
             }
         }
@@ -103,8 +107,8 @@ class Turma extends CI_Controller {
     function add() {
         $this->load->model('dojo_model');
         $this->data['dojos'] = $this->dojo_model->as_dropdown('nomeDojo')->get_all();
-        //Insere o primeiro item       
-        array_unshift($this->data['dojos'], 'Dojo');
+        //Insere o primeiro item
+        $this->data['dojos'] = array('0' => 'Selecione um Dojo') + $this->data['dojos'];
         $this->data['options_active'] = array(
                 '1' => 'Ativo',
                 '2' => 'Inativo');
