@@ -22,6 +22,7 @@ Modelagem feita com Mysql Workbench
 * [Font Awesome 4.4.0](http://fortawesome.github.io/Font-Awesome/) - Framework CSS com ícones
 * [JQuery 1.11.3](https://jquery.com/) - Framework JavaScript
 * [Jquery Maskedinput 1.4.1](https://github.com/digitalBush/jquery.maskedinput) - Mascara para inputs
+* [Bootstrap Datepicker 1.4.0](https://github.com/eternicode/bootstrap-datepicker) - Calendário para campos de dada
 * [MY_Model](https://github.com/avenirer/CodeIgniter-MY_Model) - Classe para auxílio no uso de banco de dados.
 
 
