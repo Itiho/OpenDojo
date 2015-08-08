@@ -8,64 +8,46 @@
  * -------------------------------------------------------
  */
 
-class Horario_Model extends AbstractModel {
+class Horario_Model extends MY_Model {
 
     var $idHorario;   // KEY ATTR. WITH AUTOINCREMENT
     var $diaSemana;   // (normal Attribute)
     var $horaInicio;   // (normal Attribute)
     var $horaFim;   // (normal Attribute)
     var $Turma_idTurma;   // (normal Attribute)
-    var $_table = 'Horario'; // Nome da tabela
+    public $table = 'Horario'; // Nome da tabela
+    public $primary_key = 'idHorario';
 
-// **********************
-// GETTER METHODS
-// **********************
+    
+    
+    public $rules = array(
+            'diaSemana' => array(
+                'field'=>'diaSemana',
+                'label'=>'Dia da semana',
+                'rules'=>'required'),
+            'horaInicio' => array(
+                'field'=>'horaInicio',
+                'label'=>'Hora de início',
+                'rules'=>'required,regex_match[[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]]'),
+            'horaFim' => array(
+                'field'=>'horaFim',
+                'label'=>'Hora de término',
+                'rules'=>'required,regex_match[[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]]'),
+            'Turma_idTurma' => array(
+                'field'=>'Turma_idTurma',
+                'label'=>'Turma',
+                'rules'=>'greater_than[0]',
+                'errors' => array ('greater_than' => '%s é obrigatório'))
+        );
+    
+    function __construct() {
+        $this->timestamps = FALSE;
+        $this->has_one['turma'] = array('Turma_Model','idTurma','Turma_idTurma');
+        
+        parent::__construct();
 
-    function get_idHorario() {
-        return $this->idHorario;
+        $this->pagination_delimiters = array('<li>', '</li>');
+        $this->pagination_arrows = array('&lt;', '&gt;');
     }
-
-    function get_diaSemana() {
-        return $this->diaSemana;
-    }
-
-    function get_horaInicio() {
-        return $this->horaInicio;
-    }
-
-    function get_horaFim() {
-        return $this->horaFim;
-    }
-
-    function get_Turma_idTurma() {
-        return $this->Turma_idTurma;
-    }
-
-// **********************
-// SETTER METHODS
-// **********************
-
-
-    function set_idHorario($val) {
-        $this->idHorario = $val;
-    }
-
-    function set_diaSemana($val) {
-        $this->diaSemana = $val;
-    }
-
-    function set_horaInicio($val) {
-        $this->horaInicio = $val;
-    }
-
-    function set_horaFim($val) {
-        $this->horaFim = $val;
-    }
-
-    function set_Turma_idTurma($val) {
-        $this->Turma_idTurma = $val;
-    }
-
 }
-
 ?>

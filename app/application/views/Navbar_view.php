@@ -21,7 +21,7 @@
                         <li><?=anchor('Graduacao', 'Graduações') ?></li>
                         <li class="divider"></li>
                         <li><?=anchor('Turma', 'Turmas') ?></li>
-                        <li><a href="#">Horários</a></li>
+                        <li><?=anchor('Horario', 'Horários') ?></li>
                         <li class="divider"></li>
                         <li><a href="#">Tipos de Contato</a></li>
                         <li class="divider"></li>

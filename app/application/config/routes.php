@@ -59,3 +59,4 @@ $route['ArteMarcial/(:num)'] = "ArteMarcial/index";
 $route['Academia/(:num)'] = "Academia/index"; 
 $route['Dojo/(:num)'] = "Dojo/index"; 
 $route['Turma/(:num)'] = "Turma/index"; 
+$route['Horario/(:num)'] = "Horario/index"; 
