@@ -22,7 +22,10 @@ echo doctype('xhtml11');
             echo '<script src="'.base_url().'assets/js/bootstrap-3.3.5.min.js"></script> ';
         }
         ?>
+        <link href = "<?php echo base_url(); ?>assets/css/bootstrap-datepicker3-1.4.0.min.css" rel = "stylesheet">
         <link href = "<?php echo base_url(); ?>assets/css/opendojo.min.css" rel = "stylesheet">
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker-1.4-0.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput-1.4.1.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/bootstrap-confirmation-2.1.3.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/opendojo.js"></script>
 </head>
