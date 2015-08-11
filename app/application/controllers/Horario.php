@@ -68,7 +68,7 @@ class Horario extends CI_Controller {
     function add() {
         $this->data['turmas'] = $this->turma_model->as_dropdown('nomeTurma')->get_all();
         //Insere o primeiro item
-        $this->data['turmas'] = array('0' => 'Turmal') + $this->data['turmas'];
+        $this->data['turmas'] = array('0' => 'Turma') + $this->data['turmas'];
         $this->data['diasSemana'] = array('0' => '') + $this->diaSemana_model->get_diasSemana();
         if (count($this->input->post()) == 0) {
             $this->load->view('HorarioAdd_view', $this->data);
