@@ -171,10 +171,10 @@ class Dojo extends CI_Controller {
         function add() {
             $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
             //Insere o primeiro item
-            $this->data['artesMarciais'] = array('0' => 'Arte Marcial') + $this->data['artesMarciais'];
+            $this->data['artesMarciais'] = array('0' => '') + $this->data['artesMarciais'];
             $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
             //Insere o primeiro item
-            $this->data['academias'] = array('0' => 'Academia') + $this->data['academias'];
+            $this->data['academias'] = array('0' => '') + $this->data['academias'];
             if (count($this->input->post()) == 0) {
                 $this->load->view('DojoAdd_view', $this->data);
             } else {

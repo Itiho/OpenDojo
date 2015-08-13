@@ -108,7 +108,7 @@ class Turma extends CI_Controller {
         $this->load->model('dojo_model');
         $this->data['dojos'] = $this->dojo_model->as_dropdown('nomeDojo')->get_all();
         //Insere o primeiro item
-        $this->data['dojos'] = array('0' => 'Selecione um Dojo') + $this->data['dojos'];
+        $this->data['dojos'] = array('0' => '') + $this->data['dojos'];
         $this->data['options_active'] = array(
                 '1' => 'Ativo',
                 '2' => 'Inativo');
