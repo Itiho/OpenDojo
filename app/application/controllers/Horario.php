@@ -45,8 +45,8 @@ class Horario extends CI_Controller {
     }
 
     function edit($id = 0) {
-        $this->data['artesMarciais'] = $this->dojo_model->as_dropdown('nomeArtemarcial')->get_all();
-        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
+        $this->data['turmas'] = $this->turma_model->as_dropdown('nomeTurma')->get_all();
+        $this->data['diasSemana'] = array('0' => '') + $this->diaSemana_model->get_diasSemana();
         $this->data['horario'] = $this->horario_model->as_array()->get($id);
         if (count($this->input->post()) == 0) {
             $this->load->view('HorarioEdit_view', $this->data);
@@ -55,9 +55,14 @@ class Horario extends CI_Controller {
             $this->form_validation->set_rules($this->horario_model->rules);
             if ($this->form_validation->run() == TRUE) {
                 $resultado = $this->horario_model->update($horario, $this->input->post('idHorario'));
-                $this->session->set_flashdata('message', 'Horario "' . $this->input->post('nomeHorario') . '" editado com sucesso');
-                $this->session->set_flashdata('type_message', '1'); //Sucesso
-                redirect('/Horario');
+                if ($resultado) {
+                    $this->session->set_flashdata('message', 'Horario "' . $this->input->post('nomeHorario') . '" editado com sucesso');
+                    $this->session->set_flashdata('type_message', '1'); //Sucesso
+                    redirect('/Horario');
+                } else {
+                    $this->data['horario'] = $horario;
+                    $this->load->view('HorarioEdit_view', $this->data);
+                }
             } else {
                 $this->data['horario'] = $horario;
                 $this->load->view('HorarioEdit_view', $this->data);
@@ -87,12 +92,11 @@ class Horario extends CI_Controller {
 
     function delete($id = null) {
         if (isset($id)) {
-            $horario = $this->horario_model->fields('nomeHorario')->get($id);
             if ($this->horario_model->delete($id)) {
-                $this->session->set_flashdata('message', 'Horario "' . $horario->nomeHorario . '" deletado com sucesso');
+                $this->session->set_flashdata('message', 'Horario deletado com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
             } else {
-                $this->session->set_flashdata('message', 'Horario "' . $horario->nomeHorario . '" não pôde ser deletado');
+                $this->session->set_flashdata('message', 'Horario não pôde ser deletado');
                 $this->session->set_flashdata('type_message', '0'); //Erro
             }
             redirect('/Horario');
