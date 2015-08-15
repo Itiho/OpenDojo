@@ -7,7 +7,7 @@ class Home extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->data['titulo'] = 'OpenDojo';
-        $this->data['cabecalho'] = '';
+        $this->data['cabecalho'] = 'Home';
     }
 
     function index() {
