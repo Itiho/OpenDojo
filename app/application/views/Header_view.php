@@ -1,4 +1,8 @@
 <?php
+if(!$this->session->userdata('username') || !$this->session->userdata('password')){
+    redirect('/Login/logout');
+}
+
 echo doctype('xhtml11');
 ?>
 

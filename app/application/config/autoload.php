@@ -75,7 +75,7 @@ $autoload['libraries'] = array('database', 'email', 'session', 'table', 'form_va
 |	$autoload['drivers'] = array('cache');
 */
 
-$autoload['drivers'] = array();
+$autoload['drivers'] = array('session');
 
 
 /*
