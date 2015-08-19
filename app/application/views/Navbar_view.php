@@ -23,7 +23,7 @@
                         <li><?= anchor('Turma', 'Turmas') ?></li>
                         <li><?= anchor('Horario', 'Horários') ?></li>
                         <li class="divider"></li>
-                        <li><a href="#">Tipos de Contato</a></li>
+                        <li><?= anchor('TipoContato', 'Tipos de Contato') ?></li>
                         <li class="divider"></li>
                         <li><a href="#">Usuários</a></li>
                     </ul>

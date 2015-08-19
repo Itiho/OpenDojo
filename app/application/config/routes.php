@@ -60,3 +60,4 @@ $route['Academia/(:num)'] = "Academia/index";
 $route['Dojo/(:num)'] = "Dojo/index"; 
 $route['Turma/(:num)'] = "Turma/index"; 
 $route['Horario/(:num)'] = "Horario/index"; 
+$route['TipoContato/(:num)'] = "TipoContato/index"; 
