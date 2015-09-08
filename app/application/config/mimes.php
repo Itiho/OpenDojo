@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Upload class to help identify allowed file types.
 |
 */
+
 return array(
 	'hqx'	=>	array('application/mac-binhex40', 'application/mac-binhex', 'application/x-binhex40', 'application/x-mac-binhex40'),
 	'cpt'	=>	'application/mac-compactpro',
@@ -126,7 +127,7 @@ return array(
 	'rsa'   =>	'application/x-pkcs7',
 	'cer'   =>	array('application/pkix-cert', 'application/x-x509-ca-cert'),
 	'3g2'   =>	'video/3gpp2',
-	'3gp'   =>	array('video/3gp', 'video/3gpp'),
+	'3gp'   =>	'video/3gp',
 	'mp4'   =>	'video/mp4',
 	'm4a'   =>	'audio/x-m4a',
 	'f4v'   =>	'video/mp4',
@@ -151,8 +152,5 @@ return array(
 	'wma'	=>	array('audio/x-ms-wma', 'video/x-ms-asf'),
 	'jar'	=>	array('application/java-archive', 'application/x-java-application', 'application/x-jar', 'application/x-compressed'),
 	'svg'	=>	array('image/svg+xml', 'application/xml', 'text/xml'),
-	'vcf'	=>	'text/x-vcard',
-	'srt'	=>	array('text/srt', 'text/plain'),
-	'vtt'	=>	array('text/vtt', 'text/plain'),
-	'ico'	=>	array('image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon')
+	'vcf'	=>	'text/x-vcard'
 );

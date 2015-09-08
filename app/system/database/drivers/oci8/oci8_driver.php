@@ -102,14 +102,6 @@ class CI_DB_oci8_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Reset $stmt_id flag
-	 *
-	 * Used by stored_procedure() to prevent _execute() from
-	 * re-setting the statement ID.
-	 */
-	protected $_reset_stmt_id = TRUE;
-
-	/**
 	 * List of reserved identifiers
 	 *
 	 * Identifiers that must NOT be escaped.
@@ -273,13 +265,26 @@ class CI_DB_oci8_driver extends CI_DB {
 		/* Oracle must parse the query before it is run. All of the actions with
 		 * the query are based on the statement id returned by oci_parse().
 		 */
-		if ($this->_reset_stmt_id === TRUE)
+		$this->stmt_id = FALSE;
+		$this->_set_stmt_id($sql);
+		oci_set_prefetch($this->stmt_id, 1000);
+		return oci_execute($this->stmt_id, $this->commit_mode);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Generate a statement ID
+	 *
+	 * @param	string	$sql	an SQL query
+	 * @return	void
+	 */
+	protected function _set_stmt_id($sql)
+	{
+		if ( ! is_resource($this->stmt_id))
 		{
 			$this->stmt_id = oci_parse($this->conn_id, $sql);
 		}
-
-		oci_set_prefetch($this->stmt_id, 1000);
-		return oci_execute($this->stmt_id, $this->commit_mode);
 	}
 
 	// --------------------------------------------------------------------
@@ -306,22 +311,22 @@ class CI_DB_oci8_driver extends CI_DB {
 	 *
 	 * params array keys
 	 *
-	 * KEY      OPTIONAL  NOTES
-	 * name     no        the name of the parameter should be in :<param_name> format
-	 * value    no        the value of the parameter.  If this is an OUT or IN OUT parameter,
-	 *                    this should be a reference to a variable
-	 * type     yes       the type of the parameter
-	 * length   yes       the max size of the parameter
+	 * KEY	  OPTIONAL	NOTES
+	 * name		no	the name of the parameter should be in :<param_name> format
+	 * value	no	the value of the parameter.  If this is an OUT or IN OUT parameter,
+	 *				this should be a reference to a variable
+	 * type		yes	the type of the parameter
+	 * length	yes	the max size of the parameter
 	 */
-	public function stored_procedure($package, $procedure, array $params)
+	public function stored_procedure($package, $procedure, $params)
 	{
-		if ($package === '' OR $procedure === '')
+		if ($package === '' OR $procedure === '' OR ! is_array($params))
 		{
 			log_message('error', 'Invalid query: '.$package.'.'.$procedure);
 			return ($this->db_debug) ? $this->display_error('db_invalid_query') : FALSE;
 		}
 
-		// Build the query string
+		// build the query string
 		$sql = 'BEGIN '.$package.'.'.$procedure.'(';
 
 		$have_cursor = FALSE;
@@ -336,12 +341,10 @@ class CI_DB_oci8_driver extends CI_DB {
 		}
 		$sql = trim($sql, ',').'); END;';
 
-		$this->_reset_stmt_id = FALSE;
-		$this->stmt_id = oci_parse($this->conn_id, $sql);
+		$this->stmt_id = FALSE;
+		$this->_set_stmt_id($sql);
 		$this->_bind_params($params);
-		$result = $this->query($sql, FALSE, $have_cursor);
-		$this->_reset_stmt_id = TRUE;
-		return $result;
+		return $this->query($sql, FALSE, $have_cursor);
 	}
 
 	// --------------------------------------------------------------------
@@ -570,7 +573,7 @@ class CI_DB_oci8_driver extends CI_DB {
 			{
 				$default = '';
 			}
-			$retval[$i]->default = $default;
+			$retval[$i]->default		= $query[$i]->COLUMN_DEFAULT;
 		}
 
 		return $retval;

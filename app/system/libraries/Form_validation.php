@@ -198,20 +198,22 @@ class CI_Form_validation {
 			return $this;
 		}
 
-		// No fields or no rules? Nothing to do...
-		if ( ! is_string($field) OR $field === '' OR empty($rules))
+		// No fields? Nothing to do...
+		if ( ! is_string($field) OR $field === '')
 		{
 			return $this;
 		}
 		elseif ( ! is_array($rules))
 		{
 			// BC: Convert pipe-separated rules string to an array
-			if ( ! is_string($rules))
+			if (is_string($rules))
+			{
+				$rules = explode('|', $rules);
+			}
+			else
 			{
 				return $this;
 			}
-
-			$rules = explode('|', $rules);
 		}
 
 		// If the field label wasn't passed we use the field name
@@ -461,7 +463,7 @@ class CI_Form_validation {
 			{
 				$this->_field_data[$field]['postdata'] = $this->_reduce_array($validation_array, $row['keys']);
 			}
-			elseif (isset($validation_array[$field]))
+			elseif (isset($validation_array[$field]) && $validation_array[$field] !== '')
 			{
 				$this->_field_data[$field]['postdata'] = $validation_array[$field];
 			}
@@ -616,12 +618,6 @@ class CI_Form_validation {
 				{
 					$callback = TRUE;
 					$rules = array(1 => $rule);
-					break;
-				}
-				elseif (is_array($rule) && isset($rule[0], $rule[1]) && is_callable($rule[1]))
-				{
-					$callback = TRUE;
-					$rules = array(array($rule[0], $rule[1]));
 					break;
 				}
 			}
@@ -821,10 +817,11 @@ class CI_Form_validation {
 				// Callable rules might not have named error messages
 				if ( ! is_string($rule))
 				{
-					$line = $this->CI->lang->line('form_validation_error_message_not_set').'(Anonymous function)';
+					return;
 				}
+
 				// Check if a custom message is defined
-				elseif (isset($this->_field_data[$row['field']]['errors'][$rule]))
+				if (isset($this->_field_data[$row['field']]['errors'][$rule]))
 				{
 					$line = $this->_field_data[$row['field']]['errors'][$rule];
 				}
@@ -875,11 +872,17 @@ class CI_Form_validation {
 	 */
 	protected function _translate_fieldname($fieldname)
 	{
-		// Do we need to translate the field name? We look for the prefix 'lang:' to determine this
-		// If we find one, but there's no translation for the string - just return it
-		if (sscanf($fieldname, 'lang:%s', $line) === 1 && FALSE === ($fieldname = $this->CI->lang->line($line, FALSE)))
+		// Do we need to translate the field name?
+		// We look for the prefix lang: to determine this
+		if (sscanf($fieldname, 'lang:%s', $line) === 1)
 		{
-			return $line;
+			// Were we able to translate the field name?  If not we use $line
+			if (FALSE === ($fieldname = $this->CI->lang->line('form_validation_'.$line))
+				// DEPRECATED support for non-prefixed keys
+				&& FALSE === ($fieldname = $this->CI->lang->line($line, FALSE)))
+			{
+				return $line;
+			}
 		}
 
 		return $fieldname;

@@ -121,31 +121,17 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Fetch Field Names
+	 * Show column query
 	 *
-	 * @param	string	$table	Table name
-	 * @return	array
+	 * Generates a platform-specific query string so that the column names can be fetched
+	 *
+	 * @param	string	$table
+	 * @return	string
 	 */
-	public function list_fields($table)
+	protected function _list_columns($table = '')
 	{
-		// Is there a cached result?
-		if (isset($this->data_cache['field_names'][$table]))
-		{
-			return $this->data_cache['field_names'][$table];
-		}
-
-		if (($result = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
-		{
-			return FALSE;
-		}
-
-		$this->data_cache['field_names'][$table] = array();
-		foreach ($result->result_array() as $row)
-		{
-			$this->data_cache['field_names'][$table][] = $row['name'];
-		}
-
-		return $this->data_cache['field_names'][$table];
+		// Not supported
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------

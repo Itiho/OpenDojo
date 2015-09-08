@@ -735,31 +735,11 @@ class XML_RPC_Client extends CI_Xmlrpc
 			.'Content-Length: '.strlen($msg->payload).$r.$r
 			.$msg->payload;
 
-		for ($written = $timestamp = 0, $length = strlen($op); $written < $length; $written += $result)
+		for ($written = 0, $length = strlen($op); $written < $length; $written += $result)
 		{
 			if (($result = fwrite($fp, substr($op, $written))) === FALSE)
 			{
 				break;
-			}
-			// See https://bugs.php.net/bug.php?id=39598 and http://php.net/manual/en/function.fwrite.php#96951
-			elseif ($result === 0)
-			{
-				if ($timestamp === 0)
-				{
-					$timestamp = time();
-				}
-				elseif ($timestamp < (time() - $this->timeout))
-				{
-					$result = FALSE;
-					break;
-				}
-
-				usleep(250000);
-				continue;
-			}
-			else
-			{
-				$timestamp = 0;
 			}
 		}
 

@@ -272,7 +272,7 @@ class CI_Loader {
 		$CI =& get_instance();
 		if (isset($CI->$name))
 		{
-			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$name);
+			show_error('The model name you are loading is the name of a resource that is already being used: '.$name);
 		}
 
 		if ($db_conn !== FALSE && ! class_exists('CI_DB', FALSE))
@@ -291,37 +291,23 @@ class CI_Loader {
 		}
 
 		$model = ucfirst(strtolower($model));
-		if ( ! class_exists($model))
+
+		foreach ($this->_ci_model_paths as $mod_path)
 		{
-			foreach ($this->_ci_model_paths as $mod_path)
+			if ( ! file_exists($mod_path.'models/'.$path.$model.'.php'))
 			{
-				if ( ! file_exists($mod_path.'models/'.$path.$model.'.php'))
-				{
-					continue;
-				}
-
-				require_once($mod_path.'models/'.$path.$model.'.php');
-				if ( ! class_exists($model, FALSE))
-				{
-					throw new RuntimeException($mod_path."models/".$path.$model.".php exists, but doesn't declare class ".$model);
-				}
-
-				break;
+				continue;
 			}
 
-			if ( ! class_exists($model, FALSE))
-			{
-				throw new RuntimeException('Unable to locate the model you have specified: '.$model);
-			}
-		}
-		elseif ( ! is_subclass_of($model, 'CI_Model'))
-		{
-			throw new RuntimeException("Class ".$model." already exists and doesn't extend CI_Model");
+			require_once($mod_path.'models/'.$path.$model.'.php');
+
+			$this->_ci_models[] = $name;
+			$CI->$name = new $model();
+			return $this;
 		}
 
-		$this->_ci_models[] = $name;
-		$CI->$name = new $model();
-		return $this;
+		// couldn't find the model
+		show_error('Unable to locate the model you have specified: '.$model);
 	}
 
 	// --------------------------------------------------------------------
@@ -514,7 +500,7 @@ class CI_Loader {
 	 *
 	 * Clears the cached variables.
 	 *
-	 * @return	CI_Loader
+	 * @return  object
 	 */
 	public function clear_vars()
 	{
@@ -919,7 +905,7 @@ class CI_Loader {
 		// If the PHP installation does not support short tags we'll
 		// do a little string replacement, changing the short tags
 		// to standard PHP echo statements.
-		if ( ! is_php('5.4') && ! ini_get('short_open_tag') && config_item('rewrite_short_tags') === TRUE)
+		if ( ! is_php('5.4') && ! ini_get('short_open_tag') && config_item('rewrite_short_tags') === TRUE && function_usable('eval'))
 		{
 			echo eval('?>'.preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($_ci_path))));
 		}
@@ -1132,7 +1118,7 @@ class CI_Loader {
 				}
 				else
 				{
-					log_message('debug', $path.' exists, but does not declare '.$subclass);
+					log_message('debug', APPPATH.'libraries/'.$file_path.$subclass.'.php exists, but does not declare '.$subclass);
 				}
 			}
 		}
@@ -1321,7 +1307,10 @@ class CI_Loader {
 			}
 
 			// Load all other libraries
-			$this->library($autoload['libraries']);
+			foreach ($autoload['libraries'] as $item)
+			{
+				$this->library($item);
+			}
 		}
 
 		// Autoload models

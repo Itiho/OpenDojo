@@ -779,7 +779,7 @@ class CI_Image_lib {
 			$this->y_axis = 0;
 		}
 
-		// Create the image handle
+		//  Create the image handle
 		if ( ! ($src_img = $this->image_create_gd()))
 		{
 			return FALSE;
@@ -845,7 +845,7 @@ class CI_Image_lib {
 	 */
 	public function image_process_imagemagick($action = 'resize')
 	{
-		// Do we have a vaild library path?
+		//  Do we have a vaild library path?
 		if ($this->library_path === '')
 		{
 			$this->set_error('imglib_libpath_invalid');
@@ -1010,7 +1010,7 @@ class CI_Image_lib {
 		// going to have to figure out how to determine the color
 		// of the alpha channel in a future release.
 
-		$white = imagecolorallocate($src_img, 255, 255, 255);
+		$white	= imagecolorallocate($src_img, 255, 255, 255);
 
 		// Rotate it!
 		$dst_img = imagerotate($src_img, $this->rotation_angle, $white);
@@ -1055,11 +1055,8 @@ class CI_Image_lib {
 
 		if ($this->rotation_angle === 'hor')
 		{
-			for ($i = 0; $i < $height; $i++)
+			for ($i = 0; $i < $height; $i++, $left = 0, $right = $width-1)
 			{
-				$left = 0;
-				$right = $width - 1;
-
 				while ($left < $right)
 				{
 					$cl = imagecolorat($src_img, $left, $i);
@@ -1075,21 +1072,18 @@ class CI_Image_lib {
 		}
 		else
 		{
-			for ($i = 0; $i < $width; $i++)
+			for ($i = 0; $i < $width; $i++, $top = 0, $bot = $height-1)
 			{
-				$top = 0;
-				$bottom = $height - 1;
-
-				while ($top < $bottom)
+				while ($top < $bot)
 				{
 					$ct = imagecolorat($src_img, $i, $top);
-					$cb = imagecolorat($src_img, $i, $bottom);
+					$cb = imagecolorat($src_img, $i, $bot);
 
 					imagesetpixel($src_img, $i, $top, $cb);
-					imagesetpixel($src_img, $i, $bottom, $ct);
+					imagesetpixel($src_img, $i, $bot, $ct);
 
 					$top++;
-					$bottom--;
+					$bot--;
 				}
 			}
 		}
@@ -1195,7 +1189,7 @@ class CI_Image_lib {
 			$x_axis += $this->orig_width - $wm_width;
 		}
 
-		// Build the finalized image
+		//  Build the finalized image
 		if ($wm_img_type === 3 && function_exists('imagealphablending'))
 		{
 			@imagealphablending($src_img, TRUE);
@@ -1333,7 +1327,7 @@ class CI_Image_lib {
 		{
 			$y_axis += $this->orig_height - $fontheight - $this->wm_shadow_distance - ($fontheight / 2);
 		}
-
+		
 		// Set horizontal alignment
 		if ($this->wm_hor_alignment === 'R')
 		{
@@ -1343,13 +1337,13 @@ class CI_Image_lib {
 		{
 			$x_axis += floor(($this->orig_width - ($fontwidth * strlen($this->wm_text))) / 2);
 		}
-
+		
 		if ($this->wm_use_drop_shadow)
 		{
 			// Offset from text
 			$x_shad = $x_axis + $this->wm_shadow_distance;
 			$y_shad = $y_axis + $this->wm_shadow_distance;
-
+				
 			/* Set RGB values for shadow
 			 *
 			 * First character is #, so we don't really need it.
@@ -1358,7 +1352,7 @@ class CI_Image_lib {
 			 */
 			$drp_color = str_split(substr($this->wm_shadow_color, 1, 6), 2);
 			$drp_color = imagecolorclosest($src_img, hexdec($drp_color[0]), hexdec($drp_color[1]), hexdec($drp_color[2]));
-
+			
 			// Add the shadow to the source image
 			if ($this->wm_use_truetype)
 			{
@@ -1369,7 +1363,7 @@ class CI_Image_lib {
 				imagestring($src_img, $this->wm_font_size, $x_shad, $y_shad, $this->wm_text, $drp_color);
 			}
 		}
-
+		
 		/* Set RGB values for text
 		 *
 		 * First character is #, so we don't really need it.
@@ -1388,7 +1382,7 @@ class CI_Image_lib {
 		{
 			imagestring($src_img, $this->wm_font_size, $x_axis, $y_axis, $this->wm_text, $txt_color);
 		}
-
+		
 		// We can preserve transparency for PNG images
 		if ($this->image_type === 3)
 		{
@@ -1437,7 +1431,7 @@ class CI_Image_lib {
 
 		switch ($image_type)
 		{
-			case 1:
+			case 1 :
 				if ( ! function_exists('imagecreatefromgif'))
 				{
 					$this->set_error(array('imglib_unsupported_imagecreate', 'imglib_gif_not_supported'));
@@ -1445,7 +1439,7 @@ class CI_Image_lib {
 				}
 
 				return imagecreatefromgif($path);
-			case 2:
+			case 2 :
 				if ( ! function_exists('imagecreatefromjpeg'))
 				{
 					$this->set_error(array('imglib_unsupported_imagecreate', 'imglib_jpg_not_supported'));
@@ -1453,7 +1447,7 @@ class CI_Image_lib {
 				}
 
 				return imagecreatefromjpeg($path);
-			case 3:
+			case 3 :
 				if ( ! function_exists('imagecreatefrompng'))
 				{
 					$this->set_error(array('imglib_unsupported_imagecreate', 'imglib_png_not_supported'));

@@ -451,7 +451,7 @@ abstract class CI_DB_driver {
 	 *
 	 * This is just a dummy method that all drivers will override.
 	 *
-	 * @return	mixed
+	 * @return      mixed
 	 */
 	public function db_connect()
 	{
@@ -481,7 +481,7 @@ abstract class CI_DB_driver {
 	 * This is just a dummy method to allow drivers without such
 	 * functionality to not declare it, while others will override it.
 	 *
-	 * @return	void
+	 * @return      void
 	 */
 	public function reconnect()
 	{
@@ -495,7 +495,7 @@ abstract class CI_DB_driver {
 	 * This is just a dummy method to allow drivers without such
 	 * functionality to not declare it, while others will override it.
 	 *
-	 * @return	bool
+	 * @return      bool
 	 */
 	public function db_select()
 	{
@@ -647,10 +647,7 @@ abstract class CI_DB_driver {
 			}
 
 			// This will trigger a rollback if transactions are being used
-			if ($this->_trans_depth !== 0)
-			{
-				$this->_trans_status = FALSE;
-			}
+			$this->_trans_status = FALSE;
 
 			// Grab the error now, as we might run some additional queries before displaying the error
 			$error = $this->error();
@@ -1221,7 +1218,7 @@ abstract class CI_DB_driver {
 	/**
 	 * Fetch Field Names
 	 *
-	 * @param	string	$table	Table name
+	 * @param	string	the table name
 	 * @return	array
 	 */
 	public function list_fields($table)
@@ -1754,7 +1751,7 @@ abstract class CI_DB_driver {
 		//
 		// Added exception for single quotes as well, we don't want to alter
 		// literal strings. -- Narf
-		if (strcspn($item, "()'") !== strlen($item))
+		if (strpos($item, '(') !== FALSE OR strpos($item, "'") !== FALSE)
 		{
 			return $item;
 		}

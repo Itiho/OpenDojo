@@ -143,7 +143,7 @@ abstract class CI_DB_forge {
 	protected $_unsigned		= TRUE;
 
 	/**
-	 * NULL value representation in CREATE/ALTER TABLE statements
+	 * NULL value representatin in CREATE/ALTER TABLE statements
 	 *
 	 * @var	string
 	 */
@@ -239,7 +239,7 @@ abstract class CI_DB_forge {
 	 */
 	public function add_key($key, $primary = FALSE)
 	{
-		if (is_array($key))
+		if ($primary === TRUE && is_array($key))
 		{
 			foreach ($key as $one)
 			{
@@ -453,7 +453,12 @@ abstract class CI_DB_forge {
 			return ($this->db->db_debug) ? $this->db->display_error('db_table_name_required') : FALSE;
 		}
 
-		if (($query = $this->_drop_table($this->db->dbprefix.$table_name, $if_exists)) === TRUE)
+		$query = $this->_drop_table($this->db->dbprefix.$table_name, $if_exists);
+		if ($query === FALSE)
+		{
+			return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
+		}
+		elseif ($query === TRUE)
 		{
 			return TRUE;
 		}

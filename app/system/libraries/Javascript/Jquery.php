@@ -84,7 +84,7 @@ class CI_Jquery extends CI_Javascript {
 	public $jquery_table_sorter_active = FALSE;
 
 	/**
-	 * JQuery table sorter pager active
+	 * JQuery table sorder pager active
 	 *
 	 * @var	bool
 	 */
