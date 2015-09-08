@@ -15,7 +15,7 @@ Importe no mysql o arquivo de criação do banco de dados BD/install.sql
 Modelagem feita com Mysql Workbench
 
 ##Frameworks utilizados
-* [CodeIgniter 3.0.0](http://www.codeigniter.com/) - Framework PHP
+* [CodeIgniter 3.0.1](http://www.codeigniter.com/) - Framework PHP
 * [Bootstrap 3.3.5](http://getbootstrap.com/) - Framework CSS e JavaScript
 * [Bootswatch 3.3.5](http://bootswatch.com/) - Themes for Bootstrap
 * [Bootstrap Confirmation 2.1.3](https://github.com/mistic100/Bootstrap-Confirmation) - Plugin JavaScript para diálogo de confirmação
