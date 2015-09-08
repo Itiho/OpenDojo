@@ -25,25 +25,25 @@ class Graduacao extends CI_Controller {
     private function filtrar($filtro_arteMarcial, $filtro_nomeGraduacao, $pagina) {
         if ($filtro_nomeGraduacao <> '') {
             $this->data['filtro_nomeGraduacao'] = $filtro_nomeGraduacao;
-
+            $filtro_nomeGraduacao = strtoupper($filtro_nomeGraduacao);
             if ($filtro_arteMarcial > 0) {
                 $this->data['filtro_arteMarcial'] = $filtro_arteMarcial;
                 $total_graduacoes = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
+                        ->where('UPPER(nomeGraduacao)', 'like', $filtro_nomeGraduacao)
                         ->where('arteMarcial', $filtro_arteMarcial)
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
+                        ->where('UPPER(nomeGraduacao)', 'like', $filtro_nomeGraduacao)
                         ->where('arteMarcial', $filtro_arteMarcial)
                         ->with_arteMarcial('fields:nomeArteMarcial')
                         ->paginate(10, $total_graduacoes, $pagina);
             } else {
                 $this->data['filtro_arteMarcial'] = '';
                 $total_graduacoes = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
+                        ->where('UPPER(nomeGraduacao)', 'like', $filtro_nomeGraduacao)
                         ->count();
                 $this->data['graduacoes'] = $this->graduacao_model
-                        ->where('nomeGraduacao', 'like', $filtro_nomeGraduacao)
+                        ->where('UPPER(nomeGraduacao)', 'like', $filtro_nomeGraduacao)
                         ->with_arteMarcial('fields:nomeArteMarcial')
                         ->paginate(10, $total_graduacoes, $pagina);
             }

@@ -29,19 +29,18 @@ class Dojo extends CI_Controller {
     private function filtrar($filtro_academia, $filtro_arteMarcial, $filtro_nomeDojo, $pagina) {
         if ($filtro_nomeDojo <> '') {
             $this->data['filtro_nomeDojo'] = $filtro_nomeDojo;
-
+            $filtro_nomeDojo = strtoupper($filtro_nomeDojo);
             if ($filtro_arteMarcial > 0) {
                 $this->data['filtro_arteMarcial'] = $filtro_arteMarcial;
-
                 if ($filtro_academia > 0) {
                     $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial('fields:nomeArteMarcial')
@@ -51,11 +50,11 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->where('ArteMarcial_idArte_Marcial', $filtro_arteMarcial)
                             ->with_artemarcial('fields:nomeArteMarcial')
                             ->with_academia('fields:nomeAcademia')
@@ -67,11 +66,11 @@ class Dojo extends CI_Controller {
                 if ($filtro_academia > 0) {
                     $this->data['filtro_academia'] = $filtro_academia;
                     $total_dojos = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->where('Academia_idAcademia', $filtro_academia)
                             ->with_artemarcial('fields:nomeArteMarcial')
                             ->with_academia('fields:nomeAcademia')
@@ -80,10 +79,10 @@ class Dojo extends CI_Controller {
                 } else {
                     $this->data['filtro_academia'] = '';
                     $total_dojos = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->count();
                     $this->data['dojos'] = $this->dojo_model
-                            ->where('nomeDojo', 'like', $filtro_nomeDojo)
+                            ->where('UPPER(nomeDojo)', 'like', $filtro_nomeDojo)
                             ->with_artemarcial('fields:nomeArteMarcial')
                             ->with_academia('fields:nomeAcademia')
                             ->with_turmas('fields:*count*')
@@ -168,41 +167,40 @@ class Dojo extends CI_Controller {
         }
     }
 
-        function add() {
-            $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
-            //Insere o primeiro item
-            $this->data['artesMarciais'] = array('0' => '') + $this->data['artesMarciais'];
-            $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-            //Insere o primeiro item
-            $this->data['academias'] = array('0' => '') + $this->data['academias'];
-            if (count($this->input->post()) == 0) {
-                $this->load->view('DojoAdd_view', $this->data);
-            } else {
-                $resultado = $this->dojo_model->from_form()->insert();
-                if ($resultado) {
-                    $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" cadastrado com sucesso');
-                    $this->session->set_flashdata('type_message', '1'); //Sucesso
-                    redirect('/Dojo');
-                } else {
-                    $this->data['dojo'] = $this->input->post();
-                    $this->load->view('DojoAdd_view', $this->data);
-                }
-            }
-        }
-
-        function delete($id = null) {
-            if (isset($id)) {
-                $dojo = $this->dojo_model->fields('nomeDojo')->get($id);
-                if ($this->dojo_model->delete($id)) {
-                    $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" deletado com sucesso');
-                    $this->session->set_flashdata('type_message', '1'); //Sucesso
-                } else {
-                    $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" não pôde ser deletado');
-                    $this->session->set_flashdata('type_message', '0'); //Erro
-                }
+    function add() {
+        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArtemarcial')->get_all();
+        //Insere o primeiro item
+        $this->data['artesMarciais'] = array('0' => '') + $this->data['artesMarciais'];
+        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
+        //Insere o primeiro item
+        $this->data['academias'] = array('0' => '') + $this->data['academias'];
+        if (count($this->input->post()) == 0) {
+            $this->load->view('DojoAdd_view', $this->data);
+        } else {
+            $resultado = $this->dojo_model->from_form()->insert();
+            if ($resultado) {
+                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" cadastrado com sucesso');
+                $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Dojo');
+            } else {
+                $this->data['dojo'] = $this->input->post();
+                $this->load->view('DojoAdd_view', $this->data);
             }
         }
-
     }
-    
+
+    function delete($id = null) {
+        if (isset($id)) {
+            $dojo = $this->dojo_model->fields('nomeDojo')->get($id);
+            if ($this->dojo_model->delete($id)) {
+                $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" deletado com sucesso');
+                $this->session->set_flashdata('type_message', '1'); //Sucesso
+            } else {
+                $this->session->set_flashdata('message', 'Dojo "' . $dojo->nomeDojo . '" não pôde ser deletado');
+                $this->session->set_flashdata('type_message', '0'); //Erro
+            }
+            redirect('/Dojo');
+        }
+    }
+
+}

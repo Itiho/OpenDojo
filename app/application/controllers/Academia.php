@@ -21,12 +21,13 @@ class Academia extends CI_Controller {
     private function filtrar($filtro_nomeAcademia, $pagina) {
         if ($filtro_nomeAcademia <> '') {
             $this->data['filtro_nomeAcademia'] = $filtro_nomeAcademia;
+            $filtro_nomeAcademia = strtoupper($filtro_nomeAcademia);
             $total_academias = $this->academia_model
-                    ->where('nomeAcademia', 'like', $filtro_nomeAcademia)
+                    ->where('UPPER(nomeAcademia)', 'like', $filtro_nomeAcademia)
                     ->count();
             $this->data['academias'] = $this->academia_model
                     ->with_dojos('fields:*count*')
-                    ->where('nomeAcademia', 'like', $filtro_nomeAcademia)
+                    ->where('UPPER(nomeAcademia)', 'like', $filtro_nomeAcademia)
                     ->paginate(10, $total_academias, $pagina);
         } else {
             $this->data['filtro_nomeAcademia'] = '';

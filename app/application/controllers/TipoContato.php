@@ -21,11 +21,12 @@ class TipoContato extends CI_Controller {
     private function filtrar($filtro_nomeTipoContato, $pagina) {
         if ($filtro_nomeTipoContato <> '') {
             $this->data['filtro_nomeTipoContato'] = $filtro_nomeTipoContato;
+            $filtro_nomeTipoContato = strtoupper($filtro_nomeTipoContato);
             $total_tiposcontato = $this->tipocontato_model
-                    ->where('tipoContato', 'like', $filtro_nomeTipoContato)
+                    ->where('UPPER(tipoContato)', 'like', $filtro_nomeTipoContato)
                     ->count();
             $this->data['tiposcontato'] = $this->tipocontato_model
-                    ->where('tipoContato', 'like', $filtro_nomeTipoContato)
+                    ->where('UPPER(tipoContato)', 'like', $filtro_nomeTipoContato)
                     ->paginate(10, $total_tiposcontato, $pagina);
         } else {
             $this->data['filtro_nomeTipoContato'] = '';
