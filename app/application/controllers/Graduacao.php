@@ -9,11 +9,12 @@ class Graduacao extends CI_Controller {
         $this->load->model('graduacao_model');
         $this->load->model('artemarcial_model');
         $this->data['titulo'] = "OpenDojo";
-        $this->data['cabecalho'] = "Graduações";
+        $this->data['cabecalho'] = "Graduação";
         $this->form_validation->set_error_delimiters('<div class="col-xs-5 messageContainer help-block">', '</div>');
     }
 
     function index($pagina = 1) {
+        $this->data['cabecalho'] = "Graduações";
         $this->filtrar($this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeGraduacao'), $pagina);
         $this->data['all_pages'] = $this->graduacao_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all('nomeArteMarcial');

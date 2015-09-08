@@ -8,16 +8,17 @@ class Academia extends CI_Controller {
         parent::__construct();
         $this->load->model('academia_model');
         $this->data['titulo'] = "OpenDojo";
-        $this->data['cabecalho'] = "Academias";
+        $this->data['cabecalho'] = "Academia";
         $this->form_validation->set_error_delimiters('<div class="col-xs-5 messageContainer help-block">', '</div>');
     }
 
     function index($pagina = 1) {
-        $this->filtrar($this->input->post('filtro_nomeAcademia'),$pagina);
+        $this->data['cabecalho'] = "Academias";
+        $this->filtrar($this->input->post('filtro_nomeAcademia'), $pagina);
         $this->data['all_pages'] = $this->academia_model->all_pages;
         $this->load->view('AcademiaList_view', $this->data);
     }
-    
+
     private function filtrar($filtro_nomeAcademia, $pagina) {
         if ($filtro_nomeAcademia <> '') {
             $this->data['filtro_nomeAcademia'] = $filtro_nomeAcademia;
@@ -73,7 +74,7 @@ class Academia extends CI_Controller {
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Academia');
             } else {
-                    $this->data['academia'] = $this->input->post();
+                $this->data['academia'] = $this->input->post();
                 $this->load->view('AcademiaAdd_view', $this->data);
             }
         }

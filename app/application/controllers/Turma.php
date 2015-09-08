@@ -15,6 +15,7 @@ class Turma extends CI_Controller {
     }
 
     function index($pagina = 1) {
+        $this->data['cabecalho'] = 'Turmas';
         $this->filtrar($this->input->post('filtro_arteMarcial'), $this->input->post('filtro_dojo'), $pagina);
         $this->data['all_pages'] = $this->turma_model->all_pages;
         $this->data['dojos'] = $this->dojo_model->as_dropdown('nomeDojo')->get_all();

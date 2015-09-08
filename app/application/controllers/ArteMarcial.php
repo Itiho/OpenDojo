@@ -13,6 +13,7 @@ class ArteMarcial extends CI_Controller {
     }
 
     function index($pagina = 1) {
+        $this->data['cabecalho'] = "Artes Marciais";
         $this->filtrar($this->input->post('filtro_nomeArteMarcial'), $pagina);
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->load->view('ArteMarcialList_view', $this->data);

@@ -13,6 +13,7 @@ class TipoContato extends CI_Controller {
     }
 
     function index($pagina = 1) {
+        $this->data['cabecalho'] = "Tipos de contato";
         $this->filtrar($this->input->post('filtro_nomeTipoContato'), $pagina);
         $this->data['all_pages'] = $this->tipocontato_model->all_pages;
         $this->load->view('TipoContatoList_view', $this->data);

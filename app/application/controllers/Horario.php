@@ -16,6 +16,7 @@ class Horario extends CI_Controller {
     }
 
     function index($pagina = 1) {
+        $this->data['cabecalho'] = 'Horarios';
         $this->filtrar($this->input->post('filtro_turma'), $pagina);
         $this->data['all_pages'] = $this->dojo_model->all_pages;
         $this->data['turmas'] = $this->turma_model->as_dropdown('nomeTurma')->get_all();

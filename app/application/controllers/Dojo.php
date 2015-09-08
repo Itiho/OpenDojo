@@ -15,6 +15,7 @@ class Dojo extends CI_Controller {
     }
 
     function index($pagina = 1) {
+        $this->data['cabecalho'] = 'Dojos';
         $this->filtrar($this->input->post('filtro_academia'), $this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeDojo'), $pagina);
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
         $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
