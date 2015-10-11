@@ -18,12 +18,10 @@ class Dojo extends CI_Controller {
         $this->data['cabecalho'] = 'Dojos';
         $this->filtrar($this->input->post('filtro_academia'), $this->input->post('filtro_arteMarcial'), $this->input->post('filtro_nomeDojo'), $pagina);
         $this->data['all_pages'] = $this->artemarcial_model->all_pages;
-        $this->data['artesMarciais'] = $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
-        //Insere o primeiro item
-        $this->data['artesMarciais'] = array('0' => 'Arte Marcial') + $this->data['artesMarciais'];
-        $this->data['academias'] = $this->academia_model->as_dropdown('nomeAcademia')->get_all();
-        //Insere o primeiro item
-        $this->data['academias'] = array('0' => 'Academia') + $this->data['academias'];
+
+        $this->data['artesMarciais'] = array('Arte Marcial') + $this->artemarcial_model->as_dropdown('nomeArteMarcial')->get_all();
+        $this->data['academias'] = array("Academia") + $this->academia_model->as_dropdown('nomeAcademia')->get_all();
+
         $this->load->view('DojoList_view', $this->data);
     }
 
@@ -154,17 +152,26 @@ class Dojo extends CI_Controller {
         if (count($this->input->post()) == 0) {
             $this->load->view('DojoEdit_view', $this->data);
         } else {
-            $dojo = $this->input->post();
-            $this->form_validation->set_rules($this->dojo_model->rules);
-            if ($this->form_validation->run() == TRUE) {
-                $resultado = $this->dojo_model->update($dojo, $this->input->post('idDojo'));
+            $result = $this->dojo_model->from_form(NULL, NULL, array('idDojo'))->update();
+            if ($result === FALSE) {
+                $this->data['dojo'] = $this->input->post();
+                $this->load->view('DojoEdit_view', $this->data);
+            } else {
                 $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" editado com sucesso');
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Dojo');
-            } else {
-                $this->data['dojo'] = $dojo;
-                $this->load->view('DojoEdit_view', $this->data);
             }
+//            $dojo = $this->input->post();
+//            $this->form_validation->set_rules($this->dojo_model->rules);
+//            if ($this->form_validation->run() == TRUE) {
+//                $resultado = $this->dojo_model->update($dojo, $this->input->post('idDojo'));
+//                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" editado com sucesso');
+//                $this->session->set_flashdata('type_message', '1'); //Sucesso
+//                redirect('/Dojo');
+//            } else {
+//                $this->data['dojo'] = $dojo;
+//                $this->load->view('DojoEdit_view', $this->data);
+//            }
         }
     }
 
