@@ -1,14 +1,4 @@
 <?php
-
-/*
- *
- * -------------------------------------------------------
- * CLASSNAME:        Academia_Model
- * FOR MYSQL TABLE:  Academia
- * FOR MYSQL DB:     OpenDojo
- * -------------------------------------------------------
- */
-
 class DiaSemana_Model extends MY_Model {
 
     private $diasSemanas = array(
@@ -35,7 +25,5 @@ class DiaSemana_Model extends MY_Model {
             return NULL;
         }
     }
-
 }
 ?>
-
