@@ -25,7 +25,7 @@
                         <li class="divider"></li>
                         <li><?= anchor('TipoContato', 'Tipos de Contato') ?></li>
                         <li class="divider"></li>
-                        <li><a href="#">Usuários</a></li>
+                        <li><?= anchor('Usuario', 'Usuários') ?></li>
                     </ul>
                 </li>
             </ul>

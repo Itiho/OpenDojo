@@ -1,46 +1,20 @@
-
-<!-- begin of generated class -->
 <?php
-/*
- *
- * -------------------------------------------------------
- * CLASSNAME:        Sexo_Model
- * FOR MYSQL TABLE:  Sexo
- * FOR MYSQL DB:     OpenDojo
- * -------------------------------------------------------
- */
+class Sexo_Model extends MY_Model {
 
-class Sexo_Model extends AbstractModel {
+    private $sexo = array(
+        '1' => 'Masculino',
+        '2' => 'Feminino');
 
-    var $idSexo;   // KEY ATTR. WITH AUTOINCREMENT
-    var $sexo;   // (normal Attribute)
-    var $_table = 'Sexo'; // Nome da tabela
-
-// **********************
-// GETTER METHODS
-// **********************
-
-    function get_idSexo() {
-        return $this->idSexo;
-    }
-
-    function get_sexo() {
+    public function get_sexos() {
         return $this->sexo;
     }
 
-// **********************
-// SETTER METHODS
-// **********************
-
-
-    function set_idSexo($val) {
-        $this->idSexo = $val;
+    public function get_sexo($sexoId) {
+        if($sexoId == 1 or $sexoId == 2){
+            return $sexo[];
+        } else {
+            return false;
+        }
     }
-
-    function set_sexo($val) {
-        $this->sexo = $val;
-    }
-
 }
-
 ?>

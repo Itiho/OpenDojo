@@ -16,10 +16,10 @@ Modelagem feita com Mysql Workbench
 
 ##Frameworks utilizados
 * [CodeIgniter 3.0.1](http://www.codeigniter.com/) - Framework PHP
-* [Bootstrap 3.3.5](http://getbootstrap.com/) - Framework CSS e JavaScript
-* [Bootswatch 3.3.5](http://bootswatch.com/) - Themes for Bootstrap
+* [Bootstrap 3.3.6](http://getbootstrap.com/) - Framework CSS e JavaScript
+* [Bootswatch 3.3.6](http://bootswatch.com/) - Themes for Bootstrap
 * [Bootstrap Confirmation 2.1.3](https://github.com/mistic100/Bootstrap-Confirmation) - Plugin JavaScript para diálogo de confirmação
-* [Font Awesome 4.4.0](http://fortawesome.github.io/Font-Awesome/) - Framework CSS com ícones
+* [Font Awesome 4.5.0](http://fortawesome.github.io/Font-Awesome/) - Framework CSS com ícones
 * [JQuery 1.11.3](https://jquery.com/) - Framework JavaScript
 * [Jquery Maskedinput 1.4.1](https://github.com/digitalBush/jquery.maskedinput) - Mascara para inputs
 * [Bootstrap Datepicker 1.4.0](https://github.com/eternicode/bootstrap-datepicker) - Calendário para campos de dada

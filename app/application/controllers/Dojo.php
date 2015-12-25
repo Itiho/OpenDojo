@@ -161,17 +161,6 @@ class Dojo extends CI_Controller {
                 $this->session->set_flashdata('type_message', '1'); //Sucesso
                 redirect('/Dojo');
             }
-//            $dojo = $this->input->post();
-//            $this->form_validation->set_rules($this->dojo_model->rules);
-//            if ($this->form_validation->run() == TRUE) {
-//                $resultado = $this->dojo_model->update($dojo, $this->input->post('idDojo'));
-//                $this->session->set_flashdata('message', 'Dojo "' . $this->input->post('nomeDojo') . '" editado com sucesso');
-//                $this->session->set_flashdata('type_message', '1'); //Sucesso
-//                redirect('/Dojo');
-//            } else {
-//                $this->data['dojo'] = $dojo;
-//                $this->load->view('DojoEdit_view', $this->data);
-//            }
         }
     }
 

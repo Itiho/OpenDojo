@@ -36,4 +36,44 @@ class Usuario extends CI_Controller {
                     ->paginate(10, $total_usuario, $pagina);
         }
     }
+
+    function edit($id = 0) {
+        // $this->load->model('usuario_model');
+        $this->data['usuario'] = $this->usuario_model->as_array()->get($id);
+            // var_dump($this->usuario_model->rulesUpdate);
+            // $this->form_validation->set_rules($this->usuario_model->rulesUpdate);
+        if (count($this->input->post()) == 0) {
+            $this->load->view('UsuarioEdit_view', $this->data);
+        } else {
+            $usuario = $this->input->post();
+            // $this->form_validation->set_rules('login','Login','trim|strtolower|required|min_length[3]');
+            $this->usuario_model->rules = $this->usuario_model->rulesUpdate;
+            if ($this->form_validation->run() == TRUE) {
+            echo "teste";
+                $resultado = $this->usuario_model->update($usuario, $this->input->post('idUsuario'));
+                $this->session->set_flashdata('message', 'Usuario "' . $this->input->post('nomeUsuario') . '" editado com sucesso');
+                $this->session->set_flashdata('type_message', '1'); //Sucesso
+                redirect('/Usuario');
+            } else {
+                $this->data['usuario'] = $usuario;
+                $this->load->view('UsuarioEdit_view', $this->data);
+            }
+        }
+    }
+
+     function add() {
+        if (count($this->input->post()) == 0) {
+            $this->load->view('UsuarioAdd_view', $this->data);
+        } else {
+            $resultado = $this->usuario_model->from_form()->insert();
+            if ($resultado) {
+                $this->session->set_flashdata('message', 'Usuario "' . $this->input->post('nomeUsuario') . '" cadastrado com sucesso');
+                $this->session->set_flashdata('type_message', '1'); //Sucesso
+                redirect('/Usuario');
+            } else {
+                $this->data['usuario'] = $this->input->post();
+                $this->load->view('UsuarioAdd_view', $this->data);
+            }
+        }
+    }
 }
